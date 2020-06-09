@@ -43,7 +43,7 @@ public class CreateExcelFile {
 	private RatioSheet RatioSheetMinusFour;
 
 	private DataService dataService;
-	private static final String FILE_PATH = System.getProperty("user.home") + "\\Desktop\\StockData2.xlsx";
+	private static final String FILE_PATH = getFilePath();
 
 	public CreateExcelFile() throws IOException, JSONException, ParseException {
 		excelFile = new XSSFWorkbook();
@@ -84,6 +84,20 @@ public class CreateExcelFile {
 
 	}
 
+	// Check OS
+	public static String getFilePath ()
+	{
+		String os = System.getProperty("os.name").toLowerCase();
+		if(os.indexOf("windows") != -1)
+			return System.getProperty("user.home") + "\\Desktop\\StockData2.xlsx";
+		else if(os.indexOf("mac") != -1)
+			return System.getProperty("user.home") + "/Desktop/StockData2.xlsx";
+		else if(os.indexOf("nix") != -1 || os.indexOf("nux") != -1 || os.indexOf("aix") != -1)
+			return System.getProperty("user.home") + "/Desktop/StockData2.xlsx";
+		else
+			return System.getProperty("user.home") + "\\Desktop\\StockData2.xlsx"; // temp
+	}
+	
 	public void setUpSheets() throws JSONException, IOException {
 		stockDataSheet = new StockSheet(excelFile, 0, dataService);
 		excelFile.setSheetName(0, "Stock Data");
