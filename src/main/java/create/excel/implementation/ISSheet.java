@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.implementation;
 
 import java.util.ArrayList;
@@ -19,44 +24,32 @@ import excel.library.ISFinancialLibrary;
 
 public class ISSheet extends FinancialSheet {
 
-	public ISSheet(Workbook excelFile, int sheetNum, DataService dataService) {
+	public ISSheet(Workbook excelFile, int sheetNum, DataService dataService, boolean isQuarterly) {
 		super(excelFile, sheetNum, dataService);
-		this.setUpFirstRow();
-		this.createIncomeStatementColumns();
+		this.setUpISHeaderRow(this.getFirstRow());
+		this.createIncomeStatementColumns(isQuarterly);
 		this.createLastTickerColumn(ISSheetConstants.NUM_COLUMNS.getIsData() - 1);
-		// Should be last method to call before finishing setting up Balance Sheet
+		this.setUpISHeaderRow(this.getLastRow());
 		this.autoSizeAllColumns(ISSheetConstants.NUM_COLUMNS.getIsData());
 	}
 
-	private void createIncomeStatementColumns() {
+	private void createIncomeStatementColumns(boolean isQuarterly) {
 		List<String> companies = this.getDataService().getOrderedCompanies();
 		for (String company : companies) {
-			ISInfoBO isInfo = this.getDataService().getTickerToISInfo().get(company).get(Math.abs(this.getYear()));
+			ISInfoBO isInfo = null;
+			if (!isQuarterly) {
+				isInfo = this.getDataService().getTickerToISInfo().get(company).get(Math.abs(this.getYear()));
+			} else {
+				isInfo = this.getDataService().getQuarterlyTickerToISInfo().get(company).get(Math.abs(this.getYear()));
+			}
 			Row row = this.getTickerToRow().get(company);
 
 			ISFinancialLibrary.writeISInfo(isInfo, row);
 
-//			Cell revenueCell = row.createCell(ISSheetConstants.REVENUE_COLUMN.getIsData());
-//			revenueCell.setCellValue(isInfo.getRevenue());
-//
-//			Cell costOfRevenueCell = row.createCell(ISSheetConstants.COST_OF_REVENUE_COLUMN.getIsData());
-//			costOfRevenueCell.setCellValue(isInfo.getCostOfRevenue());
-//
-//			Cell grossProfitCell = row.createCell(ISSheetConstants.GROSS_PROFIT_COLUMN.getIsData());
-//			grossProfitCell.setCellValue(isInfo.getGrossProfit());
-//
-//			Cell netIncomeCell = row.createCell(ISSheetConstants.NET_INCOME_COLUMN.getIsData());
-//			netIncomeCell.setCellValue(isInfo.getNetIncome());
-//
-//			Cell dateCell = row.createCell(ISSheetConstants.IS_DATE.getIsData());
-//			dateCell.setCellValue(isInfo.getIsDate());
-//
-//			Cell currencyTypeCell = row.createCell(ISSheetConstants.CURRENCY_TYPE.getIsData());
-//			currencyTypeCell.setCellValue(isInfo.getCurrencyType());
 		}
 	}
 
-	public void setUpFirstRow() {
+	public void setUpISHeaderRow(Row headerRow) {
 		CellStyle style = this.getExcelFile().createCellStyle();// Create style
 		Font font = this.getExcelFile().createFont();// Create font
 		font.setBold(true);// Make font bold
@@ -65,7 +58,7 @@ public class ISSheet extends FinancialSheet {
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		List<Cell> firstRowCells = new ArrayList<Cell>();
 		for (int i = 0; i < ISSheetConstants.NUM_COLUMNS.getIsData(); i++) {
-			Cell cell = this.getFirstRow().createCell(i);
+			Cell cell = headerRow.createCell(i);
 			firstRowCells.add(cell);
 			cell.setCellStyle(style);
 		}
@@ -85,6 +78,12 @@ public class ISSheet extends FinancialSheet {
 		firstRowCells.get(ISSheetConstants.GROSS_PROFIT_GROWTH_COLUMN.getIsData()).setCellValue("Gross Profit Growth");
 		firstRowCells.get(ISSheetConstants.NET_INCOME_COLUMN.getIsData()).setCellValue("Net income");
 		firstRowCells.get(ISSheetConstants.NET_INCOME_GOWTH_COLUMN.getIsData()).setCellValue("Net Income Growth");
+		firstRowCells.get(ISSheetConstants.EPS_COLUMN.getIsData()).setCellValue("Earnings Per Share");
+		firstRowCells.get(ISSheetConstants.EPS_GROWTH_COLUMN.getIsData()).setCellValue("Earnings Per Share Growth");
+		firstRowCells.get(ISSheetConstants.RESEARCH_AND_DEVELOPMENT_COLUMN.getIsData())
+				.setCellValue("Research and Development");
+		firstRowCells.get(ISSheetConstants.RESEARCH_AND_DEVELOPMENT_GROWTH_COLUMN.getIsData())
+				.setCellValue("Research and Development Growth");
 		firstRowCells.get(ISSheetConstants.NUM_COLUMNS.getIsData() - 1).setCellValue("Ticker");
 	}
 

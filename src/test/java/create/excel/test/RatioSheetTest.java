@@ -1,11 +1,14 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.test;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,20 +16,19 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import create.excel.bo.RatioInfoBO;
 import create.excel.enums.CommonSheetConstants;
 import create.excel.enums.RatioSheetConstants;
-import create.excel.implementation.CreateExcelFile;
+import create.excel.implementation.CreateAnnualExcelFile;
 import create.excel.implementation.RatioSheet;
 
 public class RatioSheetTest {
 
-	private static CreateExcelFile excelFile;
+	private static CreateAnnualExcelFile excelFile;
 	private static RatioSheet ratioSheet;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		excelFile = new CreateExcelFile();
+		excelFile = new CreateAnnualExcelFile();
 		ratioSheet = excelFile.getRatioSheet();
 	}
 
@@ -65,25 +67,6 @@ public class RatioSheetTest {
 		assertEquals("Twelvth column is not debt to equity ratio growth!", twelvthColumn.getStringCellValue(),
 				"Debt to Equity Ratio Growth");
 
-	}
-
-	@Test
-	public void testRatioSheetValues() {
-		List<String> companies = ratioSheet.getDataService().getOrderedCompanies();
-		Map<String, Row> tickerToRow = ratioSheet.getTickerToRow();
-		for (int i = 0; i < companies.size(); i++) {
-			String ticker = companies.get(i);
-			Row tickerRow = tickerToRow.get(ticker);
-			RatioInfoBO tickerRatioInfo = excelFile.getDataService().getTickerToRatioInfo().get(ticker)
-					.get(Math.abs(0));
-
-			assertEquals("Earnings per share is wrong! ", tickerRatioInfo.getEarningsPerShare(), tickerRow
-					.getCell(RatioSheetConstants.EARNINGS_PER_SHARE_COLUMN.getRatioData()).getStringCellValue());
-			assertEquals("Current Ratio is wrong!", tickerRatioInfo.getCurrentRatio(),
-					tickerRow.getCell(RatioSheetConstants.CURRENT_RATIO_COLUMN.getRatioData()).getStringCellValue());
-			assertEquals("Debt to Equity Ratio is wrong!", tickerRatioInfo.getDebtToEquityRatio(), tickerRow
-					.getCell(RatioSheetConstants.DEBT_EQUITY_RATIO_COLUMN.getRatioData()).getStringCellValue());
-		}
 	}
 
 }

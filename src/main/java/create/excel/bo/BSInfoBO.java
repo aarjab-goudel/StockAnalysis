@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.bo;
 
 import excel.library.CommonFinancialLibrary;
@@ -7,12 +12,17 @@ public class BSInfoBO extends InfoBO {
 	private String netEquity;
 	private String netEquityGrowth;
 	private String cashAndCashEquivalent;
+	private String cashAndCashEquivalentGrowth;
 	private String shortTermInvestments;
+	private String shortTermInvestmentsGrowth;
 	private String receivables;
 	private String longTermInvestments;
+	private String longTermInvestmentsGrowth;
 	private String shortTermDebt;
+	private String shortTermDebtGrowth;
 	private String accountsPayable;
 	private String longTermDebt;
+	private String longTermDebtGrowth;
 	private String bsDate;
 	private String shareHoldersEquity;
 	private String shareHoldersEquityGrowth;
@@ -146,6 +156,46 @@ public class BSInfoBO extends InfoBO {
 
 	public void setShareHoldersEquityGrowth(String shareHoldersEquityGrowth) {
 		this.shareHoldersEquityGrowth = shareHoldersEquityGrowth;
+	}
+
+	public String getCashAndCashEquivalentGrowth() {
+		return cashAndCashEquivalentGrowth;
+	}
+
+	public String getShortTermInvestmentsGrowth() {
+		return shortTermInvestmentsGrowth;
+	}
+
+	public String getLongTermInvestmentsGrowth() {
+		return longTermInvestmentsGrowth;
+	}
+
+	public String getShortTermDebtGrowth() {
+		return shortTermDebtGrowth;
+	}
+
+	public String getLongTermDebtGrowth() {
+		return longTermDebtGrowth;
+	}
+
+	public void setCashAndCashEquivalentGrowth(String cashAndCashEquivalentGrowth) {
+		this.cashAndCashEquivalentGrowth = cashAndCashEquivalentGrowth;
+	}
+
+	public void setShortTermInvestmentsGrowth(String shortTermInvestmentsGrowth) {
+		this.shortTermInvestmentsGrowth = shortTermInvestmentsGrowth;
+	}
+
+	public void setLongTermInvestmentsGrowth(String longTermInvestmentsGrowth) {
+		this.longTermInvestmentsGrowth = longTermInvestmentsGrowth;
+	}
+
+	public void setShortTermDebtGrowth(String shortTermDebtGrowth) {
+		this.shortTermDebtGrowth = shortTermDebtGrowth;
+	}
+
+	public void setLongTermDebtGrowth(String longTermDebtGrowth) {
+		this.longTermDebtGrowth = longTermDebtGrowth;
 	}
 
 }

@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.implementation;
 
 import java.util.ArrayList;
@@ -21,13 +26,14 @@ public class StockSheet extends FinancialSheet {
 
 	public StockSheet(Workbook excelFile, int year, DataService dataService) {
 		super(excelFile, year, dataService);
-		this.setUpFirstRow();
+		this.setUpStockSheetHeaderRow(this.getFirstRow());
 		this.createStockSheetColumns();
 		this.createLastTickerColumn(StockSheetConstants.NUM_COLUMNS.getStockSheetData() - 1);
+		this.setUpStockSheetHeaderRow(this.getLastRow());
 		this.autoSizeAllColumns(StockSheetConstants.NUM_COLUMNS.getStockSheetData());
 	}
 
-	public void setUpFirstRow() {
+	public void setUpStockSheetHeaderRow(Row headerRow) {
 		CellStyle style = this.getExcelFile().createCellStyle();// Create style
 		Font font = this.getExcelFile().createFont();// Create font
 		font.setBold(true);// Make font bold
@@ -36,7 +42,7 @@ public class StockSheet extends FinancialSheet {
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		List<Cell> firstRowCells = new ArrayList<Cell>();
 		for (int i = 0; i < StockSheetConstants.NUM_COLUMNS.getStockSheetData(); i++) {
-			Cell cell = this.getFirstRow().createCell(i);
+			Cell cell = headerRow.createCell(i);
 			firstRowCells.add(cell);
 			cell.setCellStyle(style);
 		}
@@ -45,9 +51,6 @@ public class StockSheet extends FinancialSheet {
 		firstRowCells.get(CommonSheetConstants.TICKER_COLUMN.getCommonColumn()).setCellValue("Ticker");
 		firstRowCells.get(CommonSheetConstants.SECTOR_COLUMN.getCommonColumn()).setCellValue("Sector");
 		firstRowCells.get(CommonSheetConstants.INDUSTRY_COLUMN.getCommonColumn()).setCellValue("Industry");
-		firstRowCells.get(StockSheetConstants.MARKET_CAPITALIZATION_COLUMN.getStockSheetData())
-				.setCellValue("Market Capitalization");
-		firstRowCells.get(StockSheetConstants.BETA_COLUMN.getStockSheetData()).setCellValue("Beta");
 		firstRowCells.get(StockSheetConstants.DIVIDEND_ANNUAL_PERCENTAGE_COLUMN.getStockSheetData())
 				.setCellValue("Annual Dividend Percent Yield");
 		firstRowCells.get(StockSheetConstants.AVERAGE_DIVIDEND_ANNUAL_PERCENTAGE_COLUMN.getStockSheetData())

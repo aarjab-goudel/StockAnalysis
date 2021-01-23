@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,17 +18,17 @@ import org.junit.Test;
 
 import create.excel.enums.CommonSheetConstants;
 import create.excel.enums.StockSheetConstants;
-import create.excel.implementation.CreateExcelFile;
+import create.excel.implementation.CreateAnnualExcelFile;
 import create.excel.implementation.StockSheet;
 
 public class StockSheetTest {
 
-	private static CreateExcelFile excelFile;
+	private static CreateAnnualExcelFile excelFile;
 	private static StockSheet stockSheet;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		excelFile = new CreateExcelFile();
+		excelFile = new CreateAnnualExcelFile();
 		stockSheet = excelFile.getStockDataSheet();
 	}
 
@@ -43,11 +48,9 @@ public class StockSheetTest {
 		Cell fifthColumn = firstRow.getCell(CommonSheetConstants.INDUSTRY_COLUMN.getCommonColumn());
 		assertEquals("Fifth column is not Industry!", fifthColumn.getStringCellValue(), "Industry");
 
-		Cell sixthColumn = firstRow.getCell(StockSheetConstants.BETA_COLUMN.getStockSheetData());
-		assertEquals("Sixth column is not Beta!", sixthColumn.getStringCellValue(), "Beta");
-
 		Cell eighthColumn = firstRow.getCell(StockSheetConstants.AVERAGE_PE_RATIO_COLUMN.getStockSheetData());
-		assertEquals("Eighth column is not Average P/E Ratio!", eighthColumn.getStringCellValue(), "Average P/E ratio");
+		assertEquals("Eighth column is not Average P/E Ratio!", eighthColumn.getStringCellValue(),
+				"Average 5 Year P/E ratio");
 
 		Cell ninthColumn = firstRow.getCell(StockSheetConstants.AVERAGE_CURRENT_RATIO.getStockSheetData());
 		assertEquals("Ninth column is not Average Current Ratio!", ninthColumn.getStringCellValue(),

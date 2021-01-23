@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.bo;
 
 public class StockDataInfoBO extends InfoBO {
@@ -10,8 +15,6 @@ public class StockDataInfoBO extends InfoBO {
 	private String averagePBRatio;
 	private String forwardPERatio;
 	private String pegRatio;
-	private String beta;
-	private String marketCap;
 	private String sector;
 	private String industry;
 	private String stockName;
@@ -82,22 +85,6 @@ public class StockDataInfoBO extends InfoBO {
 
 	public void setPegRatio(String pegRatio) {
 		this.pegRatio = pegRatio;
-	}
-
-	public String getBeta() {
-		return beta;
-	}
-
-	public void setBeta(String beta) {
-		this.beta = beta;
-	}
-
-	public String getMarketCap() {
-		return marketCap;
-	}
-
-	public void setMarketCap(String marketCap) {
-		this.marketCap = marketCap;
 	}
 
 	public String getSector() {

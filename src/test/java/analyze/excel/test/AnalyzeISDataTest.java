@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package analyze.excel.test;
 
 import java.io.IOException;
@@ -11,19 +16,19 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import analyze.excel.data.AnalyzeExcelFile;
+import analyze.excel.data.AnalyzeAnnualExcelFile;
 import analyze.excel.data.ISAnalyzer;
 import create.excel.bo.ISInfoBO;
 
 public class AnalyzeISDataTest {
 
-	private static AnalyzeExcelFile analyzeExcel;
+	private static AnalyzeAnnualExcelFile analyzeExcel;
 	private static ISAnalyzer isAnalyzer;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		analyzeExcel = new AnalyzeExcelFile();
-		isAnalyzer = new ISAnalyzer(analyzeExcel.getTickerToISInfo());
+		analyzeExcel = new AnalyzeAnnualExcelFile();
+		isAnalyzer = new ISAnalyzer(analyzeExcel.getTickerToISInfo(), analyzeExcel.getSetUp().getTickerToTxtFilePath());
 	}
 
 	@Test

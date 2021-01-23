@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.bo;
 
 import excel.library.CommonFinancialLibrary;
@@ -6,6 +11,9 @@ public class ISInfoBO extends InfoBO {
 
 	private String revenue;
 	private String revenueGrowth;
+
+	private String researchAndDevelopment;
+	private String researchAndDevelopmentGrowth;
 
 	private String costOfRevenue;
 	private String grossProfit;
@@ -16,6 +24,7 @@ public class ISInfoBO extends InfoBO {
 
 	private String isDate;
 	private String eps;
+	private String epsGrowth;
 	private String currencyType;
 
 	public ISInfoBO(int year, String ticker) {
@@ -106,6 +115,30 @@ public class ISInfoBO extends InfoBO {
 
 	public void setNetIncomeGrowth(String netIncomeGrowth) {
 		this.netIncomeGrowth = netIncomeGrowth;
+	}
+
+	public String getEpsGrowth() {
+		return epsGrowth;
+	}
+
+	public void setEpsGrowth(String epsGrowth) {
+		this.epsGrowth = epsGrowth;
+	}
+
+	public String getResearchAndDevelopment() {
+		return researchAndDevelopment.replace(",", "");
+	}
+
+	public void setResearchAndDevelopment(String researchAndDevelopment) {
+		this.researchAndDevelopment = researchAndDevelopment;
+	}
+
+	public String getResearchAndDevelopmentGrowth() {
+		return researchAndDevelopmentGrowth;
+	}
+
+	public void setResearchAndDevelopmentGrowth(String researchAndDevelopmentGrowth) {
+		this.researchAndDevelopmentGrowth = researchAndDevelopmentGrowth;
 	}
 
 }

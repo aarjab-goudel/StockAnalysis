@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.implementation;
 
 import java.util.ArrayList;
@@ -19,19 +24,24 @@ import excel.library.BSFinancialLibrary;
 
 public class BSSheet extends FinancialSheet {
 
-	public BSSheet(Workbook excelFile, int sheetNum, DataService dataService) {
+	public BSSheet(Workbook excelFile, int sheetNum, DataService dataService, boolean isQuarterly) {
 		super(excelFile, sheetNum, dataService);
-		this.setUpFirstRow();
-		this.createBalanceSheetColumns();
+		this.setUpBSHeaderRow(this.getFirstRow());
+		this.createBalanceSheetColumns(isQuarterly);
 		this.createLastTickerColumn(BSSheetConstants.NUM_COLUMNS.getBSData() - 1);
-		// Should be last method to call before finishing setting up Balance Sheet
+		this.setUpBSHeaderRow(this.getLastRow());
 		this.autoSizeAllColumns(BSSheetConstants.NUM_COLUMNS.getBSData());
 	}
 
-	private void createBalanceSheetColumns() {
+	private void createBalanceSheetColumns(boolean isQuarterly) {
 		List<String> companies = this.getDataService().getOrderedCompanies();
 		for (String company : companies) {
-			BSInfoBO bsInfo = this.getDataService().getTickerToBSInfo().get(company).get(Math.abs(this.getYear()));
+			BSInfoBO bsInfo = null;
+			if (!isQuarterly) {
+				bsInfo = this.getDataService().getTickerToBSInfo().get(company).get(Math.abs(this.getYear()));
+			} else {
+				bsInfo = this.getDataService().getQuarterlyTickerToBSInfo().get(company).get(Math.abs(this.getYear()));
+			}
 			Row row = this.getTickerToRow().get(company);
 
 			BSFinancialLibrary.writeBSInfo(bsInfo, row);
@@ -39,7 +49,7 @@ public class BSSheet extends FinancialSheet {
 		}
 	}
 
-	public void setUpFirstRow() {
+	public void setUpBSHeaderRow(Row headerRow) {
 		CellStyle style = this.getExcelFile().createCellStyle();// Create style
 		Font font = this.getExcelFile().createFont();// Create font
 		font.setBold(true);// Make font bold
@@ -48,7 +58,7 @@ public class BSSheet extends FinancialSheet {
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		List<Cell> firstRowCells = new ArrayList<Cell>();
 		for (int i = 0; i < BSSheetConstants.NUM_COLUMNS.getBSData(); i++) {
-			Cell cell = this.getFirstRow().createCell(i);
+			Cell cell = headerRow.createCell(i);
 			firstRowCells.add(cell);
 			cell.setCellStyle(style);
 		}

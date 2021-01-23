@@ -1,17 +1,23 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.data.service;
-import org.junit.*;
 
-import create.excel.data.service.CSVReader;
 import java.util.List;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CSVReaderTest {
 	private static CSVReader csvReader;
-	
+
 	@BeforeClass
 	public static void initializeFields() {
-		csvReader = new CSVReader();
+		csvReader = new CSVReader(null);
 	}
-	
+
 	@Test
 	public void testCSVParse() {
 		List<String> stocks = csvReader.getStockList();
@@ -24,8 +30,6 @@ public class CSVReaderTest {
 			System.out.println(i + 1 + ". " + stocks.get(i));
 		}
 		System.out.println("===========================================================================");
-	} 
-	
-	
+	}
 
 }

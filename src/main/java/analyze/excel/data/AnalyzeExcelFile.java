@@ -1,6 +1,11 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
+
 package analyze.excel.data;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +16,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import create.excel.bo.BSInfoBO;
 import create.excel.bo.CFInfoBO;
 import create.excel.bo.ISInfoBO;
-import create.excel.bo.RatioInfoBO;
-import create.excel.data.service.SaveExcel;
 import excel.library.BSFinancialLibrary;
 import excel.library.CFFinancialLibrary;
+import excel.library.CommonFinancialLibrary;
 import excel.library.ISFinancialLibrary;
-import excel.library.RatioFinancialLibrary;
 
 public class AnalyzeExcelFile {
 
@@ -24,15 +27,17 @@ public class AnalyzeExcelFile {
 	private Map<String, List<BSInfoBO>> tickerToBSInfo;
 	private Map<String, List<ISInfoBO>> tickerToISInfo;
 	private Map<String, List<CFInfoBO>> tickerToCFInfo;
-	private Map<String, List<RatioInfoBO>> tickerToRatioInfo;
+	private List<String> companies;
 
-	public AnalyzeExcelFile() throws IOException {
-		this.excelFile = SaveExcel.getInstance();
-		tickerToBSInfo = this.extractBSData();
-		tickerToISInfo = this.extractISData();
-		tickerToCFInfo = this.extractCFData();
-		tickerToRatioInfo = this.extractRatioData();
-		SaveExcel.closeAndSaveFile();
+	public AnalyzeExcelFile(Workbook excelFile) {
+		if (excelFile != null) {
+			this.excelFile = excelFile;
+			tickerToBSInfo = this.extractBSData();
+			tickerToCFInfo = this.extractCFData();
+			tickerToISInfo = this.extractISData();
+			this.companies = CommonFinancialLibrary.readCurrentStockList(this.getExcelFile().getSheetAt(0));
+		}
+
 	}
 
 	public Map<String, List<BSInfoBO>> extractBSData() {
@@ -52,7 +57,6 @@ public class AnalyzeExcelFile {
 
 		Map<String, List<BSInfoBO>> tickerToBSInfo = BSFinancialLibrary.readBSData(bsSheets);
 		return tickerToBSInfo;
-
 	}
 
 	public Map<String, List<ISInfoBO>> extractISData() {
@@ -96,27 +100,6 @@ public class AnalyzeExcelFile {
 
 	}
 
-	public Map<String, List<RatioInfoBO>> extractRatioData() {
-		Sheet firstRatioSheet = excelFile.getSheet("Ratios");
-		Sheet secondRatioSheet = excelFile.getSheet("RatiosOne");
-		Sheet thirdRatioSheet = excelFile.getSheet("RatiosTwo");
-		Sheet fourthRatioSheet = excelFile.getSheet("RatiosThree");
-		Sheet fifthRatioSheet = excelFile.getSheet("RatiosFour");
-
-		List<Sheet> ratiosSheet = new ArrayList<Sheet>();
-
-		ratiosSheet.add(firstRatioSheet);
-		ratiosSheet.add(secondRatioSheet);
-		ratiosSheet.add(thirdRatioSheet);
-		ratiosSheet.add(fourthRatioSheet);
-		ratiosSheet.add(fifthRatioSheet);
-
-		Map<String, List<RatioInfoBO>> tickerToRatioInfo = RatioFinancialLibrary.readRatioData(ratiosSheet);
-
-		return tickerToRatioInfo;
-
-	}
-
 	public Map<String, List<BSInfoBO>> getTickerToBSInfo() {
 		return tickerToBSInfo;
 	}
@@ -129,8 +112,12 @@ public class AnalyzeExcelFile {
 		return tickerToCFInfo;
 	}
 
-	public Map<String, List<RatioInfoBO>> getTickerToRatioInfo() {
-		return tickerToRatioInfo;
+	public Workbook getExcelFile() {
+		return excelFile;
+	}
+
+	public List<String> getCompanies() {
+		return companies;
 	}
 
 }

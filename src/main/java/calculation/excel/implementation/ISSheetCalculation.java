@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package calculation.excel.implementation;
 
 import java.util.List;
@@ -13,6 +18,8 @@ public class ISSheetCalculation extends FinancialSheetCalculation {
 	private static final String COST_OF_REVENUE_LETTER = "I";
 	private static final String GROSS_PROFIT_LETTER = "K";
 	private static final String NET_INCOME_LETTER = "M";
+	private static final String EPS_LETTER = "O";
+	private static final String RESEARCH_AND_DEVELOPMENT_LETTER = "Q";
 
 	private static final int FURTHEST_YEAR = -4;
 
@@ -46,17 +53,25 @@ public class ISSheetCalculation extends FinancialSheetCalculation {
 					previousYear);
 			String netIncomeGrowthFormula = this.setUpGrowthFormula(NET_INCOME_LETTER, "IS", tickerRowNum,
 					previousYear);
+			String epsGrowthFormula = this.setUpGrowthFormula(EPS_LETTER, "IS", tickerRowNum, previousYear);
+			String researchAndDevelopmentGrowthFormula = this.setUpGrowthFormula(RESEARCH_AND_DEVELOPMENT_LETTER, "IS",
+					tickerRowNum, previousYear);
 
 			Cell revenueGrowthCell = tickerRow.createCell(ISSheetConstants.REVENUE_GROWTH_COLUMN.getIsData());
 			Cell costOfRevenueGrowthCell = tickerRow
 					.createCell(ISSheetConstants.COST_OF_REVENUE_GROWTH_COLUMN.getIsData());
 			Cell grossProfitGrowthCell = tickerRow.createCell(ISSheetConstants.GROSS_PROFIT_GROWTH_COLUMN.getIsData());
 			Cell netIncomeGrowthCell = tickerRow.createCell(ISSheetConstants.NET_INCOME_GOWTH_COLUMN.getIsData());
+			Cell epsGrowthCell = tickerRow.createCell(ISSheetConstants.EPS_GROWTH_COLUMN.getIsData());
+			Cell researchAndDevelopmentGrowthCell = tickerRow
+					.createCell(ISSheetConstants.RESEARCH_AND_DEVELOPMENT_GROWTH_COLUMN.getIsData());
 
 			revenueGrowthCell.setCellFormula(revenueGrowthFormula);
 			costOfRevenueGrowthCell.setCellFormula(costOfRevenueGrowthFormula);
 			grossProfitGrowthCell.setCellFormula(grossProfitGrowthFormula);
 			netIncomeGrowthCell.setCellFormula(netIncomeGrowthFormula);
+			epsGrowthCell.setCellFormula(epsGrowthFormula);
+			researchAndDevelopmentGrowthCell.setCellFormula(researchAndDevelopmentGrowthFormula);
 
 		}
 

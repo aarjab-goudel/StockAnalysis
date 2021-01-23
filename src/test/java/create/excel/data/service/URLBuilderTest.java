@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.data.service;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +20,7 @@ public class URLBuilderTest {
 
 	@BeforeClass
 	public static void intializeFields() {
-		CSVReader csvReader = new CSVReader();
+		CSVReader csvReader = new CSVReader(null);
 		List<String> companies = csvReader.getStockList();
 		urlBuilder = new URLBuilder(companies);
 	}

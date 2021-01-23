@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package analyze.excel.test;
 
 import java.io.IOException;
@@ -11,19 +16,19 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import analyze.excel.data.AnalyzeExcelFile;
+import analyze.excel.data.AnalyzeAnnualExcelFile;
 import analyze.excel.data.CFAnalyzer;
 import create.excel.bo.CFInfoBO;
 
 public class AnalyzeCFDataTest {
 
-	private static AnalyzeExcelFile analyzeExcel;
+	private static AnalyzeAnnualExcelFile analyzeExcel;
 	private static CFAnalyzer cfAnalyzer;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		analyzeExcel = new AnalyzeExcelFile();
-		cfAnalyzer = new CFAnalyzer(analyzeExcel.getTickerToCFInfo());
+		analyzeExcel = new AnalyzeAnnualExcelFile();
+		cfAnalyzer = new CFAnalyzer(analyzeExcel.getTickerToCFInfo(), analyzeExcel.getSetUp().getTickerToTxtFilePath());
 	}
 
 	@Test

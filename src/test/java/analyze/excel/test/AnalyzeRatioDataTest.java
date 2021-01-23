@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package analyze.excel.test;
 
 import java.io.IOException;
@@ -11,16 +16,16 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import analyze.excel.data.AnalyzeExcelFile;
+import analyze.excel.data.AnalyzeAnnualExcelFile;
 import create.excel.bo.RatioInfoBO;
 
 public class AnalyzeRatioDataTest {
 
-	private static AnalyzeExcelFile analyzeExcel;
+	private static AnalyzeAnnualExcelFile analyzeExcel;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		analyzeExcel = new AnalyzeExcelFile();
+		analyzeExcel = new AnalyzeAnnualExcelFile();
 	}
 
 	@Test

@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.implementation;
 
 import java.util.ArrayList;
@@ -19,48 +24,31 @@ import excel.library.CFFinancialLibrary;
 
 public class CFSheet extends FinancialSheet {
 
-	public CFSheet(Workbook excelFile, int year, DataService dataService) {
+	public CFSheet(Workbook excelFile, int year, DataService dataService, boolean isQuarterly) {
 		super(excelFile, year, dataService);
-		this.setUpFirstRow();
-		this.createCashFlowColumns();
+		this.setUpCFHeaderRow(this.getFirstRow());
+		this.createCashFlowColumns(isQuarterly);
 		this.createLastTickerColumn(CFSheetConstants.NUM_COLUMNS.getCfData() - 1);
-		// Should be last method to call before finishing setting up Balance Sheet
+		this.setUpCFHeaderRow(this.getLastRow());
 		this.autoSizeAllColumns(CFSheetConstants.NUM_COLUMNS.getCfData());
 	}
 
-	private void createCashFlowColumns() {
+	private void createCashFlowColumns(boolean isQuarterly) {
 		List<String> companies = this.getDataService().getOrderedCompanies();
 		for (String company : companies) {
-			CFInfoBO cfInfo = this.getDataService().getTickerToCFInfo().get(company).get(Math.abs(this.getYear()));
+			CFInfoBO cfInfo = null;
+			if (!isQuarterly) {
+				cfInfo = this.getDataService().getTickerToCFInfo().get(company).get(Math.abs(this.getYear()));
+			} else {
+				cfInfo = this.getDataService().getQuarterlyTickerToCFInfo().get(company).get(Math.abs(this.getYear()));
+			}
 			Row row = this.getTickerToRow().get(company);
 			CFFinancialLibrary.writeCFInfo(cfInfo, row);
-
-//			Cell netCashByOperatingCell = row
-//					.createCell(CFSheetConstants.NET_CASH_BY_OPERATING_ACTIVITIES_COLUMN.getCfData());
-//			netCashByOperatingCell.setCellValue(cfInfo.getNetCashByOperatingActivites());
-//
-//			Cell netCashForFinancingCell = row.createCell(CFSheetConstants.NET_CASH_FOR_FINANCING_COLUMN.getCfData());
-//			netCashForFinancingCell.setCellValue(cfInfo.getNetCashForFinancingActivities());
-//
-//			Cell netCashForInvestingCell = row.createCell(CFSheetConstants.NET_CASH_FOR_INVESTING_COLUMN.getCfData());
-//			netCashForInvestingCell.setCellValue(cfInfo.getNetCashForInvestingActivities());
-//
-//			Cell capitalExpenditureCell = row.createCell(CFSheetConstants.CAPITAL_EXPENDITURE_COLUMN.getCfData());
-//			capitalExpenditureCell.setCellValue(cfInfo.getCapitalExpenditure());
-//
-//			Cell dateCell = row.createCell(CFSheetConstants.CF_DATE.getCfData());
-//			dateCell.setCellValue(cfInfo.getCfDate());
-//
-//			Cell freeCashFlowCell = row.createCell(CFSheetConstants.FREE_CASH_FLOW_COLUMN.getCfData());
-//			freeCashFlowCell.setCellValue(cfInfo.getFreeCashFlow());
-//
-//			Cell currencyTypeCell = row.createCell(CFSheetConstants.CURRENCY_TYPE.getCfData());
-//			currencyTypeCell.setCellValue(cfInfo.getCurrencyType());
 
 		}
 	}
 
-	private void setUpFirstRow() {
+	private void setUpCFHeaderRow(Row headerRow) {
 		CellStyle style = this.getExcelFile().createCellStyle();// Create style
 		Font font = this.getExcelFile().createFont();// Create font
 		font.setBold(true);// Make font bold
@@ -69,7 +57,7 @@ public class CFSheet extends FinancialSheet {
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		List<Cell> firstRowCells = new ArrayList<Cell>();
 		for (int i = 0; i < CFSheetConstants.NUM_COLUMNS.getCfData(); i++) {
-			Cell cell = this.getFirstRow().createCell(i);
+			Cell cell = headerRow.createCell(i);
 			firstRowCells.add(cell);
 			cell.setCellStyle(style);
 		}

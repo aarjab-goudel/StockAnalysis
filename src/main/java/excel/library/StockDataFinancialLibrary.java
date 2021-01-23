@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package excel.library;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,13 +19,6 @@ public class StockDataFinancialLibrary {
 	}
 
 	public static void writeStockData(DataService dataService, StockDataInfoBO stockInfo, Row row) {
-
-		Cell marketCapitalizationCell = row
-				.createCell(StockSheetConstants.MARKET_CAPITALIZATION_COLUMN.getStockSheetData());
-		marketCapitalizationCell.setCellValue(stockInfo.getMarketCap());
-
-		Cell betaCell = row.createCell(StockSheetConstants.BETA_COLUMN.getStockSheetData());
-		betaCell.setCellValue(stockInfo.getBeta());
 
 		Cell annualDividendPercentageCell = row
 				.createCell(StockSheetConstants.DIVIDEND_ANNUAL_PERCENTAGE_COLUMN.getStockSheetData());
@@ -47,6 +45,22 @@ public class StockDataFinancialLibrary {
 
 		Cell pegRatioCell = row.createCell(StockSheetConstants.PEG_RATIO_COLUMN.getStockSheetData());
 		pegRatioCell.setCellValue(stockInfo.getPegRatio());
+	}
+
+	public static StockDataInfoBO createErrorStockDataInfoBO(String ticker) {
+		StockDataInfoBO stockInfo = new StockDataInfoBO(0, ticker);
+		stockInfo.setAnnualDividendPercent("ERROR");
+		stockInfo.setAverageDividendPercent("ERROR");
+		stockInfo.setAveragePBRatio("ERROR");
+		stockInfo.setAveragePERatio("ERROR");
+		stockInfo.setForwardPERatio("ERROR");
+		stockInfo.setIndustry("ERROR");
+		stockInfo.setPBRatio("ERROR");
+		stockInfo.setPegRatio("ERROR");
+		stockInfo.setPERatio("ERROR");
+		stockInfo.setSector("ERROR");
+		stockInfo.setStockName("ERROR");
+		return stockInfo;
 	}
 
 }

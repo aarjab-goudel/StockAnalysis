@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package calculation.excel.test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import calculation.excel.implementation.ISSheetCalculation;
-import create.excel.implementation.CreateExcelFile;
+import create.excel.implementation.CreateAnnualExcelFile;
 
 public class ISSheetCalculationTest {
 
@@ -18,27 +23,27 @@ public class ISSheetCalculationTest {
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		CreateExcelFile excelFile = new CreateExcelFile();
+		CreateAnnualExcelFile excelFile = new CreateAnnualExcelFile();
 		isSheetCalculation = new ISSheetCalculation(0, excelFile.getISSheet());
 	}
 
 	@Test
 	public void testISSheetGrowthFormulas() {
-		String colOneRevenueGrowthFormula = "(F1-IS!F1)/(IS!F1)";
+		String colOneRevenueGrowthFormula = "(G1-IS!G1)/(IS!G1)";
 		assertEquals("The RevenueGrowthFormula is wrong for column one!", colOneRevenueGrowthFormula,
 				isSheetCalculation.setUpGrowthFormula(ISSheetCalculation.getRevenueLetter(), "IS", 1, 0));
 
-		String colThirteenCostOfRevenueGrowthFormula = "(H13-ISOne!H13)/(ISOne!H13)";
+		String colThirteenCostOfRevenueGrowthFormula = "(I13-ISOne!I13)/(ISOne!I13)";
 		assertEquals("The CostOfRevenueGrowthFormula is wrong for column thirteen!",
 				colThirteenCostOfRevenueGrowthFormula,
 				isSheetCalculation.setUpGrowthFormula(ISSheetCalculation.getCostOfRevenueLetter(), "IS", 13, -1));
 
-		String colHundredAndTwentyGrossProfitGrowthFormula = "(J123-ISTwo!J123)/(ISTwo!J123)";
+		String colHundredAndTwentyGrossProfitGrowthFormula = "(K123-ISTwo!K123)/(ISTwo!K123)";
 		assertEquals("The GrossProfitGrowthFormula is wrong for column hundred and twenty three!",
 				colHundredAndTwentyGrossProfitGrowthFormula,
 				isSheetCalculation.setUpGrowthFormula(ISSheetCalculation.getGrossProfitLetter(), "IS", 123, -2));
 
-		String colTwoThousandAndTwoHundredAndFiftyFourNetIncomeGrowthFormula = "(L2254-ISThree!L2254)/(ISThree!L2254)";
+		String colTwoThousandAndTwoHundredAndFiftyFourNetIncomeGrowthFormula = "(M2254-ISThree!M2254)/(ISThree!M2254)";
 		assertEquals("The NetIncomeGrowthFormula is wrong for column two thousand and two hundred and fifty four!",
 				colTwoThousandAndTwoHundredAndFiftyFourNetIncomeGrowthFormula,
 				isSheetCalculation.setUpGrowthFormula(ISSheetCalculation.getNetIncomeLetter(), "IS", 2254, -3));

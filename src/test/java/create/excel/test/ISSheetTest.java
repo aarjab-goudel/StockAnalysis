@@ -1,11 +1,14 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.test;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,20 +16,19 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import create.excel.bo.ISInfoBO;
 import create.excel.enums.CommonSheetConstants;
 import create.excel.enums.ISSheetConstants;
-import create.excel.implementation.CreateExcelFile;
+import create.excel.implementation.CreateAnnualExcelFile;
 import create.excel.implementation.ISSheet;
 
 public class ISSheetTest {
 
-	private static CreateExcelFile excelFile;
+	private static CreateAnnualExcelFile excelFile;
 	private static ISSheet incomeStatementSheet;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		excelFile = new CreateExcelFile();
+		excelFile = new CreateAnnualExcelFile();
 		incomeStatementSheet = excelFile.getISSheet();
 	}
 
@@ -73,26 +75,6 @@ public class ISSheetTest {
 		assertEquals("Thirteenth column is not Net Income Growth!", thirteenthColumn.getStringCellValue(),
 				"Net Income Growth");
 
-	}
-
-	@Test
-	public void testISSheetValues() {
-		List<String> companies = incomeStatementSheet.getDataService().getOrderedCompanies();
-		Map<String, Row> tickerToRow = incomeStatementSheet.getTickerToRow();
-		for (int i = 0; i < companies.size(); i++) {
-			String ticker = companies.get(i);
-			Row tickerRow = tickerToRow.get(ticker);
-			ISInfoBO tickerISInfo = excelFile.getDataService().getTickerToISInfo().get(ticker).get(Math.abs(0));
-
-			assertEquals("Revenue formula is wrong! ", tickerISInfo.getRevenue(),
-					tickerRow.getCell(ISSheetConstants.REVENUE_COLUMN.getIsData()).getStringCellValue());
-			assertEquals("Cost of revenue is wrong! ", tickerISInfo.getCostOfRevenue(),
-					tickerRow.getCell(ISSheetConstants.COST_OF_REVENUE_COLUMN.getIsData()).getStringCellValue());
-			assertEquals("Gross profit is wrong!", tickerISInfo.getGrossProfit(),
-					tickerRow.getCell(ISSheetConstants.GROSS_PROFIT_COLUMN.getIsData()).getStringCellValue());
-			assertEquals("Net Income is wrong!", tickerISInfo.getNetIncome(),
-					tickerRow.getCell(ISSheetConstants.NET_INCOME_COLUMN.getIsData()).getStringCellValue());
-		}
 	}
 
 }

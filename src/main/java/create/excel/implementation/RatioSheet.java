@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.implementation;
 
 import java.util.ArrayList;
@@ -22,10 +27,10 @@ public class RatioSheet extends FinancialSheet {
 
 	public RatioSheet(Workbook excelFile, int sheetNum, DataService dataService) {
 		super(excelFile, sheetNum, dataService);
-		this.setUpFirstRow();
+		this.setUpRatioHeaderRow(this.getFirstRow());
 		this.createRatioColumns();
 		this.createLastTickerColumn(RatioSheetConstants.NUM_COLUMNS.getRatioData() - 1);
-		// Should be last method to call before finishing setting up Ratio Sheet
+		this.setUpRatioHeaderRow(this.getLastRow());
 		this.autoSizeAllColumns(RatioSheetConstants.NUM_COLUMNS.getRatioData());
 	}
 
@@ -42,25 +47,10 @@ public class RatioSheet extends FinancialSheet {
 
 			RatioFinancialLibrary.writeRatioInfo(isInfo, ratioInfo, row);
 
-//			String ratioDate = ratioInfo.getRatioDate();
-//			Row row = this.getTickerToRow().get(company);
-//
-//			Cell earningsPerShareCell = row.createCell(RatioSheetConstants.EARNINGS_PER_SHARE_COLUMN.getRatioData());
-//			earningsPerShareCell.setCellValue(isInfo.getEps());
-//
-//			Cell currentRatioCell = row.createCell(RatioSheetConstants.CURRENT_RATIO_COLUMN.getRatioData());
-//			currentRatioCell.setCellValue(ratioInfo.getCurrentRatio());
-//
-//			Cell debtEquityRatioCell = row.createCell(RatioSheetConstants.DEBT_EQUITY_RATIO_COLUMN.getRatioData());
-//			debtEquityRatioCell.setCellValue(ratioInfo.getDebtToEquityRatio());
-//
-//			Cell dateCell = row.createCell(RatioSheetConstants.RATIO_DATE.getRatioData());
-//			dateCell.setCellValue(ratioDate);
-
 		}
 	}
 
-	public void setUpFirstRow() {
+	public void setUpRatioHeaderRow(Row headerRow) {
 		CellStyle style = this.getExcelFile().createCellStyle();// Create style
 		Font font = this.getExcelFile().createFont();// Create font
 		font.setBold(true);// Make font bold
@@ -69,7 +59,7 @@ public class RatioSheet extends FinancialSheet {
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		List<Cell> firstRowCells = new ArrayList<Cell>();
 		for (int i = 0; i < RatioSheetConstants.NUM_COLUMNS.getRatioData(); i++) {
-			Cell cell = this.getFirstRow().createCell(i);
+			Cell cell = headerRow.createCell(i);
 			firstRowCells.add(cell);
 			cell.setCellStyle(style);
 		}

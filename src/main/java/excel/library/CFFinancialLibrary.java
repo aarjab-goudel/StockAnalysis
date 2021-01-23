@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package excel.library;
 
 import java.util.ArrayList;
@@ -31,36 +36,68 @@ public class CFFinancialLibrary {
 			rowIterator.next();
 			while (rowIterator.hasNext()) {
 				Row row = rowIterator.next();
-				Cell tickerCell = row.getCell(CommonSheetConstants.TICKER_COLUMN.getCommonColumn());
-				Cell freeCashFlowCell = row.getCell(CFSheetConstants.FREE_CASH_FLOW_COLUMN.getCfData());
-				Cell netCashForInvestCell = row.getCell(CFSheetConstants.NET_CASH_FOR_INVESTING_COLUMN.getCfData());
-				Cell netCashForFinancingCell = row.getCell(CFSheetConstants.NET_CASH_FOR_FINANCING_COLUMN.getCfData());
+				if (!CommonFinancialLibrary.determineHeaderRow(row)) {
+					Cell tickerCell = row.getCell(CommonSheetConstants.TICKER_COLUMN.getCommonColumn());
+					Cell freeCashFlowCell = row.getCell(CFSheetConstants.FREE_CASH_FLOW_COLUMN.getCfData());
+					Cell netCashForInvestCell = row.getCell(CFSheetConstants.NET_CASH_FOR_INVESTING_COLUMN.getCfData());
+					Cell netCashForFinancingCell = row
+							.getCell(CFSheetConstants.NET_CASH_FOR_FINANCING_COLUMN.getCfData());
+					Cell cfDateCell = row.getCell(CFSheetConstants.CF_DATE.getCfData());
 
-				String tickerValue = dataFormatter.formatCellValue(tickerCell).replace(",", "");
-				String freeCashFlowValue = dataFormatter.formatCellValue(freeCashFlowCell).replace(",", "");
-				String netCashForInvestValue = dataFormatter.formatCellValue(netCashForInvestCell).replace(",", "");
-				String netCashForFinancingValue = dataFormatter.formatCellValue(netCashForFinancingCell).replace(",",
-						"");
+					try {
+						String tickerValue = dataFormatter.formatCellValue(tickerCell).replace(",", "");
+						String freeCashFlowValue = CommonFinancialLibrary.removeDecimalFromNumber(
+								dataFormatter.formatCellValue(freeCashFlowCell).replace(",", ""));
+						String netCashForInvestValue = CommonFinancialLibrary.removeDecimalFromNumber(
+								dataFormatter.formatCellValue(netCashForInvestCell).replace(",", ""));
+						String netCashForFinancingValue = CommonFinancialLibrary.removeDecimalFromNumber(
+								dataFormatter.formatCellValue(netCashForFinancingCell).replace(",", ""));
+						String cfDate = dataFormatter.formatCellValue(cfDateCell);
 
-				if (tickerToCFData.containsKey(tickerValue)) {
-					List<CFInfoBO> cfInfoList = tickerToCFData.get(tickerValue);
-					CFInfoBO cfInfo = new CFInfoBO(yearCounter, tickerValue);
-					cfInfo.setFreeCashFlow(freeCashFlowValue);
-					cfInfo.setNetCashForFinancingActivities(netCashForFinancingValue);
-					cfInfo.setNetCashForInvestingActivities(netCashForInvestValue);
-					cfInfoList.add(cfInfo);
-				} else {
-					List<CFInfoBO> cfInfoList = new ArrayList<CFInfoBO>();
-					CFInfoBO cfInfo = new CFInfoBO(yearCounter, tickerValue);
-					cfInfo.setFreeCashFlow(freeCashFlowValue);
-					cfInfo.setNetCashForFinancingActivities(netCashForFinancingValue);
-					cfInfo.setNetCashForInvestingActivities(netCashForInvestValue);
-					cfInfoList.add(cfInfo);
-					tickerToCFData.put(tickerValue, cfInfoList);
+						if (tickerToCFData.containsKey(tickerValue)) {
+							List<CFInfoBO> cfInfoList = tickerToCFData.get(tickerValue);
+							CFInfoBO cfInfo = new CFInfoBO(yearCounter, tickerValue);
+							cfInfo.setFreeCashFlow(freeCashFlowValue);
+							cfInfo.setNetCashForFinancingActivities(netCashForFinancingValue);
+							cfInfo.setNetCashForInvestingActivities(netCashForInvestValue);
+							cfInfo.setCfDate(cfDate);
+							cfInfoList.add(cfInfo);
+						} else {
+							List<CFInfoBO> cfInfoList = new ArrayList<CFInfoBO>();
+							CFInfoBO cfInfo = new CFInfoBO(yearCounter, tickerValue);
+							cfInfo.setFreeCashFlow(freeCashFlowValue);
+							cfInfo.setNetCashForFinancingActivities(netCashForFinancingValue);
+							cfInfo.setNetCashForInvestingActivities(netCashForInvestValue);
+							cfInfo.setCfDate(cfDate);
+							cfInfoList.add(cfInfo);
+							tickerToCFData.put(tickerValue, cfInfoList);
+						}
+					} catch (Exception e) {
+						String tickerValue = dataFormatter.formatCellValue(tickerCell).replace(",", "");
+						if (tickerToCFData.containsKey(tickerValue)) {
+							List<CFInfoBO> cfInfoList = tickerToCFData.get(tickerValue);
+							CFInfoBO cfInfo = new CFInfoBO(yearCounter, tickerValue);
+							cfInfo.setFreeCashFlow(CommonFinancialLibrary.errorMessage());
+							cfInfo.setNetCashForFinancingActivities(CommonFinancialLibrary.errorMessage());
+							cfInfo.setNetCashForInvestingActivities(CommonFinancialLibrary.errorMessage());
+							cfInfo.setCfDate(CommonFinancialLibrary.errorMessage());
+							cfInfoList.add(cfInfo);
+						} else {
+							List<CFInfoBO> cfInfoList = new ArrayList<CFInfoBO>();
+							CFInfoBO cfInfo = new CFInfoBO(yearCounter, tickerValue);
+							cfInfo.setFreeCashFlow(CommonFinancialLibrary.errorMessage());
+							cfInfo.setNetCashForFinancingActivities(CommonFinancialLibrary.errorMessage());
+							cfInfo.setNetCashForInvestingActivities(CommonFinancialLibrary.errorMessage());
+							cfInfo.setCfDate(CommonFinancialLibrary.errorMessage());
+							cfInfoList.add(cfInfo);
+							tickerToCFData.put(tickerValue, cfInfoList);
+						}
+					}
+
 				}
 
-				yearCounter--;
 			}
+			yearCounter--;
 		}
 
 		calculateCFData(tickerToCFData);
@@ -101,25 +138,41 @@ public class CFFinancialLibrary {
 	public static void writeCFInfo(CFInfoBO cfInfo, Row row) {
 		Cell netCashByOperatingCell = row
 				.createCell(CFSheetConstants.NET_CASH_BY_OPERATING_ACTIVITIES_COLUMN.getCfData());
-		netCashByOperatingCell.setCellValue(cfInfo.getNetCashByOperatingActivites());
+		netCashByOperatingCell.setCellValue(
+				CommonFinancialLibrary.addAppropriateCommasToNumber(cfInfo.getNetCashByOperatingActivites()));
 
 		Cell netCashForFinancingCell = row.createCell(CFSheetConstants.NET_CASH_FOR_FINANCING_COLUMN.getCfData());
-		netCashForFinancingCell.setCellValue(cfInfo.getNetCashForFinancingActivities());
+		netCashForFinancingCell.setCellValue(
+				CommonFinancialLibrary.addAppropriateCommasToNumber(cfInfo.getNetCashForFinancingActivities()));
 
 		Cell netCashForInvestingCell = row.createCell(CFSheetConstants.NET_CASH_FOR_INVESTING_COLUMN.getCfData());
-		netCashForInvestingCell.setCellValue(cfInfo.getNetCashForInvestingActivities());
+		netCashForInvestingCell.setCellValue(
+				CommonFinancialLibrary.addAppropriateCommasToNumber(cfInfo.getNetCashForInvestingActivities()));
 
 		Cell capitalExpenditureCell = row.createCell(CFSheetConstants.CAPITAL_EXPENDITURE_COLUMN.getCfData());
-		capitalExpenditureCell.setCellValue(cfInfo.getCapitalExpenditure());
+		capitalExpenditureCell
+				.setCellValue(CommonFinancialLibrary.addAppropriateCommasToNumber(cfInfo.getCapitalExpenditure()));
 
 		Cell dateCell = row.createCell(CFSheetConstants.CF_DATE.getCfData());
 		dateCell.setCellValue(cfInfo.getCfDate());
 
 		Cell freeCashFlowCell = row.createCell(CFSheetConstants.FREE_CASH_FLOW_COLUMN.getCfData());
-		freeCashFlowCell.setCellValue(cfInfo.getFreeCashFlow());
+		freeCashFlowCell.setCellValue(CommonFinancialLibrary.addAppropriateCommasToNumber(cfInfo.getFreeCashFlow()));
 
 		Cell currencyTypeCell = row.createCell(CFSheetConstants.CURRENCY_TYPE.getCfData());
 		currencyTypeCell.setCellValue(cfInfo.getCurrencyType());
+	}
+
+	public static CFInfoBO createErrorCFInfoBO(String ticker) {
+		CFInfoBO cfInfo = new CFInfoBO(0, ticker);
+		cfInfo.setCapitalExpenditure("ERROR");
+		cfInfo.setCfDate("ERROR");
+		cfInfo.setCurrencyType("ERROR");
+		cfInfo.setFreeCashFlow("ERROR");
+		cfInfo.setNetCashByOperatingActivites("ERROR");
+		cfInfo.setNetCashForFinancingActivities("ERROR");
+		cfInfo.setNetCashForInvestingActivities("ERROR");
+		return cfInfo;
 	}
 
 }

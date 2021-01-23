@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.data.service;
 
 import java.io.BufferedReader;
@@ -5,25 +10,36 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CSVReader {
-	// Contains the path to Stocks.txt file
 	private static final String CSV_FILE = new java.io.File("Stocks.txt").getAbsolutePath();
-	// Contains the path to SubsetStocks.txt file
-	private static final String SUBSET_STOCKS_CSV_FILE = new java.io.File("SubsetStocks.txt").getAbsolutePath();
 	private List<String> unOrderedStockList;
-	private List<String> unOrderedSubsetStocksList;
 
-	public CSVReader() {
+	public CSVReader(List<String> unOrderedStockListFromTextField) {
 		unOrderedStockList = new ArrayList<String>();
-		unOrderedSubsetStocksList = new ArrayList<String>();
-		this.buildUnorderedStockList(CSV_FILE, false);
-		this.buildUnorderedStockList(SUBSET_STOCKS_CSV_FILE, true);
+		if (unOrderedStockListFromTextField == null) {
+			this.buildUnorderedStockList(CSV_FILE);
+		} else {
+			unOrderedStockList = unOrderedStockListFromTextField;
+		}
+		this.capitalizeAllTickers();
 	}
 
-	public void buildUnorderedStockList(String filePathToStockList, boolean isSubsetStock) {
+	public void capitalizeAllTickers() {
+		List<String> capitalizeUnorderedStockList = new ArrayList<String>();
+		for (String ticker : unOrderedStockList) {
+			String capitalTicker = ticker.toUpperCase();
+			capitalizeUnorderedStockList.add(capitalTicker);
+		}
+		unOrderedStockList = capitalizeUnorderedStockList;
+	}
+
+	public void buildUnorderedStockList(String filePathToStockList) {
 		System.out.println(filePathToStockList);
+		Set<String> stockSet = new HashSet<String>();
 		BufferedReader bufferReader = null;
 		try {
 			String line = "";
@@ -32,9 +48,7 @@ public class CSVReader {
 			while ((line = bufferReader.readLine()) != null) {
 				String[] stocks = line.split(csvSplitBy);
 				for (int i = 0; i < stocks.length; i++) {
-					if (isSubsetStock) {
-						unOrderedSubsetStocksList.add(stocks[i]);
-					} else {
+					if (stockSet.add(stocks[i])) {
 						unOrderedStockList.add(stocks[i]);
 					}
 				}
@@ -57,10 +71,6 @@ public class CSVReader {
 
 	public List<String> getStockList() {
 		return unOrderedStockList;
-	}
-
-	public List<String> getUnOrderedSubsetStocksList() {
-		return unOrderedSubsetStocksList;
 	}
 
 }

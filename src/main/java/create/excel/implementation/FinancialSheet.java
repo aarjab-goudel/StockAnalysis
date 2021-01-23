@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.implementation;
 
 import java.util.HashMap;
@@ -19,6 +24,7 @@ public class FinancialSheet {
 	private Workbook excelFile;
 	private Sheet sheet;
 	private Row firstRow;
+	private Row lastRow;
 	private int year;
 	private Map<String, Row> tickerToRow;
 	private DataService dataService;
@@ -48,6 +54,7 @@ public class FinancialSheet {
 			rowCounter++;
 			tickerToRow.put(companies.get(i), row);
 		}
+		lastRow = sheet.createRow(rowCounter);
 		return tickerToRow;
 	}
 
@@ -138,6 +145,10 @@ public class FinancialSheet {
 
 	public DataService getDataService() {
 		return dataService;
+	}
+
+	public Row getLastRow() {
+		return lastRow;
 	}
 
 }

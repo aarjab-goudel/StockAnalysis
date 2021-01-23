@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.data.service;
 
 import java.io.BufferedReader;
@@ -12,7 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ReadJsonData {
-	
+
 	private String readAll(Reader reader) throws IOException {
 		StringBuilder strBuilder = new StringBuilder();
 		int readerCounter;
@@ -21,11 +26,12 @@ public class ReadJsonData {
 		}
 		return strBuilder.toString();
 	}
-	
+
 	public JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
 		InputStream inputStream = new URL(url).openStream();
 		try {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(inputStream, Charset.forName("UTF-8")));
 			String jsonText = this.readAll(bufferedReader);
 			JSONObject json = new JSONObject(jsonText);
 			return json;
@@ -33,5 +39,5 @@ public class ReadJsonData {
 			inputStream.close();
 		}
 	}
- 
+
 }

@@ -1,11 +1,14 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.test;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,20 +16,19 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import create.excel.bo.CFInfoBO;
 import create.excel.enums.CFSheetConstants;
 import create.excel.enums.CommonSheetConstants;
 import create.excel.implementation.CFSheet;
-import create.excel.implementation.CreateExcelFile;
+import create.excel.implementation.CreateAnnualExcelFile;
 
 public class CFSheetTest {
 
-	private static CreateExcelFile excelFile;
+	private static CreateAnnualExcelFile excelFile;
 	private static CFSheet cashFlowSheet;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		excelFile = new CreateExcelFile();
+		excelFile = new CreateAnnualExcelFile();
 		cashFlowSheet = excelFile.getCFSheet();
 	}
 
@@ -68,31 +70,6 @@ public class CFSheetTest {
 		Cell eleventhColumn = firstRow.getCell(CFSheetConstants.CAPITAL_EXPENDITURE_COLUMN.getCfData());
 		assertEquals("Eleventh column is not Capital expenditure!", eleventhColumn.getStringCellValue(),
 				"Capital Expenditures");
-	}
-
-	@Test
-	public void testCFSheetValues() {
-		List<String> companies = cashFlowSheet.getDataService().getOrderedCompanies();
-		Map<String, Row> tickerToRow = cashFlowSheet.getTickerToRow();
-		for (int i = 0; i < companies.size(); i++) {
-			String ticker = companies.get(i);
-			Row tickerRow = tickerToRow.get(ticker);
-			CFInfoBO tickerCFInfo = excelFile.getDataService().getTickerToCFInfo().get(ticker).get(Math.abs(0));
-			assertEquals("Net cash provided by operating activities formula is wrong! ",
-					tickerCFInfo.getNetCashByOperatingActivites(),
-					tickerRow.getCell(CFSheetConstants.NET_CASH_BY_OPERATING_ACTIVITIES_COLUMN.getCfData())
-							.getStringCellValue());
-			assertEquals("Net cash used for investing activities is wrong! ",
-					tickerCFInfo.getNetCashForInvestingActivities(),
-					tickerRow.getCell(CFSheetConstants.NET_CASH_FOR_INVESTING_COLUMN.getCfData()).getStringCellValue());
-			assertEquals("Net cash provided by (used for) financing activities formula is wrong!",
-					tickerCFInfo.getNetCashForFinancingActivities(),
-					tickerRow.getCell(CFSheetConstants.NET_CASH_FOR_FINANCING_COLUMN.getCfData()).getStringCellValue());
-
-			assertEquals("Capital Expenditures formula is wrong!", tickerCFInfo.getCapitalExpenditure(),
-					tickerRow.getCell(CFSheetConstants.CAPITAL_EXPENDITURE_COLUMN.getCfData()).getStringCellValue());
-		}
-
 	}
 
 }

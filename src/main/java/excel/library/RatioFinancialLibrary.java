@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package excel.library;
 
 import java.util.ArrayList;
@@ -32,35 +37,65 @@ public class RatioFinancialLibrary {
 			rowIterator.next();
 			while (rowIterator.hasNext()) {
 				Row row = rowIterator.next();
-				Cell tickerCell = row.getCell(CommonSheetConstants.TICKER_COLUMN.getCommonColumn());
-				Cell currentRatioCell = row.getCell(RatioSheetConstants.CURRENT_RATIO_COLUMN.getRatioData());
-				Cell debtEquityRatioCell = row.getCell(RatioSheetConstants.DEBT_EQUITY_RATIO_COLUMN.getRatioData());
-				Cell EPSCell = row.getCell(RatioSheetConstants.EARNINGS_PER_SHARE_COLUMN.getRatioData());
+				if (!CommonFinancialLibrary.determineHeaderRow(row)) {
+					Cell tickerCell = row.getCell(CommonSheetConstants.TICKER_COLUMN.getCommonColumn());
+					Cell currentRatioCell = row.getCell(RatioSheetConstants.CURRENT_RATIO_COLUMN.getRatioData());
+					Cell debtEquityRatioCell = row.getCell(RatioSheetConstants.DEBT_EQUITY_RATIO_COLUMN.getRatioData());
+					Cell EPSCell = row.getCell(RatioSheetConstants.EARNINGS_PER_SHARE_COLUMN.getRatioData());
+					Cell ratioDateCell = row.getCell(RatioSheetConstants.RATIO_DATE.getRatioData());
 
-				String tickerValue = dataFormatter.formatCellValue(tickerCell);
-				String currentRatioValue = dataFormatter.formatCellValue(currentRatioCell);
-				String debtEquityRatioValue = dataFormatter.formatCellValue(debtEquityRatioCell);
-				String EPSValue = dataFormatter.formatCellValue(EPSCell);
+					try {
+						String tickerValue = dataFormatter.formatCellValue(tickerCell);
+						String currentRatioValue = dataFormatter.formatCellValue(currentRatioCell);
+						String debtEquityRatioValue = dataFormatter.formatCellValue(debtEquityRatioCell);
+						String EPSValue = dataFormatter.formatCellValue(EPSCell);
+						String ratioDate = dataFormatter.formatCellValue(ratioDateCell);
 
-				if (tickerToRatioData.containsKey(tickerValue)) {
-					List<RatioInfoBO> ratioInfoList = tickerToRatioData.get(tickerValue);
-					RatioInfoBO ratioInfo = new RatioInfoBO(yearCounter, tickerValue);
-					ratioInfo.setCurrentRatio(currentRatioValue);
-					ratioInfo.setDebtToEquityRatio(debtEquityRatioValue);
-					ratioInfo.setEarningsPerShare(EPSValue);
-					ratioInfoList.add(ratioInfo);
-				} else {
-					List<RatioInfoBO> ratioInfoList = new ArrayList<RatioInfoBO>();
-					RatioInfoBO ratioInfo = new RatioInfoBO(yearCounter, tickerValue);
-					ratioInfo.setCurrentRatio(currentRatioValue);
-					ratioInfo.setDebtToEquityRatio(debtEquityRatioValue);
-					ratioInfo.setEarningsPerShare(EPSValue);
-					ratioInfoList.add(ratioInfo);
-					tickerToRatioData.put(tickerValue, ratioInfoList);
+						if (tickerToRatioData.containsKey(tickerValue)) {
+							List<RatioInfoBO> ratioInfoList = tickerToRatioData.get(tickerValue);
+							RatioInfoBO ratioInfo = new RatioInfoBO(yearCounter, tickerValue);
+							ratioInfo.setCurrentRatio(currentRatioValue);
+							ratioInfo.setDebtToEquityRatio(debtEquityRatioValue);
+							ratioInfo.setEarningsPerShare(EPSValue);
+							ratioInfo.setRatioDate(ratioDate);
+							ratioInfoList.add(ratioInfo);
+						} else {
+							List<RatioInfoBO> ratioInfoList = new ArrayList<RatioInfoBO>();
+							RatioInfoBO ratioInfo = new RatioInfoBO(yearCounter, tickerValue);
+							ratioInfo.setCurrentRatio(currentRatioValue);
+							ratioInfo.setDebtToEquityRatio(debtEquityRatioValue);
+							ratioInfo.setEarningsPerShare(EPSValue);
+							ratioInfo.setRatioDate(ratioDate);
+							ratioInfoList.add(ratioInfo);
+							tickerToRatioData.put(tickerValue, ratioInfoList);
+						}
+					} catch (Exception e) {
+						String tickerValue = dataFormatter.formatCellValue(tickerCell);
+						if (tickerToRatioData.containsKey(tickerValue)) {
+							List<RatioInfoBO> ratioInfoList = tickerToRatioData.get(tickerValue);
+							RatioInfoBO ratioInfo = new RatioInfoBO(yearCounter, tickerValue);
+							ratioInfo.setCurrentRatio(CommonFinancialLibrary.errorMessage());
+							ratioInfo.setDebtToEquityRatio(CommonFinancialLibrary.errorMessage());
+							ratioInfo.setEarningsPerShare(CommonFinancialLibrary.errorMessage());
+							ratioInfo.setRatioDate(CommonFinancialLibrary.errorMessage());
+							ratioInfoList.add(ratioInfo);
+						} else {
+							List<RatioInfoBO> ratioInfoList = new ArrayList<RatioInfoBO>();
+							RatioInfoBO ratioInfo = new RatioInfoBO(yearCounter, tickerValue);
+							ratioInfo.setCurrentRatio(CommonFinancialLibrary.errorMessage());
+							ratioInfo.setDebtToEquityRatio(CommonFinancialLibrary.errorMessage());
+							ratioInfo.setEarningsPerShare(CommonFinancialLibrary.errorMessage());
+							ratioInfo.setRatioDate(CommonFinancialLibrary.errorMessage());
+							ratioInfoList.add(ratioInfo);
+							tickerToRatioData.put(tickerValue, ratioInfoList);
+						}
+
+					}
+
 				}
 
-				yearCounter--;
 			}
+			yearCounter--;
 		}
 
 		calculateRatioData(tickerToRatioData);
@@ -138,6 +173,16 @@ public class RatioFinancialLibrary {
 
 		Cell dateCell = row.createCell(RatioSheetConstants.RATIO_DATE.getRatioData());
 		dateCell.setCellValue(ratioDate);
+	}
+
+	public static RatioInfoBO createErrorRatioInfoBO(String ticker) {
+		RatioInfoBO ratioInfo = new RatioInfoBO(0, ticker);
+		ratioInfo.setCurrentRatio("ERROR");
+		ratioInfo.setDebtToEquityRatio("ERROR");
+		ratioInfo.setEarningsPerShare("ERROR");
+		ratioInfo.setPeRatio("ERROR");
+		ratioInfo.setRatioDate("ERROR");
+		return ratioInfo;
 	}
 
 }

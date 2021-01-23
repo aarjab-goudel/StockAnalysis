@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.data.service;
 
 import static org.junit.Assert.assertEquals;
@@ -16,9 +21,9 @@ public class DataServiceTest {
 
 	@BeforeClass
 	public static void intializeFields() throws JSONException, IOException, ParseException {
-		CSVReader csvReader = new CSVReader();
+		CSVReader csvReader = new CSVReader(null);
 		List<String> companies = csvReader.getStockList();
-		dataService = new DataService(companies);
+		dataService = new DataService(companies, null);
 
 	}
 
@@ -26,33 +31,21 @@ public class DataServiceTest {
 	public void testBuildTickerToStockNameMap() throws JSONException, IOException {
 		Map<String, String> tickerToName = dataService.getTickerToStockName();
 		assertEquals("Stock name is wrong for AAPL ", "Apple Inc.", tickerToName.get("AAPL"));
-		assertEquals("Stock name is wrong for F ", "Ford Motor Company", tickerToName.get("F"));
-		assertEquals("Stock name is wrong for XOM ", "Exxon Mobil Corporation", tickerToName.get("XOM"));
-		assertEquals("Stock name is wrong for COF ", "Capital One Financial Corporation", tickerToName.get("COF"));
-		assertEquals("Stock name is wrong for JNJ ", "Johnson & Johnson", tickerToName.get("JNJ"));
-		assertEquals("Stock name is wrong for PFE", "Pfizer Inc.", tickerToName.get("PFE"));
+
 	}
 
 	@Test
 	public void testBuildTickerToStockIndustry() throws JSONException, IOException {
 		Map<String, String> tickerToIndustry = dataService.getTickerToIndustry();
-		assertEquals("Stock industry is wrong for AAPL ", "Computer Hardware", tickerToIndustry.get("AAPL"));
-		assertEquals("Stock industry is wrong for F ", "Autos", tickerToIndustry.get("F"));
-		assertEquals("Stock industry is wrong for XOM ", "Oil & Gas - Integrated", tickerToIndustry.get("XOM"));
-		assertEquals("Stock industry is wrong for COF ", "Credit Services", tickerToIndustry.get("COF"));
-		assertEquals("Stock industry is wrong for JNJ ", "Drug Manufacturers", tickerToIndustry.get("JNJ"));
-		assertEquals("Stock industry is wrong for PFE", "Drug Manufacturers", tickerToIndustry.get("PFE"));
+		assertEquals("Stock industry is wrong for AAPL ", "Consumer Electronics", tickerToIndustry.get("AAPL"));
+
 	}
 
 	@Test
 	public void testTickerToStockSector() throws JSONException, IOException {
 		Map<String, String> tickerToSector = dataService.getTickerToSector();
 		assertEquals("Stock sector is wrong for AAPL ", "Technology", tickerToSector.get("AAPL"));
-		assertEquals("Stock sector is wrong for F ", "Consumer Cyclical", tickerToSector.get("F"));
-		assertEquals("Stock sector is wrong for XOM ", "Energy", tickerToSector.get("XOM"));
-		assertEquals("Stock sector is wrong for COF ", "Financial Services", tickerToSector.get("COF"));
-		assertEquals("Stock sector is wrong for JNJ ", "Healthcare", tickerToSector.get("JNJ"));
-		assertEquals("Stock sector is wrong for PFE", "Healthcare", tickerToSector.get("PFE"));
+
 	}
 
 	@Test

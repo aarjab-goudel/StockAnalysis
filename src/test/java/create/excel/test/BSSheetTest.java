@@ -1,3 +1,8 @@
+/**
+ * Author: Aarjab Goudel
+ * Last Modified Date: 1/12/2021
+ * 
+ */
 package create.excel.test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,20 +18,19 @@ import org.json.JSONException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import create.excel.bo.BSInfoBO;
 import create.excel.enums.BSSheetConstants;
 import create.excel.enums.CommonSheetConstants;
 import create.excel.implementation.BSSheet;
-import create.excel.implementation.CreateExcelFile;
+import create.excel.implementation.CreateAnnualExcelFile;
 
 public class BSSheetTest {
 
-	private static CreateExcelFile excelFile;
+	private static CreateAnnualExcelFile excelFile;
 	private static BSSheet balanceSheet;
 
 	@BeforeClass
 	public static void initializeFields() throws IOException, JSONException, ParseException {
-		excelFile = new CreateExcelFile();
+		excelFile = new CreateAnnualExcelFile();
 		balanceSheet = excelFile.getBSSheet();
 	}
 
@@ -61,10 +65,10 @@ public class BSSheetTest {
 		Cell fifthColumn = firstRow.getCell(CommonSheetConstants.INDUSTRY_COLUMN.getCommonColumn());
 		assertEquals("Fifth column is not Industry!", fifthColumn.getStringCellValue(), "Industry");
 
-		Cell sixthColumn = firstRow.getCell(5);
+		Cell sixthColumn = firstRow.getCell(6);
 		assertEquals("Fourth column is not net equity!", sixthColumn.getStringCellValue(), "Net Equity");
 
-		Cell seventhColumn = firstRow.getCell(6);
+		Cell seventhColumn = firstRow.getCell(7);
 		assertEquals("Fifth column is not net equity growth!", seventhColumn.getStringCellValue(), "Net Equity Growth");
 
 		Cell eighthColumn = firstRow.getCell(BSSheetConstants.CASH_AND_CASH_EQUIVALENT_COLUMN.getBSData());
@@ -96,31 +100,6 @@ public class BSSheetTest {
 
 	}
 
-	@Test
-	public void testBSSheetValues() {
-		List<String> companies = balanceSheet.getDataService().getOrderedCompanies();
-		Map<String, Row> tickerToRow = excelFile.getBSSheet().getTickerToRow();
-		for (int i = 0; i < companies.size(); i++) {
-			String ticker = companies.get(i);
-			Row tickerRow = tickerToRow.get(ticker);
-
-			BSInfoBO tickerBSInfo = excelFile.getDataService().getTickerToBSInfo().get(ticker).get(Math.abs(0));
-			assertEquals("Cash and cash equivalent formula is wrong! ", tickerBSInfo.getCashAndCashEquivalent(),
-					tickerRow.getCell(BSSheetConstants.CASH_AND_CASH_EQUIVALENT_COLUMN.getBSData())
-							.getStringCellValue());
-			assertEquals("Short term investment formula is wrong! ", tickerBSInfo.getShortTermInvestments(),
-					tickerRow.getCell(BSSheetConstants.SHORT_TERM_INVESTMENTS_COLUMN.getBSData()).getStringCellValue());
-			assertEquals("Receivables formula is wrong!", tickerBSInfo.getReceivables(),
-					tickerRow.getCell(BSSheetConstants.RECEIVABLES_COLUMN.getBSData()).getStringCellValue());
-			assertEquals("Long-term investments formula is wrong!", tickerBSInfo.getLongTermInvestments(),
-					tickerRow.getCell(BSSheetConstants.LONG_TERM_INVESTMENTS_COLUMN.getBSData()).getStringCellValue());
-			assertEquals("Short-term debt formula is wrong!", tickerBSInfo.getShortTermDebt(),
-					tickerRow.getCell(BSSheetConstants.SHORT_TERM_DEBT_COLUMN.getBSData()).getStringCellValue());
-			assertEquals("Accounts payable formula is wong!", tickerBSInfo.getAccountsPayable(),
-					tickerRow.getCell(BSSheetConstants.ACCOUNTS_PAYABLE_COLUMN.getBSData()).getStringCellValue());
-			assertEquals("Long-term debt formula is wrong!", tickerBSInfo.getLongTermDebt(),
-					tickerRow.getCell(BSSheetConstants.LONG_TERM_DEBT_COLUMN.getBSData()).getStringCellValue());
-		}
-	}
-
+//Still working on ticker #. Fixed a couple of issues and Im working on fixing one last issue where the script 
+//is not pulling all the Versa devices. I have a meeting with Kamil later today to discuss about the issue and fix it
 }
