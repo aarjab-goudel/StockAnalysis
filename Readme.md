@@ -2,7 +2,7 @@
 
 ```docker pull mythgoudel/aj_analyze_stock_data``` (make sure you have permission to pull)
 
-```docker run -it -d <container_id> bin/bash```
+```docker run -it -d <image_id> bin/bash```
 
 ```docker exec -it <container_id> bash```
 
@@ -18,7 +18,7 @@ This will copy the directory with the produced file and paste it into your curre
 
 ## GUI Instruction 
 
-Download source code
+Download source code (https://github.com/aarjab-goudel/StockAnalysis)
 
 Make sure Java 11 or higher is installed in your machine
 
