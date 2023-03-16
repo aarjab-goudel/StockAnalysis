@@ -71,32 +71,32 @@ public class BSSheetTest {
 		Cell seventhColumn = firstRow.getCell(7);
 		assertEquals("Fifth column is not net equity growth!", seventhColumn.getStringCellValue(), "Net Equity Growth");
 
-		Cell eighthColumn = firstRow.getCell(BSSheetConstants.CASH_AND_CASH_EQUIVALENT_COLUMN.getBSData());
-		assertEquals("Sixth column is not cash and cash equivalents!", eighthColumn.getStringCellValue(),
-				"Cash and cash equivalents");
+//		Cell eighthColumn = firstRow.getCell(BSSheetConstants.CASH_AND_CASH_EQUIVALENT_COLUMN.getBSData());
+//		assertEquals("Sixth column is not cash and cash equivalents!", eighthColumn.getStringCellValue(),
+//				"Cash and cash equivalents");
+//
+//		Cell ninethColumn = firstRow.getCell(BSSheetConstants.SHORT_TERM_INVESTMENTS_COLUMN.getBSData());
+//		assertEquals("Seventh column is not short term investments!", ninethColumn.getStringCellValue(),
+//				"Short-term investments");
 
-		Cell ninethColumn = firstRow.getCell(BSSheetConstants.SHORT_TERM_INVESTMENTS_COLUMN.getBSData());
-		assertEquals("Seventh column is not short term investments!", ninethColumn.getStringCellValue(),
-				"Short-term investments");
+//		Cell tenthColumn = firstRow.getCell(BSSheetConstants.RECEIVABLES_COLUMN.getBSData());
+//		assertEquals("Eighth column is not receivables!", tenthColumn.getStringCellValue(), "Receivables");
 
-		Cell tenthColumn = firstRow.getCell(BSSheetConstants.RECEIVABLES_COLUMN.getBSData());
-		assertEquals("Eighth column is not receivables!", tenthColumn.getStringCellValue(), "Receivables");
+//		Cell eleventhColumn = firstRow.getCell(BSSheetConstants.LONG_TERM_INVESTMENTS_COLUMN.getBSData());
+//		assertEquals("Nineth column is not long term investments!", eleventhColumn.getStringCellValue(),
+//				"Long-term investments");
 
-		Cell eleventhColumn = firstRow.getCell(BSSheetConstants.LONG_TERM_INVESTMENTS_COLUMN.getBSData());
-		assertEquals("Nineth column is not long term investments!", eleventhColumn.getStringCellValue(),
-				"Long-term investments");
+//		Cell thirteenthColumn = firstRow.getCell(BSSheetConstants.SHORT_TERM_DEBT_COLUMN.getBSData());
+//		assertEquals("Eleventh column is not short term debt!", thirteenthColumn.getStringCellValue(),
+//				"Short-term debt");
 
-		Cell thirteenthColumn = firstRow.getCell(BSSheetConstants.SHORT_TERM_DEBT_COLUMN.getBSData());
-		assertEquals("Eleventh column is not short term debt!", thirteenthColumn.getStringCellValue(),
-				"Short-term debt");
+//		Cell foureenthColumn = firstRow.getCell(BSSheetConstants.ACCOUNTS_PAYABLE_COLUMN.getBSData());
+//		assertEquals("Twelvth column is not accounts payable!", foureenthColumn.getStringCellValue(),
+//				"Accounts payable");
 
-		Cell foureenthColumn = firstRow.getCell(BSSheetConstants.ACCOUNTS_PAYABLE_COLUMN.getBSData());
-		assertEquals("Twelvth column is not accounts payable!", foureenthColumn.getStringCellValue(),
-				"Accounts payable");
-
-		Cell fifteenthColumn = firstRow.getCell(BSSheetConstants.LONG_TERM_DEBT_COLUMN.getBSData());
-		assertEquals("Thirteenth column is not long term debt!", fifteenthColumn.getStringCellValue(),
-				"Long-term debt");
+//		Cell fifteenthColumn = firstRow.getCell(BSSheetConstants.LONG_TERM_DEBT_COLUMN.getBSData());
+//		assertEquals("Thirteenth column is not long term debt!", fifteenthColumn.getStringCellValue(),
+//				"Long-term debt");
 
 	}
 

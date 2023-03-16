@@ -57,14 +57,14 @@ public class BalanceSheetScraperTest {
 			System.out.println("====== " + ticker + " =====");
 			for (int i = 0; i < list.size(); i++) {
 				System.out.println("Year " + i);
-				System.out.println("Cash and cash equivalents: " + list.get(i).getCashAndCashEquivalent());
-				System.out.println("Short term investments: " + list.get(i).getShortTermInvestments());
-				System.out.println("Recievables: " + list.get(i).getReceivables());
-				System.out.println("Long term investments: " + list.get(i).getLongTermInvestments());
-				System.out.println("Intangible Assets: " + list.get(i).getTotalIntangibleAssets());
-				System.out.println("Short term debt: " + list.get(i).getShortTermDebt());
-				System.out.println("Accounts Payable: " + list.get(i).getAccountsPayable());
-				System.out.println("Long term debt: " + list.get(i).getLongTermDebt());
+//				System.out.println("Cash and cash equivalents: " + list.get(i).getCashAndCashEquivalent());
+//				System.out.println("Short term investments: " + list.get(i).getShortTermInvestments());
+//				System.out.println("Recievables: " + list.get(i).getReceivables());
+//				System.out.println("Long term investments: " + list.get(i).getLongTermInvestments());
+//				System.out.println("Intangible Assets: " + list.get(i).getTotalIntangibleAssets());
+//				System.out.println("Short term debt: " + list.get(i).getShortTermDebt());
+//				System.out.println("Accounts Payable: " + list.get(i).getAccountsPayable());
+//				System.out.println("Long term debt: " + list.get(i).getLongTermDebt());
 				System.out.println("Shareholders equity: " + list.get(i).getShareHoldersEquity());
 
 			}

@@ -51,9 +51,9 @@ public class BSSheetCalculation extends FinancialSheetCalculation {
 	public void writeToBalanceSheetRow(Row tickerRow) {
 		int tickerRowNum = tickerRow.getRowNum() + 1;
 		String netEquityFormula = this.setUpNetEquityFormula(tickerRowNum);
-		Cell netEquityCell = tickerRow.createCell(BSSheetConstants.NET_EQUITY_COLUMN.getBSData());
-		netEquityCell.getCellStyle().setDataFormat(HSSFDataFormat.getBuiltinFormat("#,##0"));
-		netEquityCell.setCellFormula(netEquityFormula);
+		//Cell netEquityCell = tickerRow.createCell(BSSheetConstants.NET_EQUITY_COLUMN.getBSData());
+//		netEquityCell.getCellStyle().setDataFormat(HSSFDataFormat.getBuiltinFormat("#,##0"));
+//		netEquityCell.setCellFormula(netEquityFormula);
 
 		if (this.getYear() != FURTHEST_YEAR) {
 			int previousYear = this.getYear() - 1;
@@ -62,12 +62,12 @@ public class BSSheetCalculation extends FinancialSheetCalculation {
 			String shareHoldersGrowthFormula = this.setUpGrowthFormula(TOTAL_SHAREHOLDERS_EQUITY_LETTER, "BS",
 					tickerRowNum, previousYear);
 
-			Cell netEquityGrowthCell = tickerRow.createCell(BSSheetConstants.NET_EQUITY_GROWTH_COLUMN.getBSData());
+			//Cell netEquityGrowthCell = tickerRow.createCell(BSSheetConstants.NET_EQUITY_GROWTH_COLUMN.getBSData());
 			Cell shareHoldersGrowthCell = tickerRow
 					.createCell(BSSheetConstants.SHARE_HOLDER_EQUITY_GROWTH_COLUMN.getBSData());
 
 			shareHoldersGrowthCell.setCellFormula(shareHoldersGrowthFormula);
-			netEquityGrowthCell.setCellFormula(netEquityGrowthFormula);
+//			netEquityGrowthCell.setCellFormula(netEquityGrowthFormula);
 		}
 
 	}

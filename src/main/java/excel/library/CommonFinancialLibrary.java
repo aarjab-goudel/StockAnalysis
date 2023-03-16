@@ -27,7 +27,7 @@ import create.excel.enums.CommonSheetConstants;
 public class CommonFinancialLibrary {
 
 	private static final String TICKER = "Ticker";
-	private static final int NUM_SPACES_BETWEEN_DATES = 20;
+	private static final int NUM_SPACES_BETWEEN_DATES = 23;
 	private static final String ERROR_MSSG = "Error calculating Avg Growth Rate";
 	private static final String ERROR = "ERROR";
 
@@ -80,7 +80,7 @@ public class CommonFinancialLibrary {
 	}
 
 	public static String calculateGrowthRate(String mostRecentYearValue, String lastYearValue) {
-		if (mostRecentYearValue.equals("—") || lastYearValue.equals("—")) {
+		if (mostRecentYearValue.equals("ï¿½") || lastYearValue.equals("ï¿½")) {
 			return CommonFinancialLibrary.ERROR;
 		} else {
 			if (!CommonFinancialLibrary.determineValidGrowthRate(mostRecentYearValue, lastYearValue)) {
@@ -159,7 +159,7 @@ public class CommonFinancialLibrary {
 	}
 
 	public static String checkAndConvertEmptyValueToZero(String value) {
-		if (value.equals("—") || value.isEmpty()) {
+		if (value.equals("ï¿½") || value.isEmpty()) {
 			return "0";
 		} else {
 			return value;
@@ -329,7 +329,7 @@ public class CommonFinancialLibrary {
 	}
 
 	public static String calculateAverageGrowthRateForFivePeriods(String beginValue, String endValue) {
-		if (!(beginValue.equals("—") || endValue.equals("—"))) {
+		if (!(beginValue.equals("ï¿½") || endValue.equals("ï¿½"))) {
 			if (!CommonFinancialLibrary.determineValidGrowthRate(beginValue, endValue)) {
 				return CommonFinancialLibrary.ERROR;
 			}
@@ -356,9 +356,38 @@ public class CommonFinancialLibrary {
 		return CommonFinancialLibrary.ERROR;
 
 	}
+	
+	public static String calculateAverageGrowthRateForFourPeriods(String beginValue, String endValue) {
+		if (!(beginValue.equals("ï¿½") || endValue.equals("ï¿½"))) {
+			if (!CommonFinancialLibrary.determineValidGrowthRate(beginValue, endValue)) {
+				return CommonFinancialLibrary.ERROR;
+			}
+			BigDecimal beginNumeric = new BigDecimal(beginValue);
+			BigDecimal endNumeric = new BigDecimal(endValue);
+			BigDecimal powerValue = new BigDecimal("0.25");
+			try {
+				BigDecimal divisionResult = endNumeric.divide(beginNumeric, 4, RoundingMode.HALF_UP);
+				double divResultAsDouble = divisionResult.doubleValue();
+				if (divResultAsDouble < 0) {
+					return null;
+				}
+				double powerValAsDouble = powerValue.doubleValue();
+				double powerResultAsDouble = Math.pow(divResultAsDouble, powerValAsDouble);
+				BigDecimal powerResult = new BigDecimal(powerResultAsDouble);
+				BigDecimal subtractionValue = new BigDecimal("1");
+				BigDecimal result = powerResult.subtract(subtractionValue);
+				result = result.setScale(4, RoundingMode.CEILING);
+				return CommonFinancialLibrary.handleNaNData(result, beginValue, endValue);
+			} catch (ArithmeticException e) {
+				return CommonFinancialLibrary.ERROR;
+			}
+		}
+		return CommonFinancialLibrary.ERROR;
+
+	}
 
 	public static String calculateAverageGrowthRateForThreePeriods(String beginValue, String endValue) {
-		if (!(beginValue.equals("—") || endValue.equals("—"))) {
+		if (!(beginValue.equals("ï¿½") || endValue.equals("ï¿½"))) {
 			if (!CommonFinancialLibrary.determineValidGrowthRate(beginValue, endValue)) {
 				return CommonFinancialLibrary.ERROR;
 			}

@@ -42,8 +42,8 @@ public class AnalyzeBSDataTest {
 			int yearCounter = 0;
 			for (BSInfoBO bsInfo : bsInfoList) {
 				System.out.println("This is year counter: " + yearCounter);
-				System.out.println("Net equity: " + bsInfo.getNetEquity());
-				System.out.println("Net equity growth: " + bsInfo.getNetEquityGrowth());
+//				System.out.println("Net equity: " + bsInfo.getNetEquity());
+//				System.out.println("Net equity growth: " + bsInfo.getNetEquityGrowth());
 				System.out.println("Total Shareholders Equity: " + bsInfo.getShareHoldersEquity());
 				System.out.println("Total Shareholders Equity Growth: " + bsInfo.getShareHoldersEquityGrowth());
 				yearCounter--;
@@ -69,19 +69,19 @@ public class AnalyzeBSDataTest {
 		List<String> netEquityGrowthList = netEquityGrowthEntry.getValue();
 		List<String> shareHolderEquityList = shareHolderEquityEntry.getValue();
 		List<String> shareHolderEquityGrowthList = shareHolderEquityGrowthEntry.getValue();
-		System.out.println("Net Equity: " + netEquityList.get(0) + "," + netEquityList.get(1) + ","
-				+ netEquityList.get(2) + "," + netEquityList.get(3) + "," + netEquityList.get(4));
+//		System.out.println("Net Equity: " + netEquityList.get(0) + "," + netEquityList.get(1) + ","
+//				+ netEquityList.get(2) + "," + netEquityList.get(3) + "," + netEquityList.get(4));
+//
+//		System.out.println("Net Equity Growth: " + netEquityGrowthList.get(0) + "," + netEquityGrowthList.get(1) + ","
+//				+ netEquityGrowthList.get(2) + "," + netEquityGrowthList.get(3));
 
-		System.out.println("Net Equity Growth: " + netEquityGrowthList.get(0) + "," + netEquityGrowthList.get(1) + ","
-				+ netEquityGrowthList.get(2) + "," + netEquityGrowthList.get(3));
-
-		System.out.println("ShareholderEquity: " + shareHolderEquityList.get(0) + "," + shareHolderEquityList.get(1)
-				+ "," + shareHolderEquityList.get(2) + "," + shareHolderEquityList.get(3) + ","
-				+ shareHolderEquityList.get(4));
-
-		System.out.println("ShareholderEquityGrowth: " + shareHolderEquityGrowthList.get(0) + ","
-				+ shareHolderEquityGrowthList.get(1) + "," + shareHolderEquityGrowthList.get(2) + ","
-				+ shareHolderEquityGrowthList.get(3));
+//		System.out.println("ShareholderEquity: " + shareHolderEquityList.get(0) + "," + shareHolderEquityList.get(1)
+//				+ "," + shareHolderEquityList.get(2) + "," + shareHolderEquityList.get(3) + ","
+//				+ shareHolderEquityList.get(4));
+//
+//		System.out.println("ShareholderEquityGrowth: " + shareHolderEquityGrowthList.get(0) + ","
+//				+ shareHolderEquityGrowthList.get(1) + "," + shareHolderEquityGrowthList.get(2) + ","
+//				+ shareHolderEquityGrowthList.get(3));
 
 		System.out.println("===========================================================================");
 

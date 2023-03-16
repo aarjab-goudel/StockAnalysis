@@ -15,12 +15,12 @@ import create.excel.implementation.CreateQuarterlyExcelFile;
 
 public class Quarterly {
 
-	private CreateQuarterlyExcelFile createQuarterly;
+	//private CreateQuarterlyExcelFile createQuarterly;
 	private AnalyzeQuarterlyExcelFile analyzeQuarterly;
 
 	public Quarterly() throws JSONException, IOException, ParseException {
 		System.out.println("STARTING QUARTERLY");
-		createQuarterly = new CreateQuarterlyExcelFile();
+		//createQuarterly = new CreateQuarterlyExcelFile();
 		analyzeQuarterly = new AnalyzeQuarterlyExcelFile();
 		System.out.println("FINISHED QUARTERLY");
 	}
@@ -29,9 +29,9 @@ public class Quarterly {
 		new Quarterly();
 	}
 
-	public CreateQuarterlyExcelFile getCreateQuarterly() {
-		return createQuarterly;
-	}
+//	public CreateQuarterlyExcelFile getCreateQuarterly() {
+//		return createQuarterly;
+//	}
 
 	public AnalyzeQuarterlyExcelFile getAnalyzeQuarterly() {
 		return analyzeQuarterly;

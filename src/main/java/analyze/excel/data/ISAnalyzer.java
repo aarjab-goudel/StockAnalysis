@@ -78,8 +78,7 @@ public class ISAnalyzer {
 			List<String> researchAndDevelopmentGrowthList = tickerToResearchAndDevelopmentGrowth.get(ticker);
 
 			String dateLines = "                                         " + isDateList.get(0) + "             "
-					+ isDateList.get(1) + "             " + isDateList.get(2) + "             " + isDateList.get(3)
-					+ "             " + isDateList.get(4);
+					+ isDateList.get(1) + "             " + isDateList.get(2) + "             " + isDateList.get(3);
 			info.write(dateLines);
 			info.newLine();
 
@@ -89,20 +88,18 @@ public class ISAnalyzer {
 			String secondRevenue = CommonFinancialLibrary.addCommasToNumericString(revenueList.get(1));
 			String thirdRevenue = CommonFinancialLibrary.addCommasToNumericString(revenueList.get(2));
 			String fourthRevenue = CommonFinancialLibrary.addCommasToNumericString(revenueList.get(3));
-			String fifthRevenue = CommonFinancialLibrary.addCommasToNumericString(revenueList.get(4));
+			//String fifthRevenue = CommonFinancialLibrary.addCommasToNumericString(revenueList.get(4));
 
 			String revenueLine = "Revenue                                  " + firstRevenue
 					+ CommonFinancialLibrary.getApprorpriateSpaces(firstRevenue) + secondRevenue
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondRevenue) + thirdRevenue
-					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdRevenue) + fourthRevenue
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthRevenue) + fifthRevenue;
+					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdRevenue) + fourthRevenue;
 			info.write(revenueLine);
 			info.newLine();
 
 			String revenueGrowthLine = "Revenue Growth                                     " + revenueGrowthList.get(0)
 					+ CommonFinancialLibrary.getApprorpriateSpaces(revenueGrowthList.get(0)) + revenueGrowthList.get(1)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(revenueGrowthList.get(1)) + revenueGrowthList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(revenueGrowthList.get(2)) + revenueGrowthList.get(3);
+					+ CommonFinancialLibrary.getApprorpriateSpaces(revenueGrowthList.get(1)) + revenueGrowthList.get(2);
 			info.write(revenueGrowthLine);
 			info.newLine();
 
@@ -112,13 +109,12 @@ public class ISAnalyzer {
 			String secondGrossProfit = CommonFinancialLibrary.addCommasToNumericString(grossProfitList.get(1));
 			String thirdGrossProfit = CommonFinancialLibrary.addCommasToNumericString(grossProfitList.get(2));
 			String fourthGrossProfit = CommonFinancialLibrary.addCommasToNumericString(grossProfitList.get(3));
-			String fifthGrossProfit = CommonFinancialLibrary.addCommasToNumericString(grossProfitList.get(4));
+//			String fifthGrossProfit = CommonFinancialLibrary.addCommasToNumericString(grossProfitList.get(4));
 
 			String grossProfitLine = "Gross Profit                             " + firstGrossProfit
 					+ CommonFinancialLibrary.getApprorpriateSpaces(firstGrossProfit) + secondGrossProfit
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondGrossProfit) + thirdGrossProfit
-					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdGrossProfit) + fourthGrossProfit
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthGrossProfit) + fifthGrossProfit;
+					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdGrossProfit) + fourthGrossProfit;
 			info.write(grossProfitLine);
 			info.newLine();
 
@@ -127,9 +123,7 @@ public class ISAnalyzer {
 					+ CommonFinancialLibrary.getApprorpriateSpaces(grossProfitGrowthList.get(0))
 					+ grossProfitGrowthList.get(1)
 					+ CommonFinancialLibrary.getApprorpriateSpaces(grossProfitGrowthList.get(1))
-					+ grossProfitGrowthList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(grossProfitGrowthList.get(2))
-					+ grossProfitGrowthList.get(3);
+					+ grossProfitGrowthList.get(2);
 			info.write(grossProfitGrowthLine);
 			info.newLine();
 
@@ -139,13 +133,12 @@ public class ISAnalyzer {
 			String secondNetIncome = CommonFinancialLibrary.addCommasToNumericString(netIncomeList.get(1));
 			String thirdNetIncome = CommonFinancialLibrary.addCommasToNumericString(netIncomeList.get(2));
 			String fourthNetIncome = CommonFinancialLibrary.addCommasToNumericString(netIncomeList.get(3));
-			String fifthNetIncome = CommonFinancialLibrary.addCommasToNumericString(netIncomeList.get(4));
+			//String fifthNetIncome = CommonFinancialLibrary.addCommasToNumericString(netIncomeList.get(4));
 
 			String netIncomeLine = "Net Income                               " + firstNetIncome
 					+ CommonFinancialLibrary.getApprorpriateSpaces(firstNetIncome) + secondNetIncome
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondNetIncome) + thirdNetIncome
-					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetIncome) + fourthNetIncome
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthNetIncome) + fifthNetIncome;
+					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetIncome) + fourthNetIncome;
 			info.write(netIncomeLine);
 			info.newLine();
 
@@ -154,31 +147,29 @@ public class ISAnalyzer {
 					+ CommonFinancialLibrary.getApprorpriateSpaces(netIncomeGrowthList.get(0))
 					+ netIncomeGrowthList.get(1)
 					+ CommonFinancialLibrary.getApprorpriateSpaces(netIncomeGrowthList.get(1))
-					+ netIncomeGrowthList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(netIncomeGrowthList.get(2))
-					+ netIncomeGrowthList.get(3);
+					+ netIncomeGrowthList.get(2);
 			info.write(netIncomeGrowthLine);
 			info.newLine();
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-			String epsLine = "EPS                                      " + epsList.get(0)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(0)) + epsList.get(1)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(1)) + epsList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(2)) + epsList.get(3)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(3)) + epsList.get(4)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(4));
-			info.write(epsLine);
-			info.newLine();
-
-			String epsGrowthLine = "EPS Growth                                         " + epsGrowthList.get(0)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsGrowthList.get(0)) + epsGrowthList.get(1)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsGrowthList.get(1)) + epsGrowthList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(epsGrowthList.get(2)) + epsGrowthList.get(3);
-			info.write(epsGrowthLine);
-			info.newLine();
-
-			CommonFinancialLibrary.writeSeperator(info);
+//			String epsLine = "EPS                                      " + epsList.get(0)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(0)) + epsList.get(1)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(1)) + epsList.get(2)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(2)) + epsList.get(3)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(3)) + epsList.get(4)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsList.get(4));
+//			info.write(epsLine);
+//			info.newLine();
+//
+//			String epsGrowthLine = "EPS Growth                                         " + epsGrowthList.get(0)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsGrowthList.get(0)) + epsGrowthList.get(1)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsGrowthList.get(1)) + epsGrowthList.get(2)
+//					+ CommonFinancialLibrary.getApprorpriateSpaces(epsGrowthList.get(2)) + epsGrowthList.get(3);
+//			info.write(epsGrowthLine);
+//			info.newLine();
+//
+//			CommonFinancialLibrary.writeSeperator(info);
 
 			String firstResearchAndDevelopment = CommonFinancialLibrary
 					.addCommasToNumericString(researchAndDevelopmentList.get(0));
@@ -188,8 +179,8 @@ public class ISAnalyzer {
 					.addCommasToNumericString(researchAndDevelopmentList.get(2));
 			String fourthResearchAndDevelopment = CommonFinancialLibrary
 					.addCommasToNumericString(researchAndDevelopmentList.get(3));
-			String fifthResearchAndDevelopment = CommonFinancialLibrary
-					.addCommasToNumericString(researchAndDevelopmentList.get(4));
+//			String fifthResearchAndDevelopment = CommonFinancialLibrary
+//					.addCommasToNumericString(researchAndDevelopmentList.get(4));
 
 			String researchAndDevelopmentLine = "Research And Development                 "
 					+ firstResearchAndDevelopment
@@ -198,10 +189,7 @@ public class ISAnalyzer {
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondResearchAndDevelopment)
 					+ thirdResearchAndDevelopment
 					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdResearchAndDevelopment)
-					+ fourthResearchAndDevelopment
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthResearchAndDevelopment)
-					+ fifthResearchAndDevelopment
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fifthResearchAndDevelopment);
+					+ fourthResearchAndDevelopment;
 			info.write(researchAndDevelopmentLine);
 			info.newLine();
 
@@ -210,45 +198,45 @@ public class ISAnalyzer {
 					+ CommonFinancialLibrary.getApprorpriateSpaces(researchAndDevelopmentGrowthList.get(0))
 					+ researchAndDevelopmentGrowthList.get(1)
 					+ CommonFinancialLibrary.getApprorpriateSpaces(researchAndDevelopmentGrowthList.get(1))
-					+ researchAndDevelopmentGrowthList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(researchAndDevelopmentGrowthList.get(2))
-					+ researchAndDevelopmentGrowthList.get(3);
+					+ researchAndDevelopmentGrowthList.get(2);
 			info.write(researchAndDevelopmentGrowthLine);
 			info.newLine();
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-			String fiveYearAvgRevenueString = CommonFinancialLibrary
-					.calculateAverageGrowthRateForFivePeriods(revenueList.get(0), revenueList.get(4));
-			String fiveYearAvgGrossProfitString = CommonFinancialLibrary
-					.calculateAverageGrowthRateForFivePeriods(grossProfitList.get(0), grossProfitList.get(4));
-			String fiveYearAvgNetIncomeString = CommonFinancialLibrary
-					.calculateAverageGrowthRateForFivePeriods(netIncomeList.get(0), netIncomeList.get(4));
-			String fiveYearAvgResearchAndDevelopmentString = CommonFinancialLibrary
-					.calculateAverageGrowthRateForFivePeriods(researchAndDevelopmentList.get(0),
-							researchAndDevelopmentList.get(4));
+			String fourYearAvgRevenueString = CommonFinancialLibrary
+					.calculateAverageGrowthRateForFourPeriods(revenueList.get(0), revenueList.get(3));
+			String fourYearAvgGrossProfitString = CommonFinancialLibrary
+					.calculateAverageGrowthRateForFourPeriods(grossProfitList.get(0), grossProfitList.get(3));
+			String fourYearAvgNetIncomeString = CommonFinancialLibrary
+					.calculateAverageGrowthRateForFourPeriods(netIncomeList.get(0), netIncomeList.get(3));
+//			String fourearAvgResearchAndDevelopmentString = CommonFinancialLibrary
+//					.calculateAverageGrowthRateForFourPeriods(researchAndDevelopmentList.get(0),
+//							researchAndDevelopmentList.get(4));
 
-			String fiveYearAvgRevenueLine = "Revenue 5 Period Growth:  " + fiveYearAvgRevenueString;
+			String fiveYearAvgRevenueLine = "Revenue 4 Period Growth:  " + fourYearAvgRevenueString;
 			info.write(fiveYearAvgRevenueLine);
 			info.newLine();
 
-			String fiverYearAvgGrossProfitLine = "Gross Profit 5 Period Growth: " + fiveYearAvgGrossProfitString;
+			String fiverYearAvgGrossProfitLine = "Gross Profit 4 Period Growth: " + fourYearAvgGrossProfitString;
 			info.write(fiverYearAvgGrossProfitLine);
 			info.newLine();
 
-			String fiveYearAvgNetIncomeLine = "Net Income 5 Period Growth: " + fiveYearAvgNetIncomeString;
+			String fiveYearAvgNetIncomeLine = "Net Income 4 Period Growth: " + fourYearAvgNetIncomeString;
 			info.write(fiveYearAvgNetIncomeLine);
 			info.newLine();
 
-			String fiveYearAvgResearchAndDevelopmentLine = "Research And Development 5 Period Growth: "
-					+ fiveYearAvgResearchAndDevelopmentString;
-			info.write(fiveYearAvgResearchAndDevelopmentLine);
-			info.newLine();
+//			String fiveYearAvgResearchAndDevelopmentLine = "Research And Development 5 Period Growth: "
+//					+ fiveYearAvgResearchAndDevelopmentString;
+//			info.write(fiveYearAvgResearchAndDevelopmentLine);
+//			info.newLine();
 
 			CommonFinancialLibrary.writeSeperator(info);
 
 			this.writeISSeperator(ticker, info);
 
+			info.newLine();
+			info.newLine();
 			info.newLine();
 
 			info.close();
@@ -272,68 +260,68 @@ public class ISAnalyzer {
 			ISInfoBO secondISInfo = isInfoList.get(1);
 			ISInfoBO thirdISInfo = isInfoList.get(2);
 			ISInfoBO fourthISInfo = isInfoList.get(3);
-			ISInfoBO fifthISInfo = isInfoList.get(4);
+			//ISInfoBO fifthISInfo = isInfoList.get(4);
 
 			String firstISDate = firstISInfo.getIsDate();
 			String secondISDate = secondISInfo.getIsDate();
 			String thirdISDate = thirdISInfo.getIsDate();
 			String fourthISDate = fourthISInfo.getIsDate();
-			String fifthISDate = fifthISInfo.getIsDate();
+			//String fifthISDate = fifthISInfo.getIsDate();
 
 			String firstResearchAndDevelopment = firstISInfo.getResearchAndDevelopment();
 			String secondResearchAndDevelopment = secondISInfo.getResearchAndDevelopment();
 			String thirdResearchAndDevelopment = thirdISInfo.getResearchAndDevelopment();
 			String fourthResearchAndDevelopment = fourthISInfo.getResearchAndDevelopment();
-			String fifthResearchAndDevelopment = fifthISInfo.getResearchAndDevelopment();
+			//String fifthResearchAndDevelopment = fifthISInfo.getResearchAndDevelopment();
 
 			String firstResearchAndDevelopmentGrowth = firstISInfo.getResearchAndDevelopmentGrowth();
 			String secondResearchAndDevelopmentGrowth = secondISInfo.getResearchAndDevelopmentGrowth();
 			String thirdResearchAndDevelopmentGrowth = thirdISInfo.getResearchAndDevelopmentGrowth();
-			String fourthResearchAndDevelopmentGrowth = fourthISInfo.getResearchAndDevelopmentGrowth();
+			//String fourthResearchAndDevelopmentGrowth = fourthISInfo.getResearchAndDevelopmentGrowth();
 
 			String firstRevenue = firstISInfo.getRevenue();
 			String secondRevenue = secondISInfo.getRevenue();
 			String thirdRevenue = thirdISInfo.getRevenue();
 			String fourthRevenue = fourthISInfo.getRevenue();
-			String fifthRevenue = fifthISInfo.getRevenue();
+			//String fifthRevenue = fifthISInfo.getRevenue();
 
 			String firstRevenueGrowth = firstISInfo.getRevenueGrowth();
 			String secondRevenueGrowth = secondISInfo.getRevenueGrowth();
 			String thirdRevenueGrowth = thirdISInfo.getRevenueGrowth();
-			String fourthRevenueGrowth = fourthISInfo.getRevenueGrowth();
+			//String fourthRevenueGrowth = fourthISInfo.getRevenueGrowth();
 
 			String firstGrossProfit = firstISInfo.getGrossProfit();
 			String secondGrossProfit = secondISInfo.getGrossProfit();
 			String thirdGrossProfit = thirdISInfo.getGrossProfit();
 			String fourthGrossProfit = fourthISInfo.getGrossProfit();
-			String fifthGrossProfit = fifthISInfo.getGrossProfit();
+			//String fifthGrossProfit = fifthISInfo.getGrossProfit();
 
 			String firstGrossProfitGrowth = firstISInfo.getGrossProfitGrowth();
 			String secondGrossProfitGrowth = secondISInfo.getGrossProfitGrowth();
 			String thirdGrossProfitGrowth = thirdISInfo.getGrossProfitGrowth();
-			String fourthGrossProfitGrowth = fourthISInfo.getGrossProfitGrowth();
+			//String fourthGrossProfitGrowth = fourthISInfo.getGrossProfitGrowth();
 
 			String firstNetIncome = firstISInfo.getNetIncome();
 			String secondNetIncome = secondISInfo.getNetIncome();
 			String thirdNetIncome = thirdISInfo.getNetIncome();
 			String fourthNetIncome = fourthISInfo.getNetIncome();
-			String fifthNetIncome = fifthISInfo.getNetIncome();
+			//String fifthNetIncome = fifthISInfo.getNetIncome();
 
 			String firstNetIncomeGrowth = firstISInfo.getNetIncomeGrowth();
 			String secondNetIncomeGrowth = secondISInfo.getNetIncomeGrowth();
 			String thirdNetIncomeGrowth = thirdISInfo.getNetIncomeGrowth();
-			String fourthNetIncomeGrowth = fourthISInfo.getNetIncomeGrowth();
+			//String fourthNetIncomeGrowth = fourthISInfo.getNetIncomeGrowth();
 
 			String firstEPS = firstISInfo.getEps();
 			String secondEPS = secondISInfo.getEps();
 			String thirdEPS = thirdISInfo.getEps();
 			String fourthEPS = fourthISInfo.getEps();
-			String fifthEPS = fifthISInfo.getEps();
+			//String fifthEPS = fifthISInfo.getEps();
 
 			String firstEPSGrowth = firstISInfo.getEpsGrowth();
 			String secondEPSGrowth = secondISInfo.getEpsGrowth();
 			String thirdEPSGrowth = thirdISInfo.getEpsGrowth();
-			String fourthEPSGrowth = fourthISInfo.getEpsGrowth();
+			//String fourthEPSGrowth = fourthISInfo.getEpsGrowth();
 
 			List<String> researchAndDevelopmentList = new ArrayList<String>();
 			List<String> researchAndDevelopmentGrowthList = new ArrayList<String>();
@@ -351,62 +339,62 @@ public class ISAnalyzer {
 			isDates.add(secondISDate);
 			isDates.add(thirdISDate);
 			isDates.add(fourthISDate);
-			isDates.add(fifthISDate);
+			//isDates.add(fifthISDate);
 
 			researchAndDevelopmentList.add(firstResearchAndDevelopment);
 			researchAndDevelopmentList.add(secondResearchAndDevelopment);
 			researchAndDevelopmentList.add(thirdResearchAndDevelopment);
 			researchAndDevelopmentList.add(fourthResearchAndDevelopment);
-			researchAndDevelopmentList.add(fifthResearchAndDevelopment);
+			//researchAndDevelopmentList.add(fifthResearchAndDevelopment);
 
 			researchAndDevelopmentGrowthList.add(firstResearchAndDevelopmentGrowth);
 			researchAndDevelopmentGrowthList.add(secondResearchAndDevelopmentGrowth);
 			researchAndDevelopmentGrowthList.add(thirdResearchAndDevelopmentGrowth);
-			researchAndDevelopmentGrowthList.add(fourthResearchAndDevelopmentGrowth);
+			//researchAndDevelopmentGrowthList.add(fourthResearchAndDevelopmentGrowth);
 
 			revenueList.add(firstRevenue);
 			revenueList.add(secondRevenue);
 			revenueList.add(thirdRevenue);
 			revenueList.add(fourthRevenue);
-			revenueList.add(fifthRevenue);
+			//revenueList.add(fifthRevenue);
 
 			revenueGrowthList.add(firstRevenueGrowth);
 			revenueGrowthList.add(secondRevenueGrowth);
 			revenueGrowthList.add(thirdRevenueGrowth);
-			revenueGrowthList.add(fourthRevenueGrowth);
+			//revenueGrowthList.add(fourthRevenueGrowth);
 
 			grossProfitList.add(firstGrossProfit);
 			grossProfitList.add(secondGrossProfit);
 			grossProfitList.add(thirdGrossProfit);
 			grossProfitList.add(fourthGrossProfit);
-			grossProfitList.add(fifthGrossProfit);
+			//grossProfitList.add(fifthGrossProfit);
 
 			grossProfitGrowthList.add(firstGrossProfitGrowth);
 			grossProfitGrowthList.add(secondGrossProfitGrowth);
 			grossProfitGrowthList.add(thirdGrossProfitGrowth);
-			grossProfitGrowthList.add(fourthGrossProfitGrowth);
+			//grossProfitGrowthList.add(fourthGrossProfitGrowth);
 
 			netIncomeList.add(firstNetIncome);
 			netIncomeList.add(secondNetIncome);
 			netIncomeList.add(thirdNetIncome);
 			netIncomeList.add(fourthNetIncome);
-			netIncomeList.add(fifthNetIncome);
+			//netIncomeList.add(fifthNetIncome);
 
 			netIncomeGrowthList.add(firstNetIncomeGrowth);
 			netIncomeGrowthList.add(secondNetIncomeGrowth);
 			netIncomeGrowthList.add(thirdNetIncomeGrowth);
-			netIncomeGrowthList.add(fourthNetIncomeGrowth);
+			//netIncomeGrowthList.add(fourthNetIncomeGrowth);
 
 			epsList.add(firstEPS);
 			epsList.add(secondEPS);
 			epsList.add(thirdEPS);
 			epsList.add(fourthEPS);
-			epsList.add(fifthEPS);
+			//epsList.add(fifthEPS);
 
 			epsGrowthList.add(firstEPSGrowth);
 			epsGrowthList.add(secondEPSGrowth);
 			epsGrowthList.add(thirdEPSGrowth);
-			epsGrowthList.add(fourthEPSGrowth);
+			//epsGrowthList.add(fourthEPSGrowth);
 
 			Collections.reverse(researchAndDevelopmentList);
 			Collections.reverse(researchAndDevelopmentGrowthList);

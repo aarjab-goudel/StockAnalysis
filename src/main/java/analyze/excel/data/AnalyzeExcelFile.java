@@ -40,12 +40,13 @@ public class AnalyzeExcelFile {
 
 	}
 
+	// This method extracts Balance Sheet data from Balance sheet spreadsheets
 	public Map<String, List<BSInfoBO>> extractBSData() {
 		Sheet firstBSSheet = excelFile.getSheet("BS");
 		Sheet secondBSSheet = excelFile.getSheet("BSOne");
 		Sheet thirdBSSheet = excelFile.getSheet("BSTwo");
 		Sheet fourthBSSheet = excelFile.getSheet("BSThree");
-		Sheet fifthBSSheet = excelFile.getSheet("BSFour");
+		//Sheet fifthBSSheet = excelFile.getSheet("BSFour");
 
 		List<Sheet> bsSheets = new ArrayList<Sheet>();
 
@@ -53,8 +54,9 @@ public class AnalyzeExcelFile {
 		bsSheets.add(secondBSSheet);
 		bsSheets.add(thirdBSSheet);
 		bsSheets.add(fourthBSSheet);
-		bsSheets.add(fifthBSSheet);
+		//bsSheets.add(fifthBSSheet);
 
+		// The readBSData actually reads the BS data from the sheet Array-list
 		Map<String, List<BSInfoBO>> tickerToBSInfo = BSFinancialLibrary.readBSData(bsSheets);
 		return tickerToBSInfo;
 	}
@@ -64,7 +66,7 @@ public class AnalyzeExcelFile {
 		Sheet secondISSheet = excelFile.getSheet("ISOne");
 		Sheet thirdISSheet = excelFile.getSheet("ISTwo");
 		Sheet fourthISSheet = excelFile.getSheet("ISThree");
-		Sheet fifthISSheet = excelFile.getSheet("ISFour");
+		//Sheet fifthISSheet = excelFile.getSheet("ISFour");
 
 		List<Sheet> isSheets = new ArrayList<Sheet>();
 
@@ -72,7 +74,7 @@ public class AnalyzeExcelFile {
 		isSheets.add(secondISSheet);
 		isSheets.add(thirdISSheet);
 		isSheets.add(fourthISSheet);
-		isSheets.add(fifthISSheet);
+		//isSheets.add(fifthISSheet);
 
 		Map<String, List<ISInfoBO>> tickerToISInfo = ISFinancialLibrary.readISData(isSheets);
 		return tickerToISInfo;
@@ -84,7 +86,7 @@ public class AnalyzeExcelFile {
 		Sheet secondCFSheet = excelFile.getSheet("CFOne");
 		Sheet thirdCFSheet = excelFile.getSheet("CFTwo");
 		Sheet fourthCFSheet = excelFile.getSheet("CFThree");
-		Sheet fifthCFSheet = excelFile.getSheet("CFFour");
+		//Sheet fifthCFSheet = excelFile.getSheet("CFFour");
 
 		List<Sheet> cfSheets = new ArrayList<Sheet>();
 
@@ -92,7 +94,7 @@ public class AnalyzeExcelFile {
 		cfSheets.add(secondCFSheet);
 		cfSheets.add(thirdCFSheet);
 		cfSheets.add(fourthCFSheet);
-		cfSheets.add(fifthCFSheet);
+		//cfSheets.add(fifthCFSheet);
 
 		Map<String, List<CFInfoBO>> tickerToCFInfo = CFFinancialLibrary.readCFData(cfSheets);
 

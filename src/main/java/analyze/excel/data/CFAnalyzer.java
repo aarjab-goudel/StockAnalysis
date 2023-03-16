@@ -60,8 +60,7 @@ public class CFAnalyzer {
 			List<String> cfDateList = tickerToCFDates.get(ticker);
 
 			String dateLines = "                                         " + cfDateList.get(0) + "             "
-					+ cfDateList.get(1) + "             " + cfDateList.get(2) + "             " + cfDateList.get(3)
-					+ "             " + cfDateList.get(4);
+					+ cfDateList.get(1) + "             " + cfDateList.get(2) + "             " + cfDateList.get(3);
 			info.write(dateLines);
 			info.newLine();
 
@@ -71,13 +70,12 @@ public class CFAnalyzer {
 			String secondCashFlow = CommonFinancialLibrary.addCommasToNumericString(freeCashFlowList.get(1));
 			String thirdCashFlow = CommonFinancialLibrary.addCommasToNumericString(freeCashFlowList.get(2));
 			String fourthCashFlow = CommonFinancialLibrary.addCommasToNumericString(freeCashFlowList.get(3));
-			String fifthCashFlow = CommonFinancialLibrary.addCommasToNumericString(freeCashFlowList.get(4));
+			//String fifthCashFlow = CommonFinancialLibrary.addCommasToNumericString(freeCashFlowList.get(4));
 
 			String freeCashFlowLine = "Free Cash Flow                           " + firstCashFlow
 					+ CommonFinancialLibrary.getApprorpriateSpaces(firstCashFlow) + secondCashFlow
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondCashFlow) + thirdCashFlow
-					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdCashFlow) + fourthCashFlow
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthCashFlow) + fifthCashFlow;
+					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdCashFlow) + fourthCashFlow;
 			info.write(freeCashFlowLine);
 			info.newLine();
 
@@ -86,9 +84,7 @@ public class CFAnalyzer {
 					+ CommonFinancialLibrary.getApprorpriateSpaces(freeCashFlowGrowthList.get(0))
 					+ freeCashFlowGrowthList.get(1)
 					+ CommonFinancialLibrary.getApprorpriateSpaces(freeCashFlowGrowthList.get(1))
-					+ freeCashFlowGrowthList.get(2)
-					+ CommonFinancialLibrary.getApprorpriateSpaces(freeCashFlowGrowthList.get(2))
-					+ freeCashFlowGrowthList.get(3);
+					+ freeCashFlowGrowthList.get(2);
 			info.write(freeCashFlowGrowthLine);
 			info.newLine();
 
@@ -102,15 +98,13 @@ public class CFAnalyzer {
 					.addCommasToNumericString(netCashForInvestingList.get(2));
 			String fourthNetCashForInvesting = CommonFinancialLibrary
 					.addCommasToNumericString(netCashForInvestingList.get(3));
-			String fifthNetCashForInvesting = CommonFinancialLibrary
-					.addCommasToNumericString(netCashForInvestingList.get(4));
+//			String fifthNetCashForInvesting = CommonFinancialLibrary
+//					.addCommasToNumericString(netCashForInvestingList.get(4));
 
 			String netCashForInvestingLine = "Net Cash For Investing                   " + firstNetCashForInvesting
 					+ CommonFinancialLibrary.getApprorpriateSpaces(firstNetCashForInvesting) + secondNetCashForInvesting
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondNetCashForInvesting) + thirdNetCashForInvesting
-					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetCashForInvesting) + fourthNetCashForInvesting
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthNetCashForInvesting)
-					+ fifthNetCashForInvesting;
+					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetCashForInvesting) + fourthNetCashForInvesting;
 			info.write(netCashForInvestingLine);
 			info.newLine();
 
@@ -122,36 +116,36 @@ public class CFAnalyzer {
 					.addCommasToNumericString(netCashForFinancingList.get(2));
 			String fourthNetCashForFinancing = CommonFinancialLibrary
 					.addCommasToNumericString(netCashForFinancingList.get(3));
-			String fifthNetCashForFinancing = CommonFinancialLibrary
-					.addCommasToNumericString(netCashForFinancingList.get(4));
+//			String fifthNetCashForFinancing = CommonFinancialLibrary
+//					.addCommasToNumericString(netCashForFinancingList.get(4));
 
 			String netCashForFinancingLine = "Net Cash For Financing                   " + firstNetCashForFinancing
 					+ CommonFinancialLibrary.getApprorpriateSpaces(firstNetCashForFinancing) + secondNetCashForFinancing
 					+ CommonFinancialLibrary.getApprorpriateSpaces(secondNetCashForFinancing) + thirdNetCashForFinancing
-					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetCashForFinancing) + fourthNetCashForFinancing
-					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthNetCashForFinancing)
-					+ fifthNetCashForFinancing;
+					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetCashForFinancing) + fourthNetCashForFinancing;
 			info.write(netCashForFinancingLine);
 			info.newLine();
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-			String fiveYearAvgFreeCashFlowString = CommonFinancialLibrary
-					.calculateAverageGrowthRateForFivePeriods(freeCashFlowList.get(0), freeCashFlowList.get(4));
-			String fiveYearAvgFreeCashFlowLine = "Free Cash Flow 5 Period Growth: " + fiveYearAvgFreeCashFlowString;
-			info.write(fiveYearAvgFreeCashFlowLine);
+			String fourYearAvgFreeCashFlowString = CommonFinancialLibrary
+					.calculateAverageGrowthRateForFourPeriods(freeCashFlowList.get(0), freeCashFlowList.get(3));
+			String fourYearAvgFreeCashFlowLine = "Free Cash Flow 4 Period Growth: " + fourYearAvgFreeCashFlowString;
+			info.write(fourYearAvgFreeCashFlowLine);
 			info.newLine();
 
-			String threeYearAvgFreeCashFlowString = CommonFinancialLibrary
-					.calculateAverageGrowthRateForThreePeriods(freeCashFlowList.get(2), freeCashFlowList.get(4));
-			String threeYearAvgFreeCashFlowLine = "Free Cash Flow 3 Period Growth: " + threeYearAvgFreeCashFlowString;
-			info.write(threeYearAvgFreeCashFlowLine);
-			info.newLine();
+//			String threeYearAvgFreeCashFlowString = CommonFinancialLibrary
+//					.calculateAverageGrowthRateForThreePeriods(freeCashFlowList.get(2), freeCashFlowList.get(4));
+//			String threeYearAvgFreeCashFlowLine = "Free Cash Flow 3 Period Growth: " + threeYearAvgFreeCashFlowString;
+//			info.write(threeYearAvgFreeCashFlowLine);
+//			info.newLine();
 
 			CommonFinancialLibrary.writeSeperator(info);
 
 			this.writeCFSeperator(ticker, info);
 
+			info.newLine();
+			info.newLine();
 			info.newLine();
 
 			info.close();
@@ -174,36 +168,36 @@ public class CFAnalyzer {
 			CFInfoBO secondCFInfo = cfInfoList.get(1);
 			CFInfoBO thirdCFInfo = cfInfoList.get(2);
 			CFInfoBO fourthCFInfo = cfInfoList.get(3);
-			CFInfoBO fifthCFInfo = cfInfoList.get(4);
+			//CFInfoBO fifthCFInfo = cfInfoList.get(4);
 
 			String firstCFDate = firstCFInfo.getCfDate();
 			String secondCFDate = secondCFInfo.getCfDate();
 			String thirdCFDate = thirdCFInfo.getCfDate();
 			String fourthCFDate = fourthCFInfo.getCfDate();
-			String fifthCFDate = fifthCFInfo.getCfDate();
+			//String fifthCFDate = fifthCFInfo.getCfDate();
 
 			String firstFreeCashFlow = firstCFInfo.getFreeCashFlow();
 			String secondFreeCashFlow = secondCFInfo.getFreeCashFlow();
 			String thirdFreeCashFlow = thirdCFInfo.getFreeCashFlow();
 			String fourthFreeCashFlow = fourthCFInfo.getFreeCashFlow();
-			String fifthFreeCashFlow = fifthCFInfo.getFreeCashFlow();
+			//String fifthFreeCashFlow = fifthCFInfo.getFreeCashFlow();
 
 			String firstFreeCashFlowGrowth = firstCFInfo.getFreeCashFlowGrowth();
 			String secondFreeCashFlowGrowth = secondCFInfo.getFreeCashFlowGrowth();
 			String thirdFreeCashFlowGrowth = thirdCFInfo.getFreeCashFlowGrowth();
-			String fourthFreeCashFlowGrowth = fourthCFInfo.getFreeCashFlowGrowth();
+			//String fourthFreeCashFlowGrowth = fourthCFInfo.getFreeCashFlowGrowth();
 
 			String firstNetCashForInvesting = firstCFInfo.getNetCashForInvestingActivities();
 			String secondNetCashForInvesting = secondCFInfo.getNetCashForInvestingActivities();
 			String thirdNetCashForInvesting = thirdCFInfo.getNetCashForInvestingActivities();
 			String fourthNetCashForInvesting = fourthCFInfo.getNetCashForInvestingActivities();
-			String fifthNetCashForInvesting = fifthCFInfo.getNetCashForInvestingActivities();
+			//String fifthNetCashForInvesting = fifthCFInfo.getNetCashForInvestingActivities();
 
 			String firstNetCashForFinancing = firstCFInfo.getNetCashForFinancingActivities();
 			String secondNetCashForFinancing = secondCFInfo.getNetCashForFinancingActivities();
 			String thirdNetCashForFinancing = thirdCFInfo.getNetCashForFinancingActivities();
 			String fourthNetCashForFinancing = fourthCFInfo.getNetCashForFinancingActivities();
-			String fifthNetCashForFinancing = fifthCFInfo.getNetCashForFinancingActivities();
+			//String fifthNetCashForFinancing = fifthCFInfo.getNetCashForFinancingActivities();
 
 			List<String> freeCashFlowList = new ArrayList<String>();
 			List<String> freeCashFlowGrowthList = new ArrayList<String>();
@@ -215,30 +209,30 @@ public class CFAnalyzer {
 			cfDates.add(secondCFDate);
 			cfDates.add(thirdCFDate);
 			cfDates.add(fourthCFDate);
-			cfDates.add(fifthCFDate);
+			//cfDates.add(fifthCFDate);
 
 			freeCashFlowList.add(firstFreeCashFlow);
 			freeCashFlowList.add(secondFreeCashFlow);
 			freeCashFlowList.add(thirdFreeCashFlow);
 			freeCashFlowList.add(fourthFreeCashFlow);
-			freeCashFlowList.add(fifthFreeCashFlow);
+			//freeCashFlowList.add(fifthFreeCashFlow);
 
 			freeCashFlowGrowthList.add(firstFreeCashFlowGrowth);
 			freeCashFlowGrowthList.add(secondFreeCashFlowGrowth);
 			freeCashFlowGrowthList.add(thirdFreeCashFlowGrowth);
-			freeCashFlowGrowthList.add(fourthFreeCashFlowGrowth);
+			//freeCashFlowGrowthList.add(fourthFreeCashFlowGrowth);
 
 			netCashForInvestingList.add(firstNetCashForInvesting);
 			netCashForInvestingList.add(secondNetCashForInvesting);
 			netCashForInvestingList.add(thirdNetCashForInvesting);
 			netCashForInvestingList.add(fourthNetCashForInvesting);
-			netCashForInvestingList.add(fifthNetCashForInvesting);
+			//netCashForInvestingList.add(fifthNetCashForInvesting);
 
 			netCashForFinancingList.add(firstNetCashForFinancing);
 			netCashForFinancingList.add(secondNetCashForFinancing);
 			netCashForFinancingList.add(thirdNetCashForFinancing);
 			netCashForFinancingList.add(fourthNetCashForFinancing);
-			netCashForFinancingList.add(fifthNetCashForFinancing);
+			//netCashForFinancingList.add(fifthNetCashForFinancing);
 
 			Collections.reverse(freeCashFlowList);
 			Collections.reverse(freeCashFlowGrowthList);

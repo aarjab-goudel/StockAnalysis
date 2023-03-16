@@ -69,24 +69,24 @@ public class BSSheet extends FinancialSheet {
 		firstRowCells.get(CommonSheetConstants.INDUSTRY_COLUMN.getCommonColumn()).setCellValue("Industry");
 		firstRowCells.get(BSSheetConstants.BS_DATE.getBSData()).setCellValue("Date");
 		firstRowCells.get(BSSheetConstants.CURRENCY_TYPE.getBSData()).setCellValue("Currency Type");
-		firstRowCells.get(BSSheetConstants.NET_EQUITY_COLUMN.getBSData()).setCellValue("Net Equity");
-		firstRowCells.get(BSSheetConstants.NET_EQUITY_GROWTH_COLUMN.getBSData()).setCellValue("Net Equity Growth");
+//		firstRowCells.get(BSSheetConstants.NET_EQUITY_COLUMN.getBSData()).setCellValue("Net Equity");
+//		firstRowCells.get(BSSheetConstants.NET_EQUITY_GROWTH_COLUMN.getBSData()).setCellValue("Net Equity Growth");
 		firstRowCells.get(BSSheetConstants.SHARE_HOLDER_EQUITY_COLUMN.getBSData())
 				.setCellValue("Total Shareholders Equity");
 		firstRowCells.get(BSSheetConstants.SHARE_HOLDER_EQUITY_GROWTH_COLUMN.getBSData())
 				.setCellValue("Total Shareholders Equity Growth");
-		firstRowCells.get(BSSheetConstants.INTANGIBLE_ASSETS_COLUMN.getBSData())
-				.setCellValue("Total intangible assets");
-		firstRowCells.get(BSSheetConstants.CASH_AND_CASH_EQUIVALENT_COLUMN.getBSData())
-				.setCellValue("Cash and cash equivalents");
-		firstRowCells.get(BSSheetConstants.SHORT_TERM_INVESTMENTS_COLUMN.getBSData())
-				.setCellValue("Short-term investments");
-		firstRowCells.get(BSSheetConstants.RECEIVABLES_COLUMN.getBSData()).setCellValue("Receivables");
-		firstRowCells.get(BSSheetConstants.LONG_TERM_INVESTMENTS_COLUMN.getBSData())
-				.setCellValue("Long-term investments");
-		firstRowCells.get(BSSheetConstants.SHORT_TERM_DEBT_COLUMN.getBSData()).setCellValue("Short-term debt");
-		firstRowCells.get(BSSheetConstants.ACCOUNTS_PAYABLE_COLUMN.getBSData()).setCellValue("Accounts payable");
-		firstRowCells.get(BSSheetConstants.LONG_TERM_DEBT_COLUMN.getBSData()).setCellValue("Long-term debt");
+//		firstRowCells.get(BSSheetConstants.INTANGIBLE_ASSETS_COLUMN.getBSData())
+//				.setCellValue("Total intangible assets");
+//		firstRowCells.get(BSSheetConstants.CASH_AND_CASH_EQUIVALENT_COLUMN.getBSData())
+//				.setCellValue("Cash and cash equivalents");
+//		firstRowCells.get(BSSheetConstants.SHORT_TERM_INVESTMENTS_COLUMN.getBSData())
+//				.setCellValue("Short-term investments");
+//		firstRowCells.get(BSSheetConstants.RECEIVABLES_COLUMN.getBSData()).setCellValue("Receivables");
+//		firstRowCells.get(BSSheetConstants.LONG_TERM_INVESTMENTS_COLUMN.getBSData())
+//				.setCellValue("Long-term investments");
+//		firstRowCells.get(BSSheetConstants.SHORT_TERM_DEBT_COLUMN.getBSData()).setCellValue("Short-term debt");
+//		firstRowCells.get(BSSheetConstants.ACCOUNTS_PAYABLE_COLUMN.getBSData()).setCellValue("Accounts payable");
+//		firstRowCells.get(BSSheetConstants.LONG_TERM_DEBT_COLUMN.getBSData()).setCellValue("Long-term debt");
 		firstRowCells.get(BSSheetConstants.NUM_COLUMNS.getBSData() - 1).setCellValue("Ticker");
 
 	}

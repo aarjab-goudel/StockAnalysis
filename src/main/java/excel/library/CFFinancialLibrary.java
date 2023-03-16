@@ -116,7 +116,7 @@ public class CFFinancialLibrary {
 			CFInfoBO secondYearCFInfo = cfInfoList.get(1);
 			CFInfoBO thirdYearCFInfo = cfInfoList.get(2);
 			CFInfoBO fourthYearCFInfo = cfInfoList.get(3);
-			CFInfoBO fifthYearCFInfo = cfInfoList.get(4);
+			//CFInfoBO fifthYearCFInfo = cfInfoList.get(4);
 
 			String firstYearFreeCashFlowGrowthRate = CommonFinancialLibrary
 					.calculateGrowthRate(firstYearCFInfo.getFreeCashFlow(), secondYearCFInfo.getFreeCashFlow());
@@ -127,9 +127,9 @@ public class CFFinancialLibrary {
 			String thirdYearFreeCashFlowGrowthRate = CommonFinancialLibrary
 					.calculateGrowthRate(thirdYearCFInfo.getFreeCashFlow(), fourthYearCFInfo.getFreeCashFlow());
 			thirdYearCFInfo.setFreeCashFlowGrowth(thirdYearFreeCashFlowGrowthRate);
-			String fourthYearFreeCashFlowGrowthRate = CommonFinancialLibrary
-					.calculateGrowthRate(fourthYearCFInfo.getFreeCashFlow(), fifthYearCFInfo.getFreeCashFlow());
-			fourthYearCFInfo.setFreeCashFlowGrowth(fourthYearFreeCashFlowGrowthRate);
+//			String fourthYearFreeCashFlowGrowthRate = CommonFinancialLibrary
+//					.calculateGrowthRate(fourthYearCFInfo.getFreeCashFlow(), fifthYearCFInfo.getFreeCashFlow());
+//			fourthYearCFInfo.setFreeCashFlowGrowth(fourthYearFreeCashFlowGrowthRate);
 
 		}
 

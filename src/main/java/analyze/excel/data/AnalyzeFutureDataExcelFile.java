@@ -19,6 +19,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import create.excel.data.service.SaveExcel;
 import create.excel.future.CreateFutureDataExcelFile;
 import create.excel.future.FutureInfoBO;
+import excel.library.CommonFinancialLibrary;
 
 public class AnalyzeFutureDataExcelFile {
 
@@ -73,16 +74,23 @@ public class AnalyzeFutureDataExcelFile {
 			Cell nextYearRevenueCell = row.getCell(CreateFutureDataExcelFile.getNextYearRevenueColumn());
 			String nextYearRevenueString = dataFormatter.formatCellValue(nextYearRevenueCell);
 			nextYearInfoBO.setRevenue(nextYearRevenueString);
+			
+			String currentRevenueAsDecimal = CommonFinancialLibrary.convertNumberWithLetterToFullNumber(currentYearRevenueString);
+			String nextYearRevenueAsDecimal = CommonFinancialLibrary
+					.convertNumberWithLetterToFullNumber(nextYearRevenueString);
+			String epsGrowth = CommonFinancialLibrary.calculateGrowthRate(nextYearEPSString, currentYearEPSString);
+			String revenueGrowth = CommonFinancialLibrary.calculateGrowthRate(nextYearRevenueAsDecimal,
+					currentRevenueAsDecimal);
 
-			Cell epsGrowthCell = row.getCell(CreateFutureDataExcelFile.getEpsGrowthColumn());
-			String epsGrowthString = dataFormatter.formatCellValue(epsGrowthCell);
-			currentFutureInfoBO.setEpsGrowth(epsGrowthString);
-			nextYearInfoBO.setEpsGrowth(epsGrowthString);
+//			Cell epsGrowthCell = row.getCell(CreateFutureDataExcelFile.getEpsGrowthColumn());
+//			String epsGrowthString = dataFormatter.formatCellValue(epsGrowthCell);
+			currentFutureInfoBO.setEpsGrowth(epsGrowth);
+			nextYearInfoBO.setEpsGrowth(epsGrowth);
 
-			Cell revenueGrowthCell = row.getCell(CreateFutureDataExcelFile.getRevenueGrowthColumn());
-			String revenueGrowthString = dataFormatter.formatCellValue(revenueGrowthCell);
-			currentFutureInfoBO.setRevenueGrowth(revenueGrowthString);
-			nextYearInfoBO.setRevenueGrowth(revenueGrowthString);
+//			Cell revenueGrowthCell = row.getCell(CreateFutureDataExcelFile.getRevenueGrowthColumn());
+//			String revenueGrowthString = dataFormatter.formatCellValue(revenueGrowthCell);
+			currentFutureInfoBO.setRevenueGrowth(revenueGrowth);
+			nextYearInfoBO.setRevenueGrowth(revenueGrowth);
 
 			tickerToCurrentYearInfo.put(ticker, currentFutureInfoBO);
 			tickerToNextYearInfo.put(ticker, nextYearInfoBO);

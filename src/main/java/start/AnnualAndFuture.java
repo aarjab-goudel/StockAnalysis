@@ -16,14 +16,14 @@ import create.excel.implementation.CreateAnnualExcelFile;
 
 public class AnnualAndFuture {
 
-	private CreateAnnualExcelFile createAnnual;
-	private CreateFutureDataExcelFile createFuture;
+//	private CreateAnnualExcelFile createAnnual;
+//	private CreateFutureDataExcelFile createFuture;
 	private AnalyzeAnnualExcelFile analyzeAnnual;
 
 	public AnnualAndFuture() throws JSONException, IOException, ParseException {
 		System.out.println("STARTING ANNUAL AND FUTURE");
-		createAnnual = new CreateAnnualExcelFile();
-		createFuture = new CreateFutureDataExcelFile();
+		//createAnnual = new CreateAnnualExcelFile();
+		//createFuture = new CreateFutureDataExcelFile();
 		analyzeAnnual = new AnalyzeAnnualExcelFile();
 		System.out.println("FINISHED ANNUAL AND FUTURE");
 
@@ -33,13 +33,13 @@ public class AnnualAndFuture {
 		new AnnualAndFuture();
 	}
 
-	public CreateAnnualExcelFile getCreateAnnual() {
-		return createAnnual;
-	}
-
-	public CreateFutureDataExcelFile getCreateFuture() {
-		return createFuture;
-	}
+//	public CreateAnnualExcelFile getCreateAnnual() {
+//		return createAnnual;
+//	}
+//
+//	public CreateFutureDataExcelFile getCreateFuture() {
+//		return createFuture;
+//	}
 
 	public AnalyzeAnnualExcelFile getAnalyzeAnnual() {
 		return analyzeAnnual;

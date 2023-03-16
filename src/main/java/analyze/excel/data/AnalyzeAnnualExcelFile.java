@@ -60,14 +60,14 @@ public class AnalyzeAnnualExcelFile extends AnalyzeExcelFile {
 
 	public AnalyzeAnnualExcelFile() throws IOException {
 		super(SaveExcel.getAnnualExcelInstance());
-		tickerToRatioInfo = this.extractRatioData();
+		//ickerToRatioInfo = this.extractRatioData();
 		setUp = new SetupDirectories(this.getCompanies(), true);
 		AnalyzeFutureDataExcelFile analyzeFutureExcelData = new AnalyzeFutureDataExcelFile();
 
 		BSAnalyzer bsAnalyzer = new BSAnalyzer(this.getTickerToBSInfo(), setUp.getTickerToTxtFilePath());
 		ISAnalyzer isAnalyzer = new ISAnalyzer(this.getTickerToISInfo(), setUp.getTickerToTxtFilePath());
 		CFAnalyzer cfAnalyzer = new CFAnalyzer(this.getTickerToCFInfo(), setUp.getTickerToTxtFilePath());
-		RatioAnalyzer ratioAnalyzer = new RatioAnalyzer(tickerToRatioInfo, setUp.getTickerToTxtFilePath());
+		//RatioAnalyzer ratioAnalyzer = new RatioAnalyzer(tickerToRatioInfo, setUp.getTickerToTxtFilePath());
 		FutureDataAnalyzer futureDataAnalyzer = new FutureDataAnalyzer(
 				analyzeFutureExcelData.getTickerToCurrentYearInfo(), analyzeFutureExcelData.getTickerToNextYearInfo(),
 				setUp.getTickerToTxtFilePath());

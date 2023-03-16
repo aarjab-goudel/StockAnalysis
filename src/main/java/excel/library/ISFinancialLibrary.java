@@ -131,7 +131,7 @@ public class ISFinancialLibrary {
 			ISInfoBO secondYearISInfo = isInfoList.get(1);
 			ISInfoBO thirdYearISInfo = isInfoList.get(2);
 			ISInfoBO fourthYearISInfo = isInfoList.get(3);
-			ISInfoBO fifthYearISInfo = isInfoList.get(4);
+			//ISInfoBO fifthYearISInfo = isInfoList.get(4);
 
 			String firstYearRevenueGrowthRate = CommonFinancialLibrary.calculateGrowthRate(firstYearISInfo.getRevenue(),
 					secondYearISInfo.getRevenue());
@@ -142,9 +142,9 @@ public class ISFinancialLibrary {
 			String thirdYearRevenueGrowthRate = CommonFinancialLibrary.calculateGrowthRate(thirdYearISInfo.getRevenue(),
 					fourthYearISInfo.getRevenue());
 			thirdYearISInfo.setRevenueGrowth(thirdYearRevenueGrowthRate);
-			String fourthYearRevenueGrowthRate = CommonFinancialLibrary
-					.calculateGrowthRate(fourthYearISInfo.getRevenue(), fifthYearISInfo.getRevenue());
-			fourthYearISInfo.setRevenueGrowth(fourthYearRevenueGrowthRate);
+//			String fourthYearRevenueGrowthRate = CommonFinancialLibrary
+//					.calculateGrowthRate(fourthYearISInfo.getRevenue(), fifthYearISInfo.getRevenue());
+//			fourthYearISInfo.setRevenueGrowth(fourthYearRevenueGrowthRate);
 
 			String firstYearResearchAndDevelopmentGrowthRate = CommonFinancialLibrary.calculateGrowthRate(
 					firstYearISInfo.getResearchAndDevelopment(), secondYearISInfo.getResearchAndDevelopment());
@@ -155,9 +155,9 @@ public class ISFinancialLibrary {
 			String thirdYearResearchAndDevelopmentGrowthRate = CommonFinancialLibrary.calculateGrowthRate(
 					thirdYearISInfo.getResearchAndDevelopment(), fourthYearISInfo.getResearchAndDevelopment());
 			thirdYearISInfo.setResearchAndDevelopmentGrowth(thirdYearResearchAndDevelopmentGrowthRate);
-			String fourthYearResearchAndDevelopmentGrowthRate = CommonFinancialLibrary.calculateGrowthRate(
-					fourthYearISInfo.getResearchAndDevelopment(), fifthYearISInfo.getResearchAndDevelopment());
-			fourthYearISInfo.setResearchAndDevelopmentGrowth(fourthYearResearchAndDevelopmentGrowthRate);
+//			String fourthYearResearchAndDevelopmentGrowthRate = CommonFinancialLibrary.calculateGrowthRate(
+//					fourthYearISInfo.getResearchAndDevelopment(), fifthYearISInfo.getResearchAndDevelopment());
+//			fourthYearISInfo.setResearchAndDevelopmentGrowth(fourthYearResearchAndDevelopmentGrowthRate);
 
 			String firstYearGrossProfitGrowthRate = CommonFinancialLibrary
 					.calculateGrowthRate(firstYearISInfo.getGrossProfit(), secondYearISInfo.getGrossProfit());
@@ -168,9 +168,9 @@ public class ISFinancialLibrary {
 			String thirdYearGrossProfitGrowthRate = CommonFinancialLibrary
 					.calculateGrowthRate(thirdYearISInfo.getGrossProfit(), fourthYearISInfo.getGrossProfit());
 			thirdYearISInfo.setGrossProfitGrowth(thirdYearGrossProfitGrowthRate);
-			String fourthYearGrossProfitGrowthRate = CommonFinancialLibrary
-					.calculateGrowthRate(fourthYearISInfo.getGrossProfit(), fifthYearISInfo.getGrossProfit());
-			fourthYearISInfo.setGrossProfitGrowth(fourthYearGrossProfitGrowthRate);
+//			String fourthYearGrossProfitGrowthRate = CommonFinancialLibrary
+//					.calculateGrowthRate(fourthYearISInfo.getGrossProfit(), fifthYearISInfo.getGrossProfit());
+//			fourthYearISInfo.setGrossProfitGrowth(fourthYearGrossProfitGrowthRate);
 
 			String firstYearNetIncomeGrowthRate = CommonFinancialLibrary
 					.calculateGrowthRate(firstYearISInfo.getNetIncome(), secondYearISInfo.getNetIncome());
@@ -181,9 +181,9 @@ public class ISFinancialLibrary {
 			String thirdYearNetIncomeGrowthRate = CommonFinancialLibrary
 					.calculateGrowthRate(thirdYearISInfo.getNetIncome(), fourthYearISInfo.getNetIncome());
 			thirdYearISInfo.setNetIncomeGrowth(thirdYearNetIncomeGrowthRate);
-			String fourthYearNetIncomeGrowthRate = CommonFinancialLibrary
-					.calculateGrowthRate(fourthYearISInfo.getNetIncome(), fifthYearISInfo.getNetIncome());
-			fourthYearISInfo.setNetIncomeGrowth(fourthYearNetIncomeGrowthRate);
+//			String fourthYearNetIncomeGrowthRate = CommonFinancialLibrary
+//					.calculateGrowthRate(fourthYearISInfo.getNetIncome(), fifthYearISInfo.getNetIncome());
+//			fourthYearISInfo.setNetIncomeGrowth(fourthYearNetIncomeGrowthRate);
 
 			String firstYearEPSRate = CommonFinancialLibrary.calculateGrowthRate(firstYearISInfo.getEps(),
 					secondYearISInfo.getEps());
@@ -194,9 +194,9 @@ public class ISFinancialLibrary {
 			String thirdYearEPSGrowthRate = CommonFinancialLibrary.calculateGrowthRate(thirdYearISInfo.getEps(),
 					fourthYearISInfo.getEps());
 			thirdYearISInfo.setEpsGrowth(thirdYearEPSGrowthRate);
-			String fourthYearEPSGrowthRate = CommonFinancialLibrary.calculateGrowthRate(fourthYearISInfo.getEps(),
-					fifthYearISInfo.getEps());
-			fourthYearISInfo.setEpsGrowth(fourthYearEPSGrowthRate);
+//			String fourthYearEPSGrowthRate = CommonFinancialLibrary.calculateGrowthRate(fourthYearISInfo.getEps(),
+//					fifthYearISInfo.getEps());
+//			fourthYearISInfo.setEpsGrowth(fourthYearEPSGrowthRate);
 
 		}
 
