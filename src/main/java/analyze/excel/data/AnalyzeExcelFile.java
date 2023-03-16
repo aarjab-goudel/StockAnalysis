@@ -56,7 +56,8 @@ public class AnalyzeExcelFile {
 		bsSheets.add(fourthBSSheet);
 		//bsSheets.add(fifthBSSheet);
 
-		// The readBSData actually reads the BS data from the sheet Array-list
+		// The readBSData actually reads the BS data from the sheet Array-list.
+		// This function reads the Balance Sheet data correctly!
 		Map<String, List<BSInfoBO>> tickerToBSInfo = BSFinancialLibrary.readBSData(bsSheets);
 		return tickerToBSInfo;
 	}

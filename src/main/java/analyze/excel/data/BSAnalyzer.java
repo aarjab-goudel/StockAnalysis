@@ -49,9 +49,9 @@ public class BSAnalyzer {
 	private Map<String, List<String>> tickerToTotalNetDebt;
 	private Map<String, List<String>> tickerToTotalNetDebtGrowth;
 	
-	private String totalCashMRQ;
-	private String totalDebtMRQ;
-	private String currentRatioMRQ;
+	private Map<String, String> tickerToTotalCashMRQ;
+	private Map<String, String> tickerToTotalDebtMRQ;
+	private Map<String, String> tickerToCurrentRatioMRQ;
 	
 	
 
@@ -85,9 +85,10 @@ public class BSAnalyzer {
 		tickerToTotalNetDebt = new HashMap<String, List<String>>();
 		tickerToTotalNetDebtGrowth = new HashMap<String, List<String>>();
 		
-		totalCashMRQ = "";
-		totalDebtMRQ = "";
-		currentRatioMRQ = "";
+		
+		tickerToTotalCashMRQ = new HashMap<String, String>();
+		tickerToTotalDebtMRQ = new HashMap<String, String>();
+		tickerToCurrentRatioMRQ = new HashMap<String, String>();
 		
 		
 		this.extractBSData();
@@ -329,15 +330,15 @@ public class BSAnalyzer {
 			CommonFinancialLibrary.writeSeperator(info);
 			
 			
-			String totalCashLine = "Total Cash (Most Recent Quarter)         " + totalCashMRQ;
+			String totalCashLine = "Total Cash (Most Recent Quarter)         $" + tickerToTotalCashMRQ.get(ticker);
 			info.write(totalCashLine);
 			info.newLine();
 			
-			String totalDebtLine = "Total Debt (Most Recent Quarter)         " + totalDebtMRQ;
+			String totalDebtLine = "Total Debt (Most Recent Quarter)         $" + tickerToTotalDebtMRQ.get(ticker);
 			info.write(totalDebtLine);
 			info.newLine();
 			
-			String currentRatioLine = "Current Ratio (Most Recent Quarter)      " + currentRatioMRQ;
+			String currentRatioLine = "Current Ratio (Most Recent Quarter)      " + tickerToCurrentRatioMRQ.get(ticker);
 			info.write(currentRatioLine);
 			info.newLine();
 			
@@ -564,9 +565,9 @@ public class BSAnalyzer {
 			String secondTotalLiabilitiesGrowth = secondBSInfo.getTotalLiabilitiesGrowth();
 			String thirdTotalLiabilitiesGrowth = thirdBSInfo.getTotalLiabilitiesGrowth();
 			
-			totalCashMRQ = firstBSInfo.getTotalStrCash();
-			totalDebtMRQ = firstBSInfo.getTotalStrDebt();
-			currentRatioMRQ = firstBSInfo.getStrCurrentRatio();
+			String totalCashMRQ = firstBSInfo.getTotalStrCash();
+			String totalDebtMRQ = firstBSInfo.getTotalStrDebt();
+			String currentRatioMRQ = firstBSInfo.getStrCurrentRatio();
 			
 //			String firstTangibleAssets = firstBSInfo.getTotalTangibleAssets();
 //			String secondTangibleAssets = secondBSInfo.getTotalTangibleAssets();
@@ -813,6 +814,9 @@ public class BSAnalyzer {
 			tickerToTotalDebtGrowth.put(ticker, totalDebtGrowth);
 			tickerToTotalNetDebt.put(ticker, totalNetDebt);
 			tickerToTotalNetDebtGrowth.put(ticker, totalNetDebtGrowth);
+			tickerToTotalCashMRQ.put(ticker, totalCashMRQ);
+			tickerToTotalDebtMRQ.put(ticker, totalDebtMRQ);
+			tickerToCurrentRatioMRQ.put(ticker, currentRatioMRQ);
 		}
 	}
 
@@ -919,6 +923,24 @@ public class BSAnalyzer {
 	public Map<String, List<String>> getTickerToTotalNetDebtGrowth() {
 		return tickerToTotalNetDebtGrowth;
 	}
+
+	public Map<String, List<String>> getTickerToBSDates() {
+		return tickerToBSDates;
+	}
+
+
+	public Map<String, String> getTickerToTotalCashMRQ() {
+		return tickerToTotalCashMRQ;
+	}
+
+	public Map<String, String> getTickerToTotalDebtMRQ() {
+		return tickerToTotalDebtMRQ;
+	}
+
+	public Map<String, String> getTickerToCurrentRatioMRQ() {
+		return tickerToCurrentRatioMRQ;
+	}
+	
 	
 	
 
