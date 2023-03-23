@@ -28,6 +28,7 @@ public class CFAnalyzer {
 	private Map<String, List<String>> tickerToNetCashForInvesting;
 	private Map<String, List<String>> tickerToNetCashForFinancing;
 	private Map<String, List<String>> tickerToCFDates;
+	private Map<String, String> tickerToCurrencyValue;
 
 	public CFAnalyzer(Map<String, List<CFInfoBO>> tickerToCFData, Map<String, String> tickerToTxtFilePaths)
 			throws IOException {
@@ -38,6 +39,7 @@ public class CFAnalyzer {
 		tickerToNetCashForInvesting = new HashMap<String, List<String>>();
 		tickerToNetCashForFinancing = new HashMap<String, List<String>>();
 		tickerToCFDates = new HashMap<String, List<String>>();
+		tickerToCurrencyValue = new HashMap<String, String>();
 		this.extractCFData();
 		this.writeCFDataToTxtFiles();
 	}
@@ -50,7 +52,8 @@ public class CFAnalyzer {
 			String txtFilePath = entry.getValue();
 			FileWriter fstream = new FileWriter(txtFilePath, true);
 			BufferedWriter info = new BufferedWriter(fstream);
-			this.writeCFSeperator(ticker, info);
+			String currencyType = tickerToCurrencyValue.get(ticker);
+			this.writeCFSeperator(ticker, currencyType, info);
 			info.newLine();
 
 			List<String> freeCashFlowList = tickerToFreeCashFlow.get(ticker);
@@ -142,7 +145,7 @@ public class CFAnalyzer {
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-			this.writeCFSeperator(ticker, info);
+			this.writeCFSeperator(ticker, currencyType, info);
 
 			info.newLine();
 			info.newLine();
@@ -152,8 +155,8 @@ public class CFAnalyzer {
 		}
 	}
 
-	private void writeCFSeperator(String ticker, BufferedWriter info) throws IOException {
-		info.write("=================================================== " + ticker
+	private void writeCFSeperator(String ticker, String currencyType, BufferedWriter info) throws IOException {
+		info.write("=================================================== " + ticker + " (" + currencyType + ")" 
 				+ " - Cash Flow Sheet ===================================================");
 		info.newLine();
 	}
@@ -198,6 +201,8 @@ public class CFAnalyzer {
 			String thirdNetCashForFinancing = thirdCFInfo.getNetCashForFinancingActivities();
 			String fourthNetCashForFinancing = fourthCFInfo.getNetCashForFinancingActivities();
 			//String fifthNetCashForFinancing = fifthCFInfo.getNetCashForFinancingActivities();
+			
+			String currencyType = firstCFInfo.getCurrencyType();
 
 			List<String> freeCashFlowList = new ArrayList<String>();
 			List<String> freeCashFlowGrowthList = new ArrayList<String>();
@@ -244,6 +249,7 @@ public class CFAnalyzer {
 			tickerToFreeCashFlowGrowth.put(ticker, freeCashFlowGrowthList);
 			tickerToNetCashForInvesting.put(ticker, netCashForInvestingList);
 			tickerToNetCashForFinancing.put(ticker, netCashForFinancingList);
+			tickerToCurrencyValue.put(ticker, currencyType);
 			tickerToCFDates.put(ticker, cfDates);
 		}
 

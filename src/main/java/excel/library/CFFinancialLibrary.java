@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import create.excel.bo.CFInfoBO;
+import create.excel.enums.BSSheetConstants;
 import create.excel.enums.CFSheetConstants;
 import create.excel.enums.CommonSheetConstants;
 
@@ -43,6 +44,7 @@ public class CFFinancialLibrary {
 					Cell netCashForFinancingCell = row
 							.getCell(CFSheetConstants.NET_CASH_FOR_FINANCING_COLUMN.getCfData());
 					Cell cfDateCell = row.getCell(CFSheetConstants.CF_DATE.getCfData());
+					Cell currencyTypeCell = row.getCell(CFSheetConstants.CURRENCY_TYPE.getCfData());
 
 					try {
 						String tickerValue = dataFormatter.formatCellValue(tickerCell).replace(",", "");
@@ -53,6 +55,7 @@ public class CFFinancialLibrary {
 						String netCashForFinancingValue = CommonFinancialLibrary.removeDecimalFromNumber(
 								dataFormatter.formatCellValue(netCashForFinancingCell).replace(",", ""));
 						String cfDate = dataFormatter.formatCellValue(cfDateCell);
+						String currencyTypeValue = dataFormatter.formatCellValue(currencyTypeCell);
 
 						if (tickerToCFData.containsKey(tickerValue)) {
 							List<CFInfoBO> cfInfoList = tickerToCFData.get(tickerValue);
@@ -61,6 +64,7 @@ public class CFFinancialLibrary {
 							cfInfo.setNetCashForFinancingActivities(netCashForFinancingValue);
 							cfInfo.setNetCashForInvestingActivities(netCashForInvestValue);
 							cfInfo.setCfDate(cfDate);
+							cfInfo.setCurrencyType(currencyTypeValue);
 							cfInfoList.add(cfInfo);
 						} else {
 							List<CFInfoBO> cfInfoList = new ArrayList<CFInfoBO>();
@@ -68,6 +72,7 @@ public class CFFinancialLibrary {
 							cfInfo.setFreeCashFlow(freeCashFlowValue);
 							cfInfo.setNetCashForFinancingActivities(netCashForFinancingValue);
 							cfInfo.setNetCashForInvestingActivities(netCashForInvestValue);
+							cfInfo.setCurrencyType(currencyTypeValue);
 							cfInfo.setCfDate(cfDate);
 							cfInfoList.add(cfInfo);
 							tickerToCFData.put(tickerValue, cfInfoList);
@@ -81,6 +86,7 @@ public class CFFinancialLibrary {
 							cfInfo.setNetCashForFinancingActivities(CommonFinancialLibrary.errorMessage());
 							cfInfo.setNetCashForInvestingActivities(CommonFinancialLibrary.errorMessage());
 							cfInfo.setCfDate(CommonFinancialLibrary.errorMessage());
+							cfInfo.setCurrencyType(CommonFinancialLibrary.errorMessage());
 							cfInfoList.add(cfInfo);
 						} else {
 							List<CFInfoBO> cfInfoList = new ArrayList<CFInfoBO>();
@@ -90,6 +96,7 @@ public class CFFinancialLibrary {
 							cfInfo.setNetCashForInvestingActivities(CommonFinancialLibrary.errorMessage());
 							cfInfo.setCfDate(CommonFinancialLibrary.errorMessage());
 							cfInfoList.add(cfInfo);
+							cfInfo.setCurrencyType(CommonFinancialLibrary.errorMessage());
 							tickerToCFData.put(tickerValue, cfInfoList);
 						}
 					}

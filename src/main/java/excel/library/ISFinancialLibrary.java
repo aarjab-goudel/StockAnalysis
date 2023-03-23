@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import create.excel.bo.ISInfoBO;
+import create.excel.enums.CFSheetConstants;
 import create.excel.enums.CommonSheetConstants;
 import create.excel.enums.ISSheetConstants;
 
@@ -45,6 +46,8 @@ public class ISFinancialLibrary {
 					Cell grossProfitCell = row.getCell(ISSheetConstants.GROSS_PROFIT_COLUMN.getIsData());
 					Cell isDateCell = row.getCell(ISSheetConstants.IS_DATE.getIsData());
 					Cell epsCell = row.getCell(ISSheetConstants.EPS_COLUMN.getIsData());
+					Cell currencyTypeCell = row.getCell(ISSheetConstants.CURRENCY_TYPE.getIsData());
+					
 
 					try {
 						String tickerValue = CommonFinancialLibrary
@@ -59,6 +62,7 @@ public class ISFinancialLibrary {
 								dataFormatter.formatCellValue(grossProfitCell).replace(",", ""));
 						String epsValue = dataFormatter.formatCellValue(epsCell);
 						String isDate = dataFormatter.formatCellValue(isDateCell);
+						String currencyTypeValue = dataFormatter.formatCellValue(currencyTypeCell);
 
 						if (tickerToISData.containsKey(tickerValue)) {
 							List<ISInfoBO> isInfoList = tickerToISData.get(tickerValue);
@@ -69,6 +73,7 @@ public class ISFinancialLibrary {
 							isInfo.setIsDate(isDate);
 							isInfo.setEps(epsValue);
 							isInfo.setResearchAndDevelopment(researchAndDevelopmentValue);
+							isInfo.setCurrencyType(currencyTypeValue);
 							isInfoList.add(isInfo);
 						} else {
 							List<ISInfoBO> isInfoList = new ArrayList<ISInfoBO>();
@@ -79,6 +84,7 @@ public class ISFinancialLibrary {
 							isInfo.setIsDate(isDate);
 							isInfo.setEps(epsValue);
 							isInfo.setResearchAndDevelopment(researchAndDevelopmentValue);
+							isInfo.setCurrencyType(currencyTypeValue);
 							isInfoList.add(isInfo);
 							tickerToISData.put(tickerValue, isInfoList);
 						}
@@ -94,6 +100,7 @@ public class ISFinancialLibrary {
 							isInfo.setIsDate(CommonFinancialLibrary.errorMessage());
 							isInfo.setEps(CommonFinancialLibrary.errorMessage());
 							isInfo.setResearchAndDevelopment(CommonFinancialLibrary.errorMessage());
+							isInfo.setCurrencyType(CommonFinancialLibrary.errorMessage());
 							isInfoList.add(isInfo);
 						} else {
 							List<ISInfoBO> isInfoList = new ArrayList<ISInfoBO>();
@@ -104,6 +111,7 @@ public class ISFinancialLibrary {
 							isInfo.setIsDate(CommonFinancialLibrary.errorMessage());
 							isInfo.setEps(CommonFinancialLibrary.errorMessage());
 							isInfo.setResearchAndDevelopment(CommonFinancialLibrary.errorMessage());
+							isInfo.setCurrencyType(CommonFinancialLibrary.errorMessage());
 							isInfoList.add(isInfo);
 							tickerToISData.put(tickerValue, isInfoList);
 						}

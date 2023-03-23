@@ -27,7 +27,7 @@ public class BSFinancialLibrary {
 	public BSFinancialLibrary() {
 
 	}
-	// This method actually reads from the balance sheet arrays and stores them into a map
+	// This method actually reads from the balance sheet excel document and stores them into a map
 	public static Map<String, List<BSInfoBO>> readBSData(List<Sheet> bsSheets) {
 		Map<String, List<BSInfoBO>> tickerToBSData = new HashMap<String, List<BSInfoBO>>();
 		int yearCounter = 0;
@@ -54,6 +54,7 @@ public class BSFinancialLibrary {
 					Cell totalCashMRQCell = row.getCell(BSSheetConstants.TOTAL_CASH_MRQ_COLUMN.getBSData());
 					Cell totalDebtMRQCell = row.getCell(BSSheetConstants.TOTAL_DEBT_MRQ_COLUMN.getBSData());
 					Cell currentRatioMRQCell = row.getCell(BSSheetConstants.CURRENT_RATIO_MRQ_COLUMN.getBSData());
+					Cell currencyTypeCell = row.getCell(BSSheetConstants.CURRENCY_TYPE.getBSData());
 					//Cell totalTangibleAssetsCell = row.getCell(BSSheetConstants.TOTAL_TANGIBLE_ASSETS_COLUMN.getBSData());
 					//Cell totalDebtCell = row.getCell(BSSheetConstants.TOTAL_DEBT_COLUMN.getBSData());
 					//Cell totalNetDebtCell = row.getCell(BSSheetConstants.TOTAL_NET_DEBT_COLUMN.getBSData());
@@ -103,6 +104,7 @@ public class BSFinancialLibrary {
 						String totalCashMRQValue = dataFormatter.formatCellValue(totalCashMRQCell);
 						String totalDebtMRQValue = dataFormatter.formatCellValue(totalDebtMRQCell);
 						String currentRatioMRQValue = dataFormatter.formatCellValue(currentRatioMRQCell);
+						String currencyTypeValue = dataFormatter.formatCellValue(currencyTypeCell);
 						
 						String bsDate = dataFormatter.formatCellValue(bsDateCell);
 
@@ -110,6 +112,7 @@ public class BSFinancialLibrary {
 							List<BSInfoBO> bsInfoList = tickerToBSData.get(tickerValue);
 							BSInfoBO bsInfo = new BSInfoBO(yearCounter, tickerValue);
 							bsInfo.setShareHoldersEquity(shareholdersEquityValue);
+							bsInfo.setCurrencyType(currencyTypeValue);
 //							bsInfo.setNetEquity(
 //									CommonFinancialLibrary.removeDecimalFromNumber(netEquityValue.toString()));
 
@@ -148,6 +151,7 @@ public class BSFinancialLibrary {
 							List<BSInfoBO> bsInfoList = new ArrayList<BSInfoBO>();
 							BSInfoBO bsInfo = new BSInfoBO(yearCounter, tickerValue);
 							bsInfo.setShareHoldersEquity(shareholdersEquityValue);
+							bsInfo.setCurrencyType(currencyTypeValue);
 //							bsInfo.setNetEquity(
 //									CommonFinancialLibrary.removeDecimalFromNumber(netEquityValue.toString()));
 //							bsInfo.setCashAndCashEquivalent(
@@ -193,6 +197,7 @@ public class BSFinancialLibrary {
 							List<BSInfoBO> bsInfoList = tickerToBSData.get(tickerValue);
 							BSInfoBO bsInfo = new BSInfoBO(yearCounter, tickerValue);
 							bsInfo.setShareHoldersEquity(CommonFinancialLibrary.errorMessage());
+							bsInfo.setCurrencyType(CommonFinancialLibrary.errorMessage());
 //							bsInfo.setNetEquity(CommonFinancialLibrary
 //									.removeDecimalFromNumber(CommonFinancialLibrary.errorMessage()));
 //
@@ -230,6 +235,7 @@ public class BSFinancialLibrary {
 							List<BSInfoBO> bsInfoList = new ArrayList<BSInfoBO>();
 							BSInfoBO bsInfo = new BSInfoBO(yearCounter, tickerValue);
 							bsInfo.setShareHoldersEquity(CommonFinancialLibrary.errorMessage());
+							bsInfo.setCurrencyType(CommonFinancialLibrary.errorMessage());
 //							bsInfo.setNetEquity(CommonFinancialLibrary
 //									.removeDecimalFromNumber(CommonFinancialLibrary.errorMessage()));
 //							bsInfo.setCashAndCashEquivalent(CommonFinancialLibrary

@@ -34,6 +34,7 @@ public class ISAnalyzer {
 	private Map<String, List<String>> tickerToEPSGrowth;
 	private Map<String, List<String>> tickerToResearchAndDevelopment;
 	private Map<String, List<String>> tickerToResearchAndDevelopmentGrowth;
+	private Map<String, String> tickerToCurrencyValue;
 
 	public ISAnalyzer(Map<String, List<ISInfoBO>> tickerToISData, Map<String, String> tickerToTxtFilePaths)
 			throws IOException {
@@ -50,6 +51,7 @@ public class ISAnalyzer {
 		tickerToEPSGrowth = new HashMap<String, List<String>>();
 		tickerToResearchAndDevelopment = new HashMap<String, List<String>>();
 		tickerToResearchAndDevelopmentGrowth = new HashMap<String, List<String>>();
+		tickerToCurrencyValue = new HashMap<String, String>();
 
 		this.extractISData();
 		this.writeISDataToTxtFiles();
@@ -63,7 +65,8 @@ public class ISAnalyzer {
 			String txtFilePath = entry.getValue();
 			FileWriter fstream = new FileWriter(txtFilePath, true);
 			BufferedWriter info = new BufferedWriter(fstream);
-			this.writeISSeperator(ticker, info);
+			String currencyType = tickerToCurrencyValue.get(ticker);
+			this.writeISSeperator(ticker, currencyType, info);
 
 			List<String> isDateList = tickerToISDates.get(ticker);
 			List<String> revenueList = tickerToRevenue.get(ticker);
@@ -233,7 +236,7 @@ public class ISAnalyzer {
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-			this.writeISSeperator(ticker, info);
+			this.writeISSeperator(ticker, currencyType, info);
 
 			info.newLine();
 			info.newLine();
@@ -244,8 +247,8 @@ public class ISAnalyzer {
 
 	}
 
-	private void writeISSeperator(String ticker, BufferedWriter info) throws IOException {
-		info.write("===================================================== " + ticker
+	private void writeISSeperator(String ticker, String currencyType, BufferedWriter info) throws IOException {
+		info.write("===================================================== " + ticker + " (" + currencyType + ")" 
 				+ " - Income Sheet =====================================================");
 		info.newLine();
 	}
@@ -322,6 +325,8 @@ public class ISAnalyzer {
 			String secondEPSGrowth = secondISInfo.getEpsGrowth();
 			String thirdEPSGrowth = thirdISInfo.getEpsGrowth();
 			//String fourthEPSGrowth = fourthISInfo.getEpsGrowth();
+			
+			String currencyType = firstISInfo.getCurrencyType();
 
 			List<String> researchAndDevelopmentList = new ArrayList<String>();
 			List<String> researchAndDevelopmentGrowthList = new ArrayList<String>();
@@ -419,6 +424,7 @@ public class ISAnalyzer {
 			tickerToISDates.put(ticker, isDates);
 			tickerToResearchAndDevelopment.put(ticker, researchAndDevelopmentList);
 			tickerToResearchAndDevelopmentGrowth.put(ticker, researchAndDevelopmentGrowthList);
+			tickerToCurrencyValue.put(ticker, currencyType);
 
 		}
 

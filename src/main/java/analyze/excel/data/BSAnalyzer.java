@@ -52,6 +52,7 @@ public class BSAnalyzer {
 	private Map<String, String> tickerToTotalCashMRQ;
 	private Map<String, String> tickerToTotalDebtMRQ;
 	private Map<String, String> tickerToCurrentRatioMRQ;
+	private Map<String, String> tickerToCurrencyValue;
 	
 	
 
@@ -89,6 +90,7 @@ public class BSAnalyzer {
 		tickerToTotalCashMRQ = new HashMap<String, String>();
 		tickerToTotalDebtMRQ = new HashMap<String, String>();
 		tickerToCurrentRatioMRQ = new HashMap<String, String>();
+		tickerToCurrencyValue  = new HashMap<String, String>();
 		
 		
 		this.extractBSData();
@@ -105,7 +107,8 @@ public class BSAnalyzer {
 			FileWriter fstream = new FileWriter(txtFilePath, true);
 			BufferedWriter info = new BufferedWriter(fstream);
 			info.newLine();
-			this.writeBSSeperator(ticker, info);
+			String currencyType = tickerToCurrencyValue.get(ticker);
+			this.writeBSSeperator(ticker, currencyType, info);
 			List<String> bsDateList = tickerToBSDates.get(ticker);
 			List<String> cashList = tickerToCashAndEquivalents.get(ticker);
 			List<String> cashGrowthList = tickerToCashAndEquivalentsGrowth.get(ticker);
@@ -142,11 +145,6 @@ public class BSAnalyzer {
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-//			String firstCashVal = CommonFinancialLibrary.addCommasToNumericString(cashList.get(0));
-//			String secondCashVal = CommonFinancialLibrary.addCommasToNumericString(cashList.get(1));
-//			String thirdCashVal = CommonFinancialLibrary.addCommasToNumericString(cashList.get(2));
-//			String fourthCashVal = CommonFinancialLibrary.addCommasToNumericString(cashList.get(3));
-//			String fifthCashVal = CommonFinancialLibrary.addCommasToNumericString(cashList.get(4));
 			
 			String firstTotalAssetsVal = CommonFinancialLibrary.addCommasToNumericString(totalAssetsList.get(0));
 			String secondTotalAssetsVal = CommonFinancialLibrary.addCommasToNumericString(totalAssetsList.get(1));
@@ -169,16 +167,7 @@ public class BSAnalyzer {
 
 			CommonFinancialLibrary.writeSeperator(info);
 
-//			String firstShortInvestmentVal = CommonFinancialLibrary
-//					.addCommasToNumericString(shortInvestmentList.get(0));
-//			String secondShortInvestmentVal = CommonFinancialLibrary
-//					.addCommasToNumericString(shortInvestmentList.get(1));
-//			String thirdShortInvestmentVal = CommonFinancialLibrary
-//					.addCommasToNumericString(shortInvestmentList.get(2));
-//			String fourthShortInvestmentVal = CommonFinancialLibrary
-//					.addCommasToNumericString(shortInvestmentList.get(3));
-//			String fifthShortInvestmentVal = CommonFinancialLibrary
-//					.addCommasToNumericString(shortInvestmentList.get(4));
+
 			
 			String firstTotalLiabilititesVal = CommonFinancialLibrary
 					.addCommasToNumericString(totalLiabilitiesList.get(0));
@@ -210,92 +199,6 @@ public class BSAnalyzer {
 			//BEGIN HERE WHERE YOU CHANGE THE LONG TERM INVESTMENT FOR TANGIBLE ASSETS AND MAKE SURE IS AND
 			//CF ONLY HANDLEE 4 ELEMENTS!
 			
-//			String firstTangibleAssetsVal = CommonFinancialLibrary.addCommasToNumericString(totalTangibleAssetsList.get(0));
-//			String secondTangibleAssetsVal = CommonFinancialLibrary.addCommasToNumericString(totalTangibleAssetsList.get(1));
-//			String thirdTangibleAssetsVal = CommonFinancialLibrary.addCommasToNumericString(totalTangibleAssetsList.get(2));
-//			String fourthTangibleAssetsVal = CommonFinancialLibrary.addCommasToNumericString(totalTangibleAssetsList.get(3));
-			
-			
-//			String firstLongInvestmentVal = CommonFinancialLibrary.addCommasToNumericString(longInvestmentList.get(0));
-//			String secondLongInvestmentVal = CommonFinancialLibrary.addCommasToNumericString(longInvestmentList.get(1));
-//			String thirdLongInvestmentVal = CommonFinancialLibrary.addCommasToNumericString(longInvestmentList.get(2));
-//			String fourthLongInvestmentVal = CommonFinancialLibrary.addCommasToNumericString(longInvestmentList.get(3));
-//			String fifthLongInvestmentVal = CommonFinancialLibrary.addCommasToNumericString(longInvestmentList.get(4));
-
-//			String totalTangibleAssetsLine = "Total Tangible Assets                    " + firstTangibleAssetsVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(firstTangibleAssetsVal) + secondTangibleAssetsVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(secondTangibleAssetsVal) + thirdTangibleAssetsVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdTangibleAssetsVal) + fourthTangibleAssetsVal;
-//			info.write(totalTangibleAssetsLine);
-//			info.newLine();
-//
-//			String totalTangibleAssetsGrowthLine = "Total Tangible Assets Growth                       "
-//					+ totalTangibleAssetsGrowthList.get(0)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(totalTangibleAssetsGrowthList.get(0))
-//					+ totalTangibleAssetsGrowthList.get(1)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(totalTangibleAssetsGrowthList.get(1))
-//					+ totalTangibleAssetsGrowthList.get(2);
-//			info.write(totalTangibleAssetsGrowthLine);
-//			info.newLine();
-//			CommonFinancialLibrary.writeSeperator(info);
-//
-//			String firstShortDebtVal = CommonFinancialLibrary.addCommasToNumericString(shortDebtList.get(0));
-//			String secondShortDebtVal = CommonFinancialLibrary.addCommasToNumericString(shortDebtList.get(1));
-//			String thirdShortDebtVal = CommonFinancialLibrary.addCommasToNumericString(shortDebtList.get(2));
-//			String fourthShortDebtVal = CommonFinancialLibrary.addCommasToNumericString(shortDebtList.get(3));
-//			String fifthShortDebtVal = CommonFinancialLibrary.addCommasToNumericString(shortDebtList.get(4));
-			
-//			String firstTotalDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalDebtList.get(0));
-//			String secondTotalDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalDebtList.get(1));
-//			String thirdTotalDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalDebtList.get(2));
-//			String fourthTotalDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalDebtList.get(3));
-
-//			String shortDebtLine = "Short Debt                               " + firstShortDebtVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(firstShortDebtVal) + secondShortDebtVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(secondShortDebtVal) + thirdShortDebtVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdShortDebtVal) + fourthShortDebtVal;
-//			info.write(shortDebtLine);
-//			info.newLine();
-//
-//			String shortDebtGrowthLine = "Short Debt Growth                                  "
-//					+ shortDebtGrowthList.get(0)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(shortDebtGrowthList.get(0))
-//					+ shortDebtGrowthList.get(1)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(shortDebtGrowthList.get(1))
-//					+ shortDebtGrowthList.get(2);
-//			info.write(shortDebtGrowthLine);
-//			info.newLine();
-//
-//			CommonFinancialLibrary.writeSeperator(info);
-
-//			String firstLongDebtVal = CommonFinancialLibrary.addCommasToNumericString(longDebtList.get(0));
-//			String secondLongDebtVal = CommonFinancialLibrary.addCommasToNumericString(longDebtList.get(1));
-//			String thirdLongDebtVal = CommonFinancialLibrary.addCommasToNumericString(longDebtList.get(2));
-//			String fourthLongDebtVal = CommonFinancialLibrary.addCommasToNumericString(longDebtList.get(3));
-//			String fifthLongDebtVal = CommonFinancialLibrary.addCommasToNumericString(longDebtList.get(4));
-			
-//			String firstTotalNetDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalNetDebtList.get(0));
-//			String secondTotalNetDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalNetDebtList.get(1));
-//			String thirdTotalNetDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalNetDebtList.get(2));
-//			String fourthTotalNetDebtVal = CommonFinancialLibrary.addCommasToNumericString(totalNetDebtList.get(3));
-
-//			String longDebtLine = "Long Term Debt                           " + firstLongDebtVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(firstLongDebtVal) + secondLongDebtVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(secondLongDebtVal) + thirdLongDebtVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdLongDebtVal) + fourthLongDebtVal;
-//			info.write(longDebtLine);
-//			info.newLine();
-//
-//			String longDebtGrowthLine = "Long Term Debt Growth                              "
-//					+ longDebtGrowthList.get(0)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(longDebtGrowthList.get(0))
-//					+ longDebtGrowthList.get(1)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(longDebtGrowthList.get(1))
-//					+ longDebtGrowthList.get(2);
-//			info.write(longDebtGrowthLine);
-//			info.newLine();
-//
-//			CommonFinancialLibrary.writeSeperator(info);
 
 			String firstShareHolderEquityVal = CommonFinancialLibrary
 					.addCommasToNumericString(shareHolderEquityList.get(0));
@@ -342,40 +245,10 @@ public class BSAnalyzer {
 			info.write(currentRatioLine);
 			info.newLine();
 			
-
-//			String firstNetEquityVal = CommonFinancialLibrary.addCommasToNumericString(netEquityList.get(0));
-//			String secondNetEquityVal = CommonFinancialLibrary.addCommasToNumericString(netEquityList.get(1));
-//			String thirdNetEquityVal = CommonFinancialLibrary.addCommasToNumericString(netEquityList.get(2));
-//			String fourthNetEquityVal = CommonFinancialLibrary.addCommasToNumericString(netEquityList.get(3));
-//			String fifthNetEquityVal = CommonFinancialLibrary.addCommasToNumericString(netEquityList.get(4));
-//
-//			String netEquityLine = "Net Equity                               " + firstNetEquityVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(firstNetEquityVal) + secondNetEquityVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(secondNetEquityVal) + thirdNetEquityVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(thirdNetEquityVal) + fourthNetEquityVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(fourthNetEquityVal) + fifthNetEquityVal
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(fifthNetEquityVal);
-//			info.write(netEquityLine);
-//			info.newLine();
-//
-//			String netEquityGrowthLine = "Net Equity Growth                                  "
-//					+ netEquityGrowthList.get(0)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(netEquityGrowthList.get(0))
-//					+ netEquityGrowthList.get(1)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(netEquityGrowthList.get(1))
-//					+ netEquityGrowthList.get(2)
-//					+ CommonFinancialLibrary.getApprorpriateSpaces(netEquityGrowthList.get(2))
-//					+ netEquityGrowthList.get(3);
-//			info.write(netEquityGrowthLine);
-//			info.newLine();
-//
-//			CommonFinancialLibrary.writeSeperator(info);
 			
 			String fourYearAvgTotalAssetsString = CommonFinancialLibrary.calculateAverageGrowthRateForFourPeriods(totalAssetsList.get(0), totalAssetsList.get(3));
 			String fourYearAvgTotalLiabilitiesString = CommonFinancialLibrary.calculateAverageGrowthRateForFourPeriods(totalLiabilitiesList.get(0), totalLiabilitiesList.get(3));
-//			String fourYearAvgTotalTangibleAssetsString = CommonFinancialLibrary.calculateAverageGrowthRateForFourPeriods(totalTangibleAssetsList.get(0), totalTangibleAssetsList.get(3));
-//			String fourYearAvgShortTermDebtString = CommonFinancialLibrary.calculateAverageGrowthRateForFourPeriods(shortDebtList.get(0), shortDebtList.get(3));
-//			String fourYearAvgLongTermDebtString = CommonFinancialLibrary.calculateAverageGrowthRateForFourPeriods(longDebtList.get(0), longDebtList.get(3));
+
 			
 			String fourYearAvgTotalAssetsLine = "Total Assets 4 Period Growth: " + fourYearAvgTotalAssetsString;
 			info.write(fourYearAvgTotalAssetsLine);
@@ -383,60 +256,24 @@ public class BSAnalyzer {
 			String fourYearAvgTotalLiabilitiesLine = "Total Liabilities 4 Period Growth: " + fourYearAvgTotalLiabilitiesString;
 			info.write(fourYearAvgTotalLiabilitiesLine);
 			info.newLine();
-//			String fourYearAvgTangibleAssetsLine = "Total Tangible Assets 4 Period Growth: " + fourYearAvgTotalTangibleAssetsString;
-//			info.write(fourYearAvgTangibleAssetsLine);
-//			info.newLine();
-//			
-//			String fourYearAvgShortDebtLine = "Short Debt 4 Period Growth: " + fourYearAvgShortTermDebtString;
-//			info.write(fourYearAvgShortDebtLine);
-//			info.newLine();
-//			String fourYearAvgLongDebtLine = "Long Debt 4 Period Growth: " + fourYearAvgLongTermDebtString;
-//			info.write(fourYearAvgLongDebtLine);
-//			info.newLine();
 
-//			String fiveYearAvgCashEquivalentString = CommonFinancialLibrary
-//					.calculateAverageGrowthRateForFivePeriods(cashList.get(0), cashList.get(4));
-//			String fiveYearAvgShortInvestmentString = CommonFinancialLibrary
-//					.calculateAverageGrowthRateForFivePeriods(shortInvestmentList.get(0), shortInvestmentList.get(4));
-//			String fiveYearAvgLongInvestmentString = CommonFinancialLibrary
-//					.calculateAverageGrowthRateForFivePeriods(longInvestmentList.get(0), longInvestmentList.get(4));
-//			String fiveYearAvgShortDebtString = CommonFinancialLibrary
-//					.calculateAverageGrowthRateForFivePeriods(shortDebtList.get(0), shortDebtList.get(4));
-//			String fiveYearAvgLongDebtString = CommonFinancialLibrary
-//					.calculateAverageGrowthRateForFivePeriods(longDebtList.get(0), longDebtList.get(4));
 			String fourYearAvgShareHolderEquityString = CommonFinancialLibrary.calculateAverageGrowthRateForFourPeriods(
 					shareHolderEquityList.get(0), shareHolderEquityList.get(3));
 //			String fiveYearAvgNetEquityString = CommonFinancialLibrary
 //					.calculateAverageGrowthRateForFivePeriods(netEquityList.get(0), netEquityList.get(4));
 
-//			String fiveYearAvgCashLine = "Cash And Cash Equivalent 5 Period Growth: " + fiveYearAvgCashEquivalentString;
-//			info.write(fiveYearAvgCashLine);
-//			info.newLine();
-//			String fiveYearShortInvestmentLine = "5 Period Short Term Investments: " + fiveYearAvgShortInvestmentString;
-//			info.write(fiveYearShortInvestmentLine);
-//			info.newLine();
-//			String fiveYearLongInvestmentLine = "5 Period Long Term Investments: " + fiveYearAvgLongInvestmentString;
-//			info.write(fiveYearLongInvestmentLine);
-//			info.newLine();
-//			String fiveYearShortDebtLine = "5 Period Short Term Debt: " + fiveYearAvgShortDebtString;
-//			info.write(fiveYearShortDebtLine);
-//			info.newLine();
-//			String fiveYearLongDebtLine = "5 Period Long Term Debt: " + fiveYearAvgLongDebtString;
-//			info.write(fiveYearLongDebtLine);
-//			info.newLine();
+
 
 			String fourYearAvgShareholderEquityLine = "Total Shareholders Equity 4 Period Growth:  "
 					+ fourYearAvgShareHolderEquityString;
 			info.write(fourYearAvgShareholderEquityLine);
 			info.newLine();
 
-//			String fiveYearAvgNetEquityLine = "Net Equity 5 Period Growth:  " + fiveYearAvgNetEquityString;
-//			info.write(fiveYearAvgNetEquityLine);
-//			info.newLine();
 
 			CommonFinancialLibrary.writeSeperator(info);
-
-			this.writeBSSeperator(ticker, info);
+			
+			
+			this.writeBSSeperator(ticker, currencyType, info);
 
 			info.newLine();
 			info.newLine();
@@ -446,8 +283,8 @@ public class BSAnalyzer {
 		}
 	}
 
-	private void writeBSSeperator(String ticker, BufferedWriter info) throws IOException {
-		info.write("===================================================== " + ticker
+	private void writeBSSeperator(String ticker, String currencyType, BufferedWriter info) throws IOException {
+		info.write("===================================================== " + ticker + " (" + currencyType + ")" 
 				+ " - Balance Sheet =====================================================");
 		info.newLine();
 	}
@@ -469,72 +306,6 @@ public class BSAnalyzer {
 			String thirdBSDate = thirdBSInfo.getBsDate();
 			String fourthBSDate = fourthBSInfo.getBsDate();
 			//String fifthBSDate = fifthBSInfo.getBsDate();
-
-//			String firstCash = firstBSInfo.getCashAndCashEquivalent();
-//			String secondCash = secondBSInfo.getCashAndCashEquivalent();
-//			String thirdCash = thirdBSInfo.getCashAndCashEquivalent();
-//			String fourthCash = fourthBSInfo.getCashAndCashEquivalent();
-			//String fifthCash = fifthBSInfo.getCashAndCashEquivalent();
-
-//			String firstCashGrowth = firstBSInfo.getCashAndCashEquivalentGrowth();
-//			String secondCashGrowth = secondBSInfo.getCashAndCashEquivalentGrowth();
-//			String thirdCashGrowth = thirdBSInfo.getCashAndCashEquivalentGrowth();
-			//String fourthCashGrowth = fourthBSInfo.getCashAndCashEquivalentGrowth();
-
-//			String firstShortDebt = firstBSInfo.getShortTermDebt();
-//			String secondShortDebt = secondBSInfo.getShortTermDebt();
-//			String thirdShortDebt = thirdBSInfo.getShortTermDebt();
-//			String fourthShortDebt = fourthBSInfo.getShortTermDebt();
-			//String fifthShortDebt = fifthBSInfo.getShortTermDebt();
-
-//			String firstShortDebtGrowth = firstBSInfo.getShortTermDebtGrowth();
-//			String secondShortDebtGrowth = secondBSInfo.getShortTermDebtGrowth();
-//			String thirdShortDebtGrowth = thirdBSInfo.getShortTermDebtGrowth();
-			//String fourthShortDebtGrowth = fourthBSInfo.getShortTermDebtGrowth();
-
-//			String firstLongDebt = firstBSInfo.getLongTermDebt();
-//			String secondLongDebt = secondBSInfo.getLongTermDebt();
-//			String thirdLongDebt = thirdBSInfo.getLongTermDebt();
-//			String fourthLongDebt = fourthBSInfo.getLongTermDebt();
-			//String fifthLongDebt = fifthBSInfo.getLongTermDebt();
-
-//			String firstLongDebtGrowth = firstBSInfo.getLongTermDebtGrowth();
-//			String secondLongDebtGrowth = secondBSInfo.getLongTermDebtGrowth();
-//			String thirdLongDebtGrowth = thirdBSInfo.getLongTermDebtGrowth();
-			//String fourthLongDebtGrowth = fourthBSInfo.getLongTermDebtGrowth();
-
-//			String firstShortInvestment = firstBSInfo.getShortTermInvestments();
-//			String secondShortInvestment = secondBSInfo.getShortTermInvestments();
-//			String thirdShortInvestment = thirdBSInfo.getShortTermInvestments();
-//			String fourthShortInvestment = fourthBSInfo.getShortTermInvestments();
-			//String fifthShortInvestment = fifthBSInfo.getShortTermInvestments();
-
-//			String firstShortInvestmentGrowth = firstBSInfo.getShortTermInvestmentsGrowth();
-//			String secondShortInvestmentGrowth = secondBSInfo.getShortTermInvestmentsGrowth();
-//			String thirdShortInvestmentGrowth = thirdBSInfo.getShortTermInvestmentsGrowth();
-			//String fourthShortInvestmentGrowth = fourthBSInfo.getShortTermInvestmentsGrowth();
-
-//			String firstLongInvestment = firstBSInfo.getLongTermInvestments();
-//			String secondLongInvestment = secondBSInfo.getLongTermInvestments();
-//			String thirdLongInvestment = thirdBSInfo.getLongTermInvestments();
-//			String fourthLongInvestment = fourthBSInfo.getLongTermInvestments();
-			//String fifthLongInvestment = fifthBSInfo.getLongTermInvestments();
-
-//			String firstLongInvestmentGrowth = firstBSInfo.getLongTermInvestmentsGrowth();
-//			String secondLongInvestmentGrowth = secondBSInfo.getLongTermInvestmentsGrowth();
-//			String thirdLongInvestmentGrowth = thirdBSInfo.getLongTermInvestmentsGrowth();
-			//String fourthLongInvestmentGrowth = fourthBSInfo.getLongTermInvestmentsGrowth();
-
-//			String firstNetEquity = firstBSInfo.getNetEquity();
-//			String secondNetEquity = secondBSInfo.getNetEquity();
-//			String thirdNetEquity = thirdBSInfo.getNetEquity();
-//			String fourthNetEquity = fourthBSInfo.getNetEquity();
-			//String fifthNetEquity = fifthBSInfo.getNetEquity();
-
-//			String firstNetEquityGrowth = firstBSInfo.getNetEquityGrowth();
-//			String secondNetEquityGrowth = secondBSInfo.getNetEquityGrowth();
-//			String thirdNetEquityGrowth = thirdBSInfo.getNetEquityGrowth();
-			//String fourthNetEquityGrowth = fourthBSInfo.getNetEquityGrowth();
 
 			String firstShareHolderEquity = firstBSInfo.getShareHoldersEquity();
 			String secondShareHolderEquity = secondBSInfo.getShareHoldersEquity();
@@ -568,36 +339,7 @@ public class BSAnalyzer {
 			String totalCashMRQ = firstBSInfo.getTotalStrCash();
 			String totalDebtMRQ = firstBSInfo.getTotalStrDebt();
 			String currentRatioMRQ = firstBSInfo.getStrCurrentRatio();
-			
-//			String firstTangibleAssets = firstBSInfo.getTotalTangibleAssets();
-//			String secondTangibleAssets = secondBSInfo.getTotalTangibleAssets();
-//			String thirdTangibleAssets = thirdBSInfo.getTotalTangibleAssets();
-//			String fourthTangibleAssets = fourthBSInfo.getTotalTangibleAssets();
-			
-//			String firstTangibleAssetsGrowth = firstBSInfo.getTotalTangibleAssetsGrowth();
-//			String secondTangibleAssetsGrowth = secondBSInfo.getTotalTangibleAssetsGrowth();
-//			String thirdTangibleAssetsGrowth = thirdBSInfo.getTotalTangibleAssetsGrowth();
-			
-//			String firstTotalDebt = firstBSInfo.getTotalDebt();
-//			String secondTotalDebt = secondBSInfo.getTotalDebt();
-//			String thirdTotalDebt = thirdBSInfo.getTotalDebt();
-//			String fourthTotalDebt = fourthBSInfo.getTotalDebt();
-			
-//			String firstTotalDebtGrowth = firstBSInfo.getTotalDebtGrowth();
-//			String secondTotalDebtGrowth = secondBSInfo.getTotalDebtGrowth();
-//			String thirdTotalDebtGrowth = thirdBSInfo.getTotalDebtGrowth();
-			
-//			String firstTotalNetDebt = firstBSInfo.getTotalNetDebt();
-//			String secondTotalNetDebt = secondBSInfo.getTotalNetDebt();
-//			String thirdTotalNetDebt = thirdBSInfo.getTotalNetDebt();
-//			String fourthTotalNetDebt = fourthBSInfo.getTotalNetDebt();
-			
-//			String firstTotalNetDebtGrowth = firstBSInfo.getTotalNetDebtGrowth();
-//			String secondTotalNetDebtGrowth = secondBSInfo.getTotalNetDebtGrowth();
-//			String thirdTotalNetDebtGrowth = thirdBSInfo.getTotalNetDebtGrowth();
-			
-			
-			
+			String currencyString = firstBSInfo.getCurrencyType();
 			
 			
 
@@ -646,108 +388,12 @@ public class BSAnalyzer {
 			totalLiabilitiesGrowth.add(secondTotalLiabilitiesGrowth);
 			totalLiabilitiesGrowth.add(thirdTotalLiabilitiesGrowth);
 			
-//			totalTangibleAssets.add(firstTangibleAssets);
-//			totalTangibleAssets.add(secondTangibleAssets);
-//			totalTangibleAssets.add(thirdTangibleAssets);
-//			totalTangibleAssets.add(fourthTangibleAssets);
-			
-//			totalTangibleAssetsGrowth.add(firstTangibleAssetsGrowth);
-//			totalTangibleAssetsGrowth.add(secondTangibleAssetsGrowth);
-//			totalTangibleAssetsGrowth.add(thirdTangibleAssetsGrowth);
-			
-//			totalDebt.add(firstTotalDebt);
-//			totalDebt.add(secondTotalDebt);
-//			totalDebt.add(thirdTotalDebt);
-//			totalDebt.add(fourthTotalDebt);
-			
-//			totalDebtGrowth.add(firstTotalDebtGrowth);
-//			totalDebtGrowth.add(secondTotalDebtGrowth);
-//			totalDebtGrowth.add(thirdTotalDebtGrowth);
-			
-//			totalNetDebt.add(firstTotalNetDebt);
-//			totalNetDebt.add(secondTotalNetDebt);
-//			totalNetDebt.add(thirdTotalNetDebt);
-//			totalNetDebt.add(fourthTotalNetDebt);
-			
-//			totalNetDebtGrowth.add(firstTotalNetDebtGrowth);
-//			totalNetDebtGrowth.add(secondTotalNetDebtGrowth);
-//			totalNetDebtGrowth.add(thirdTotalNetDebtGrowth);
-
-			
-			
-			
-
-//			cashAndEquivalentList.add(firstCash);
-//			cashAndEquivalentList.add(secondCash);
-//			cashAndEquivalentList.add(thirdCash);
-//			cashAndEquivalentList.add(fourthCash);
-			//cashAndEquivalentList.add(fifthCash);
-
-//			cashAndEquivalentGrowthList.add(firstCashGrowth);
-//			cashAndEquivalentGrowthList.add(secondCashGrowth);
-//			cashAndEquivalentGrowthList.add(thirdCashGrowth);
-			//cashAndEquivalentGrowthList.add(fourthCashGrowth);
-
-//			shortDebtList.add(firstShortDebt);
-//			shortDebtList.add(secondShortDebt);
-//			shortDebtList.add(thirdShortDebt);
-//			shortDebtList.add(fourthShortDebt);
-			//shortDebtList.add(fifthShortDebt);
-
-//			shortDebtGrowthList.add(firstShortDebtGrowth);
-//			shortDebtGrowthList.add(secondShortDebtGrowth);
-//			shortDebtGrowthList.add(thirdShortDebtGrowth);
-			//shortDebtGrowthList.add(fourthShortDebtGrowth);
-
-//			longDebtList.add(firstLongDebt);
-//			longDebtList.add(secondLongDebt);
-//			longDebtList.add(thirdLongDebt);
-//			longDebtList.add(fourthLongDebt);
-			//longDebtList.add(fifthLongDebt);
-
-//			longDebtGrowthList.add(firstLongDebtGrowth);
-//			longDebtGrowthList.add(secondLongDebtGrowth);
-//			longDebtGrowthList.add(thirdLongDebtGrowth);
-			//longDebtGrowthList.add(fourthLongDebtGrowth);
-
-//			shortInvestmentList.add(firstShortInvestment);
-//			shortInvestmentList.add(secondShortInvestment);
-//			shortInvestmentList.add(thirdShortInvestment);
-//			shortInvestmentList.add(fourthShortInvestment);
-			//shortInvestmentList.add(fifthShortInvestment);
-
-//			shortInvestmentGrowthList.add(firstShortInvestmentGrowth);
-//			shortInvestmentGrowthList.add(secondShortInvestmentGrowth);
-//			shortInvestmentGrowthList.add(thirdShortInvestmentGrowth);
-			//shortInvestmentGrowthList.add(fourthShortInvestmentGrowth);
-
-//			longInvestmentList.add(firstLongInvestment);
-//			longInvestmentList.add(secondLongInvestment);
-//			longInvestmentList.add(thirdLongInvestment);
-//			longInvestmentList.add(fourthLongInvestment);
-			//longInvestmentList.add(fifthLongInvestment);
-
-//			longInvestmentGrowthList.add(firstLongInvestmentGrowth);
-//			longInvestmentGrowthList.add(secondLongInvestmentGrowth);
-//			longInvestmentGrowthList.add(thirdLongInvestmentGrowth);
-			//longInvestmentGrowthList.add(fourthLongInvestmentGrowth);
 
 			bsDates.add(firstBSDate);
 			bsDates.add(secondBSDate);
 			bsDates.add(thirdBSDate);
 			bsDates.add(fourthBSDate);
-			//bsDates.add(fifthBSDate);
-
-//			netEquityList.add(firstNetEquity);
-//			netEquityList.add(secondNetEquity);
-//			netEquityList.add(thirdNetEquity);
-//			netEquityList.add(fourthNetEquity);
-			//netEquityList.add(fifthNetEquity);
-
-//			netEquityGrowthList.add(firstNetEquityGrowth);
-//			netEquityGrowthList.add(secondNetEquityGrowth);
-//			netEquityGrowthList.add(thirdNetEquityGrowth);
-			//netEquityGrowthList.add(fourthNetEquityGrowth);
+			
 
 			shareHolderEquityList.add(firstShareHolderEquity);
 			shareHolderEquityList.add(secondShareHolderEquity);
@@ -817,6 +463,8 @@ public class BSAnalyzer {
 			tickerToTotalCashMRQ.put(ticker, totalCashMRQ);
 			tickerToTotalDebtMRQ.put(ticker, totalDebtMRQ);
 			tickerToCurrentRatioMRQ.put(ticker, currentRatioMRQ);
+			tickerToCurrencyValue.put(ticker, currencyString);
+			
 		}
 	}
 
