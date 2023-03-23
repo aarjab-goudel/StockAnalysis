@@ -17,6 +17,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import create.excel.data.service.SaveExcel;
+import create.excel.enums.BSSheetConstants;
+import create.excel.enums.CommonSheetConstants;
 import create.excel.future.CreateFutureDataExcelFile;
 import create.excel.future.FutureInfoBO;
 import excel.library.CommonFinancialLibrary;
@@ -24,14 +26,19 @@ import excel.library.CommonFinancialLibrary;
 public class AnalyzeFutureDataExcelFile {
 
 	private Workbook futureDataExcelFile;
+	private Workbook annualExcelFile;
 	private Map<String, FutureInfoBO> tickerToCurrentYearInfo;
 	private Map<String, FutureInfoBO> tickerToNextYearInfo;
+	private Map<String, String> tickerToCurrencyType;
 
 	public AnalyzeFutureDataExcelFile() throws IOException {
 		futureDataExcelFile = SaveExcel.getFutureDataExcelInstance();
+		annualExcelFile = SaveExcel.getAnnualExcelInstance();
 		tickerToCurrentYearInfo = new HashMap<String, FutureInfoBO>();
 		tickerToNextYearInfo = new HashMap<String, FutureInfoBO>();
+		tickerToCurrencyType = new HashMap<String, String>();
 		this.extractFutureExcelData();
+		this.extractCurrencyData();
 		SaveExcel.closeAndSaveFutureExcelFile();
 	}
 
@@ -97,6 +104,27 @@ public class AnalyzeFutureDataExcelFile {
 
 		}
 	}
+	
+	public void extractCurrencyData() {
+		Sheet currencySheet = annualExcelFile.getSheetAt(1);
+		Iterator<Row> iterator = currencySheet.iterator();
+		DataFormatter dataFormatter = new DataFormatter();
+		iterator.next();
+		while (iterator.hasNext()) {
+			Row row = iterator.next();
+			if (!CommonFinancialLibrary.determineHeaderRow(row)) {
+				Cell tickerCell = row.getCell(CommonSheetConstants.TICKER_COLUMN.getCommonColumn());
+				Cell currencyTypeCell = row.getCell(BSSheetConstants.CURRENCY_TYPE.getBSData());
+				String tickerValue = CommonFinancialLibrary
+						.removeDecimalFromNumber(dataFormatter.formatCellValue(tickerCell));
+				String currencyTypeValue = dataFormatter.formatCellValue(currencyTypeCell);
+				tickerToCurrencyType.put(tickerValue, currencyTypeValue);
+			}
+			
+		}
+		
+		
+	}
 
 	public Map<String, FutureInfoBO> getTickerToCurrentYearInfo() {
 		return tickerToCurrentYearInfo;
@@ -105,5 +133,11 @@ public class AnalyzeFutureDataExcelFile {
 	public Map<String, FutureInfoBO> getTickerToNextYearInfo() {
 		return tickerToNextYearInfo;
 	}
+
+	public Map<String, String> getTickerToCurrencyType() {
+		return tickerToCurrencyType;
+	}
+	
+	
 
 }

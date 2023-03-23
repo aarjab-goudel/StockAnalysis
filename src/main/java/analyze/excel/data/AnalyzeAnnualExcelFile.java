@@ -47,10 +47,10 @@ public class AnalyzeAnnualExcelFile extends AnalyzeExcelFile {
 				RatioAnalyzer ratioAnalyzer = new RatioAnalyzer(tickerToRatioInfo, setUp.getTickerToTxtFilePath());
 				SaveExcel.closeAndSaveAnnualFile();
 
-				analyzeFutureData = new AnalyzeFutureDataExcelFile();
-				FutureDataAnalyzer futureDataAnalyzer = new FutureDataAnalyzer(
-						analyzeFutureData.getTickerToCurrentYearInfo(), analyzeFutureData.getTickerToNextYearInfo(),
-						setUp.getTickerToTxtFilePath());
+//				analyzeFutureData = new AnalyzeFutureDataExcelFile();
+//				FutureDataAnalyzer futureDataAnalyzer = new FutureDataAnalyzer(
+//						analyzeFutureData.getTickerToCurrentYearInfo(), analyzeFutureData.getTickerToNextYearInfo(),
+//						setUp.getTickerToTxtFilePath());
 
 			}
 
@@ -68,7 +68,7 @@ public class AnalyzeAnnualExcelFile extends AnalyzeExcelFile {
 		ISAnalyzer isAnalyzer = new ISAnalyzer(this.getTickerToISInfo(), setUp.getTickerToTxtFilePath());
 		CFAnalyzer cfAnalyzer = new CFAnalyzer(this.getTickerToCFInfo(), setUp.getTickerToTxtFilePath());
 		//RatioAnalyzer ratioAnalyzer = new RatioAnalyzer(tickerToRatioInfo, setUp.getTickerToTxtFilePath());
-		FutureDataAnalyzer futureDataAnalyzer = new FutureDataAnalyzer(
+		FutureDataAnalyzer futureDataAnalyzer = new FutureDataAnalyzer( analyzeFutureExcelData.getTickerToCurrencyType(),
 				analyzeFutureExcelData.getTickerToCurrentYearInfo(), analyzeFutureExcelData.getTickerToNextYearInfo(),
 				setUp.getTickerToTxtFilePath());
 
