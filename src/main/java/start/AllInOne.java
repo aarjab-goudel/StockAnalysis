@@ -26,9 +26,9 @@ public class AllInOne {
 
 	public AllInOne() throws JSONException, IOException, ParseException {
 		System.out.println("STARTING ALL IN ONE");
-		createAnnual = new CreateAnnualExcelFile();
-		createFuture = new CreateFutureDataExcelFile();
-		createQuarterly = new CreateQuarterlyExcelFile();
+//		createAnnual = new CreateAnnualExcelFile();
+//		createFuture = new CreateFutureDataExcelFile();
+//		createQuarterly = new CreateQuarterlyExcelFile();
 		analyzeAnnual = new AnalyzeAnnualExcelFile();
 		analyzeQuarterly = new AnalyzeQuarterlyExcelFile();
 		System.out.println("FINISHED ALL IN ONE");

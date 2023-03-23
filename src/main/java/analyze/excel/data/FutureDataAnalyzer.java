@@ -19,13 +19,15 @@ public class FutureDataAnalyzer {
 	private Map<String, FutureInfoBO> tickerToCurrentYear;
 	private Map<String, FutureInfoBO> tickerToNextYear;
 	private Map<String, String> tickerToTxtFilePaths;
+	private Map<String, String> tickerToCurrencyType;
 
-	public FutureDataAnalyzer(Map<String, FutureInfoBO> tickerToCurrentYearData,
+	public FutureDataAnalyzer(Map<String, String> tickerToCurrency, Map<String, FutureInfoBO> tickerToCurrentYearData,
 			Map<String, FutureInfoBO> tickerToNextYearData, Map<String, String> tickerToTxtFilePaths)
 			throws IOException {
 		this.tickerToCurrentYear = tickerToCurrentYearData;
 		this.tickerToNextYear = tickerToNextYearData;
 		this.tickerToTxtFilePaths = tickerToTxtFilePaths;
+		this.tickerToCurrencyType = tickerToCurrency;
 		this.writeFutureExcelDataToTxtFiles();
 	}
 
@@ -35,10 +37,11 @@ public class FutureDataAnalyzer {
 			Map.Entry<String, String> entry = iterator.next();
 			String txtFilePath = entry.getValue();
 			String ticker = entry.getKey();
+			String currencyType = tickerToCurrencyType.get(ticker);
 			FileWriter fstream = new FileWriter(txtFilePath, true);
 			BufferedWriter info = new BufferedWriter(fstream);
 
-			this.writeFutureDataSeperator(ticker, info, "EPS");
+			this.writeFutureDataSeperator(ticker, currencyType, info, "EPS");
 			FutureInfoBO currentYearInfoBO = tickerToCurrentYear.get(ticker);
 			FutureInfoBO nextYearInfoBO = tickerToNextYear.get(ticker);
 
@@ -57,7 +60,7 @@ public class FutureDataAnalyzer {
 			info.write(epsGrowthLine);
 			info.newLine();
 
-			this.writeFutureDataSeperator(ticker, info, "Revenue");
+			this.writeFutureDataSeperator(ticker, currencyType, info, "Revenue");
 
 			String currentRevenueLine = "For " + currentYearInfoBO.getDate() + ": " + "The Revenue is expected to be "
 					+ currentYearInfoBO.getRevenue();
@@ -79,8 +82,8 @@ public class FutureDataAnalyzer {
 		}
 	}
 
-	private void writeFutureDataSeperator(String ticker, BufferedWriter info, String dataType) throws IOException {
-		info.write("==================================================== " + ticker + " - Future Data Analysis For "
+	private void writeFutureDataSeperator(String ticker, String currencyType, BufferedWriter info, String dataType) throws IOException {
+		info.write("==================================================== " + ticker + " (" + currencyType + ")" + " - Future Data Analysis For "
 				+ dataType + " ====================================================");
 		info.newLine();
 	}
