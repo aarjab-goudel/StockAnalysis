@@ -67,8 +67,7 @@ public class BSFinancialLibrary {
 				
 
 
-						String tickerValue = CommonFinancialLibrary
-								.removeDecimalFromNumber(dataFormatter.formatCellValue(tickerCell));
+						String tickerValue = dataFormatter.formatCellValue(tickerCell);
 						String shareholdersEquityValue = CommonFinancialLibrary.removeDecimalFromNumber(
 								dataFormatter.formatCellValue(shareholdersEquity).replace(",", ""));
 		

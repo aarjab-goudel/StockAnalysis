@@ -50,8 +50,7 @@ public class ISFinancialLibrary {
 					
 
 					try {
-						String tickerValue = CommonFinancialLibrary
-								.removeDecimalFromNumber(dataFormatter.formatCellValue(tickerCell).replace(",", ""));
+						String tickerValue = dataFormatter.formatCellValue(tickerCell);
 						String researchAndDevelopmentValue = CommonFinancialLibrary.removeDecimalFromNumber(
 								dataFormatter.formatCellValue(researchAndDevelopmentCell).replace(",", ""));
 						String revenueValue = CommonFinancialLibrary

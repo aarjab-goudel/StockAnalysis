@@ -47,7 +47,7 @@ public class CFFinancialLibrary {
 					Cell currencyTypeCell = row.getCell(CFSheetConstants.CURRENCY_TYPE.getCfData());
 
 					try {
-						String tickerValue = dataFormatter.formatCellValue(tickerCell).replace(",", "");
+						String tickerValue = dataFormatter.formatCellValue(tickerCell);
 						String freeCashFlowValue = CommonFinancialLibrary.removeDecimalFromNumber(
 								dataFormatter.formatCellValue(freeCashFlowCell).replace(",", ""));
 						String netCashForInvestValue = CommonFinancialLibrary.removeDecimalFromNumber(
